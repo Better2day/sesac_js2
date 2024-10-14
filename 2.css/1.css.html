@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: lightblue;
+        }
+        
+        h1 {
+            color: white;
+            text-align: center;
+        }
+
+        p {
+            color: red;
+            /* font-size: 16px; 폰트는 기본값이 16px */
+            font-size: 1.5em; /* 1em은 기본 16px이고, 비례해서 크기가 달라진다 */
+        }
+
+        .myclass1 {
+            color: blue;
+            background-color: yellow;
+            width: 400px;
+            height: 50px;
+            border-width: 15px;
+            border-color: black;
+            border-style:ridge; /* dotted dashed */
+
+        }
+        
+        .myclass2 {
+            color: green;
+            background-color: pink;
+            
+        }
+
+        #myp1 {
+            border-width: 5px;
+            border-color: black;
+            border-style:groove ;         
+        }
+        
+
+    </style>
+</head>
+<body>
+    <H1>CSS 연습용 페이지</H1>
+     <!-- 클래스 2개를 중복 적용하면, 여기 속성에서의 순서가 아니라 CSS 안에서의 순서를 따라간다. -->
+    <p class="myclass1 myclass2" id="myp1">여기에 아무거나 입력</p>
+    <p>여기에 아무거나 입력</p>
+    <p class="myclass1">여기에 아무거나 입력</p>
+    <p class="myclass2">여기에 아무거나 입력</p>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        ul {
+            list-style-type: none;
+        }
+        #firstul .icon::before {
+            content: '★';
+            color: red;
+        }
+        #firstul .icon::after {
+            content: '★';
+            color: blue;
+        }
+        /* li::before {
+            content: 'x';
+
+        } */
+        #secondul li::before {
+            content: 'x';
+        }
+
+    </style>
+</head>
+<body>
+    <ul id="firstul">
+        <li class="icon">아메리카노</li>
+        <ul id="secondul">
+            <li>아아</li>
+            <li>뜨아</li>ㅁ
+
+        </ul>
+        <li class="icon">카푸치노</li>
+        <li class="icon">에스프레소</li>
+    </ul>
+    
+</body>
+</html>

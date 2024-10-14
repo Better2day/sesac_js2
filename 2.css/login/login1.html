@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap">
+    <style>
+        * {
+            background-color: #201D48;
+            font-family: "Roboto", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 20px;
+            color: white;
+            border-radius: 5px;
+        }
+        /* div .container {
+            width: 300px;
+            text-align: center;
+            margin: 0 auto;
+            border: 5px solid red;
+        } */
+        /* div {
+
+        } */
+        div .main {
+            width: 300px;
+            height: 430px;
+            border: 1px solid #fff;
+            margin: 0 auto;
+            margin-top: 100px;
+            text-align: center;
+            overflow: clip;
+            /* overflow-block: clip; */
+            /* box-shadow:inset 10px #573B8A;              */
+        }
+        div .signup, .login {
+            border: 1px solid #fff;
+            padding: 10px 0px;
+        }
+
+        div .login {
+            width: 600px;
+            height: 200px;
+            /* position: relative; */
+            background-color: #EEEEEE;
+            border-top-left-radius: 35%;
+            border-top-right-radius: 35%;
+            /* z-index: 999; */
+            position: absolute;
+            /* top: -50px; */
+        }
+        input {
+            background-color: #dddddd;
+            border-radius: 5px;
+            margin-top: 10px;
+
+        }
+        button {
+            width: 220px;
+            background-color: #573B8A;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .login label, .login p {
+            background-color: #EEEEEE;
+        }        
+        .login label {
+            color: #573B8A;
+            border: 2px solid #fff;            
+        }
+        .login form {
+            width: 600px;
+            background-color: #EEEEEE;
+            border-top-left-radius: 35%;
+            border-top-right-radius: 35%;
+            border: 2px solid #333;
+            position: relative;
+        }
+        .login p:first-child {
+            padding-top: 50px;
+            color: red;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="main">
+            <!-- <input type="checkbox"> -->
+            <div class="signup">
+                <form>
+                    <label>Sign up</label>
+                    <input type="text" placeholder="Username">
+                    <input type="email" placeholder="Email">
+                    <input type="password" placeholder="Password">
+                    <button>Sign up</button>
+                </form>
+            </div>
+            <div class="login">
+                <form>
+                    <label>Login</label>
+                    <input type="email" placeholder="Email">
+                    <input type="password" placeholder="Password">
+                    <button>Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

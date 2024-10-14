@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .mystyle1 {
+            list-style-type: square;
+            background-color: aquamarine;
+        }
+        .mystyle2 {
+            list-style-type: upper-alpha;
+            background-color: bisque;
+            margin-left: 40px;
+            padding: 20px;
+        }
+        /* > 기호는 Direct child만 선택해서 (바로 아랫 단계) */
+        .mystyle2 > li {
+            margin-bottom: 10px;
+        }
+        .mystyle3 {
+            list-style-type: none;
+            background-color: rgb(245, 172, 255);
+        }
+        /* Direct child가 아니라서, 아랫 단계 li 전부에 적용된다 */
+        .mystyle3 li::before {
+            content: "V";
+            color: rgb(0, 255, 0);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <H1>CSS 적용할 수 있는 리스트 속성</H1>
+    <h2>UL (unordered list)</h2>
+    <ul class="mystyle1">
+        <li>항목1</li>
+        <li>항목2</li>
+        <li>항목3</li>        
+    </ul>
+    <h2>UL (ordered list)</h2>
+    <ol class="mystyle2">
+        <li>항목1</li>
+        <li>항목2</li>
+        <li>항목3</li>
+    </ol>
+    <h2>OL (styled list)</h2>
+    <ol class="mystyle3">
+        <li>항목1</li>
+        <li>항목2</li>
+        <li>항목3</li>
+    </ol>
+</body>
+</html>
