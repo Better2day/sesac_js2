@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+        function sayHello() {
+            console.log('hello');
+            document.write('<H1>hello</H1>');
+            for(let i = 1; i <= 5; i++) {
+                document.write("숫자: " + i + "<br>"); 
+            }
+        }
+
+        function test() {
+            let modulus = (a, b) => (a % b);
+            document.write(modulus(7, 3));
+        }
+
+    </script>
+</head>
+<body>
+    <H1>헬로우 월드, js</H1>
+    <button onclick="test()">Hello</button>
+    <script></script>
+</body>
+</html>

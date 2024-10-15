@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .square {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            transition-property: width, height; /* 내가 무엇을 바꿀 것인지? 속성값이 중요 */
+            transition-duration: 1s;
+            transition-timing-function: ease-in-out;
+        }
+        .square:hover {
+            width: 150px;
+            height: 200px;
+        }
+
+        .button {
+            color: black;
+            transition-property: color;
+            transition-duration: 1.0s;
+            transition-timing-function: ease-in-out;
+        }
+        .button:hover {
+            color: red;
+        }
+
+        .image {
+            width: 200px;
+            transition-property: transform;
+            transition-duration: 1s;
+            transition-timing-function: ease-in-out;
+        }
+        .image:hover {
+            transform: rotate(180deg);
+        }
+
+        .gradient {
+            background: linear-gradient(to right, #ff0000, orangered);
+            transition-property: background;
+        }
+        .gradient:hover {
+            background: linear-gradient(to right, blue, black);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="square"></div>
+    <br>
+    <button class="button">Hover me</button>
+    <br>
+    <img class="image" src="../images/puppy1.jpg" alt="강아지">
+    <br>
+    <div class="gradient">Hover me for gradient effect</div>
+</body>
+</html>

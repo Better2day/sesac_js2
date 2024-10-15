@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            animation-name: moveLeft; /* 애니메이션 명명 (이 라인만 작성한다고 동작하지 않음) */
+            animation-duration: 1s;
+            animation-timing-function: ease;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+            position: relative;
+        }
+        @keyframes moveLeft {
+            0% { left: 300px; top: 100px; }
+            100% { left: 500px; top: 300px; }
+        }
+
+        .text {
+            color: black;
+            animation-name: fadeOut;
+            animation-duration: 1.5s;
+            animation-timing-function: linear;
+            animation-delay: 1s;
+            animation-iteration-count: 5;
+            position: relative;
+        }
+        @keyframes fadeOut {
+            0% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        .circle {
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+            border-radius: 10%;
+            animation-name: rotateAndScale;
+            animation-duration: 3s;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+            /* position: relative; */
+        }
+        @keyframes rotateAndScale {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(0.5); }
+            100% { transform: rotate(0deg) scale(1); }
+        }
+
+        .image {
+            width: 200px;
+            height: 200px;
+            animation-name: shake;
+            animation-duration: 2s;
+            animation-timing-function:ease-in-and-out;
+            animation-iteration-count: infinite;
+        }
+        @keyframes shake{
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-10px) rotate(-10deg);}
+            75% { transform: translateX(10px) rotate(10deg);}
+            100% { transform: translateX(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <br>
+    <p class="text">Fade Out Animation</p>
+    <br>
+    <div class="circle"></div>
+    <br>
+    <img class="image" src="../images/puppy1.jpg" alt="Welsh Corgi">
+
+</body>
+</html>

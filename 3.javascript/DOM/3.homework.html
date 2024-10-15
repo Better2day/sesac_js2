@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+        var i = 0;
+        function toggleColor() {
+            const argText = document.getElementById('textt');
+             if (i === 0) {
+                argText.style.color = 'red';
+                i = 1;
+             } else if (i === 1) {
+                argText.style.color = 'blue';
+                i = 0;
+             } else {
+                document.write('있을 수 없는 오류!');
+             }
+        }
+    </script>
+</head>
+<body>
+    <p id="textt">이 텍스트의 색상을 토글해보세요!</p>
+    <button onClick="toggleColor()">텍스트 색상 토글</button>
+</body>
+</html>
