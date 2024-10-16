@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        table {
+            border: 1px solid black;
+            border-collapse: collapse;
+            width: 200px;
+            height: 150px;
+        }
+        td {
+            border: 1px solid black;
+            /* background-color: lightblue; */
+            /* background-color: lightgreen; */
+        }
+    </style>
+    <script>
+        function changeCellColor() { // lightblue (rgb(173, 216, 230), #add8e6)
+/*
+            let table = document.getElementsByTagName("table"); //.backgroundColor;
+            table[0].style.backgroundColor = '#add8e6';
+*/
+/*
+            let cells = document.getElementsByTagName("td"); //.backgroundColor;
+            for (let i = 0; i < cells.length; i++) {
+                cells[i].style.backgroundColor = 'lightblue';
+                
+            }
+*/
+            let cells = document.getElementsByTagName("td"); //.backgroundColor;
+            for (let cell of cells) {
+                cell.style.backgroundColor = 'lightblue';                
+            }
+        /*
+            let tds = document.getElementsByTagName("td"); //.backgroundColor;
+            let i = 0;
+            while (true) {
+                console.log(i);
+                tds[i++].style.backgroundColor = '#add8e6';                
+                if (i == 9) { break; }
+            }
+        */           
+        }
+        function changeOddCellColor() { // lightgreen
+            //let curCellColor = document.getElementsByTagName("td").backgroundColor;
+            //(document.getElementsByTagName("td"):nth-child(2n-1))backgroundColor = '#add8e6';
+
+            let cells = document.getElementsByTagName("td");
+
+            for (let i = 0; i < cells.length; i++) {
+                if (i % 2 == 1) {
+                    cells[i].style.backgroundColor = 'lightgreen';
+                }
+            }
+
+/*            
+            while (true) {
+                console.log(i);                
+                if (i % 2 == 1) {
+                    tds2[i].style.backgroundColor = '#90ee90';
+                } else if (i == 9) {
+                    break;
+                }
+                i++;
+            }
+*/
+        }
+    </script>
+</head>
+<body>
+    <table id="mytable">
+        <tr>
+            <td>셀1</td>
+            <td>셀2</td>
+            <td>셀3</td>
+        </tr>
+        <tr>
+            <td>셀4</td>
+            <td>셀5</td>
+            <td>셀6</td>
+        </tr>
+        <tr>
+            <td>셀7</td>
+            <td>셀8</td>
+            <td>셀9</td>
+        </tr>        
+    </table>
+    <button onClick="changeCellColor()">셀 색상 변경</button>
+    <button onClick="changeOddCellColor()">홀수 셀 색상 변경</button>
+</body>
+</html>

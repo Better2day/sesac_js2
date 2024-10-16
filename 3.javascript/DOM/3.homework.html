@@ -3,10 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
+    <style>
+        p {
+            color: red;
+        }
+
+    </style>
     <script>
         var i = 0;
         function toggleColor() {
-            const argText = document.getElementById('textt');
+            const mytext = document.getElementById('mytext'); // HTML DOM 요소만 가져온다. 여기에 적용된 CSS는 가져오지 못한다 (정확하게는 inline 속성만 가져올 수 있다.)
+            console.log(mytext);
+            const currentColor = mytext.style.color;
+            console.log(currentColor);
+
+            // HTML + CSS가 적용된 색상값을 가져오고 싶으면??
+            const currentColor2 = window.getComputedStyle(mytext).color;
+            console.log(currentColor2);
+            
+
+            if (currentColor2 == 'rgb(255, 0, 0)') {
+                console.log('here is if block');
+                mytext.style.color = 'blue';
+            } else {
+                console.log('here is else block');
+                mytext.style.color = 'red';
+            }
+/*
              if (i === 0) {
                 argText.style.color = 'red';
                 i = 1;
@@ -16,11 +39,12 @@
              } else {
                 document.write('있을 수 없는 오류!');
              }
+*/
         }
     </script>
 </head>
 <body>
-    <p id="textt">이 텍스트의 색상을 토글해보세요!</p>
+    <p id="mytext">이 텍스트의 색상을 토글해보세요!</p>
     <button onClick="toggleColor()">텍스트 색상 토글</button>
 </body>
 </html>

@@ -36,3 +36,10 @@ console.log(sum3(3, 4));
 let sum4 = (a, b) => (a + b);
 
 console.log(sum4(10, 10));
+
+console.log(4 + 3);
+console.log(4 - 3);
+console.log(4 * 3);
+console.log(Math.round(parseInt("4") / parseInt("3")));
+console.log(4 % 3);
+

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+        // function progress() {
+        //     let pbar = document.getElementById("progressbar");
+        //     // console.log(pbar);            
+        //     // flex? 로는 어떻게?
+
+        //     let num = parseInt(document.getElementsByTagName("input")[0].getAttribute("value"));
+        //     //console.log((num[0].getAttribute("min")));
+        //     console.log(num);
+        //     for (let i = 0; i < num; i++) {
+        //         pbar.innerHTML += "<div style=\"width:100px; height:20px; float:left; background-color:green\"></div>";
+        //     }
+        //     // console.log(pbar.innerHTML);            
+        // }
+    </script>
+    <link rel="stylesheet" href="progress.css">
+</head>
+<body>
+    <h1>프로그레스바를 만들어보기</h1>
+    <input id="timeInput" type="number" placeholder="초 입력" min="1">
+    <button id="startButton">시작</button>
+    <button id="resetButton">초기화</button>
+    <div id="progressBar">
+        <div id="progress"><span id="progressText">0%</span></div>
+    </div>
+    <script src="progress.js"></script>
+
+    <!-- <h2>프로그레스바 만들어보기</h2>
+    <input type="number" placeholder="초 입력" min="5">
+    <button onClick="progress()">시작</button>
+    <button>초기화</button>
+    <div id="progressbar" style="background-color: red"></div> -->
+</body>
+</html>

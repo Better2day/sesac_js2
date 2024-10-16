@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+//        var mynum = 0;
+        function number_inc() {
+            const result = document.getElementById('result');
+            console.log(result.innerText);
+            result.innerText = Number(result.innerText) + 1;;
+            // DOM 구조 안에 있는 값은 text (숫자로 보여도 숫자 아님. 그래서 전역 변수, 지역 변수 개념도 없음)
+/*
+            console.log(document.getElementById("div1"));
+            mynum = parseInt(document.getElementById("div1").textContent);
+            console.log(mynum);
+            //mynum++;
+            console.log(++mynum);
+            document.getElementById;("div1").textContent = mynum;
+*/
+        }
+        function number_dec() {
+const result = document.getElementById('result');
+            console.log(result);
+            var finalResult = Number(result.textContent) - 1;
+            result.textContent = finalResult;
+/*            
+            mynum = parseInt(document.getElementById("div1").innerHTML);
+            mynum++;
+            document.getElementById;("div1").innerHTML = mynum;
+*/
+        }
+
+    </script>
+
+</head>
+<body>
+    <H1>버튼 월드</H1>
+    <div id="result">0</div>
+    <div>
+        <button onClick="number_inc()">+1</button>
+        <button onClick="number_dec()">-1</button>
+    </div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="modal.css">
+    <script src="modal.js" defer></script> <!-- defer 속성을 통해서 DOM 로딩 후 실행되도록 설정 -->
+</head>
+<body>
+    <h1>안녕하세요</h1>
+    <p>아무 내용이나 작성</p>
+    <button id="open">모달 열기</button>    
+
+    <div class="modalcontainer" style="display: none;">
+        <div clsas="modal">
+            <div class="modal-title">안녕하세요</div>
+            <p>이 창을 닫지 않으면 지나갈 수 없다</p>
+            <div class="modal-close">
+                <button id="close">닫기</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

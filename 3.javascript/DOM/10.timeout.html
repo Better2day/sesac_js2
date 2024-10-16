@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Refresh</h1>
+    <p>이 페이지는 3초 후에 자동 리프레쉬 됩니다.</p>
+    <script>
+        // window.onload = function() {
+        window.onload = 
+            setTimeout(function() {
+                console.log("출력");      
+                //location.reload(); // 브라우저 주소창을 통한 리프레시 (브라우저 캐시 내용으로 불러옴)          
+                //location.reload(true); // 외부 서버로부터 다시 로드 (캐시를 사용하지 않음)
+                //location = location; // 주소창에 있는 주소를 다시 주소창에 넣는다. = reload();
+                //location.href = location.href; // 주소창의 URI를 다시 주소창의 URI로 한다.
+            }, 3000); // 3s (3000ms) 후에 이 안에 있는 내용을 호출한다.
+        // }
+    </script>
+    
+</body>
+</html>

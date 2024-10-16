@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const parent = document.createElement('div');
+        const child = document.createElement('p');
+        const child2 = document.createElement('span');
+        //child.append('텍스트1','텍스트2', '텍스트3');
+        //child.appendChild('텍스트1','텍스트2', '텍스트3'); // error
+        // console.log(parent);
+                
+        //parent.append(child);
+        //parent.append(child); // undefined
+        // console.log(parent.appendChild(child));
+        console.log(parent.appendChild(child, child2));
+        
+        console.log(parent); // <div> <p>"텍스트 1" "텍스트 2"</p> </div>
+
+    </script>
+    
+</body>
+</html>
