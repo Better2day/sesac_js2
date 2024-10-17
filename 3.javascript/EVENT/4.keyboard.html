@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #displayKey {
+            font-size: 100px;
+            text-align: center;
+            margin-top: 50px;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="myInput" placeholder="글자를 입력하세요">
+    <div id="displayKey"><!-- 눌린 키를 표시 --></div>
+
+    <script>
+        // 아래 같은 이벤트는 무슨 키가 눌렸는지 리턴값으로 넘겨준다.
+        // document.addEventListener('keydown', function (event) {
+        document.addEventListener('keyup', (e) => {
+            //console.log("키 눌림: " + event.key)
+            //console.log(`키 눌림: ${e.key}`);
+            const displayKeyElement = document.getElementById('displayKey');
+            displayKeyElement.textContent = e.key;
+        });
+    </script>
+</body>
+</html>

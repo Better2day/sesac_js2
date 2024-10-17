@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button id="myButton">Click me!</button>    
+    <script>
+        /*
+        function buttonAction() {
+            console.log("Clicked!");
+        }
+        */
+
+        //const button = document.getElementById('myButton');
+
+        //button.addEventListener('click', buttonAction);
+        /*
+        button.addEventListener('click', () => {
+            console.log("Clicked!"); }
+        )
+        */
+
+        // client 쪽으로 소스가 가기 때문에, 용량을 줄이기 위해서도 최대한 간결하게 작성
+        document.getElementById('myButton').addEventListener('click', () => {
+            console.log("Clicked!");
+        })
+    </script>
+</body>
+</html>

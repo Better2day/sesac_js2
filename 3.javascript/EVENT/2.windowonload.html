@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // document는 HTML 문서, window는 브라우저 창
+        // window.onload = function() {
+        window.onload = () => {            
+            console.log("모든 리소스(HTML/CSS/image 등) 로딩 완료")
+        }
+
+        // DOMContentLoaded 코드가 아래 있지만, 실제 실행은 먼저 된다.
+        document.addEventListener("DOMContentLoaded", () => { // 화살표 함수
+            // 'DOM'이 다 로딩되었을 때 실행됨
+            // 이 시점에서 CSS, image 리소스 등 모든 컨텐츠의 로딩이 완료되었음을 보장할 수 없다.
+            console.log("DOM 이 완전히 로딩되었음");
+        })
+    </script>
+</body>
+</html>
