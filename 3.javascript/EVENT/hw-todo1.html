@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h1>To-Do List</h1>
+    <input id="newToDo" type="text" placeholder="New to-do">
+    <button id="addBtn">Add</button><br>
+    <ul id="toDoList">
+    </ul>
+    <script>
+        // document.createElement("li").textContent
+        let liNum = 1;
+
+        // 1. To-Do List Item 추가
+        document.getElementById("addBtn").addEventListener("click", () => {
+            let newToDo = document.getElementById("newToDo");
+
+            // 1) 사용자 입력값으로 List Item 생성 → UL 아래 자식으로 추가
+            if (newToDo.value != "") { // 내용 없는 to-do list 생성 방지
+                const li = document.createElement("li");
+                li.id = "li" + liNum++;
+                li.textContent = newToDo.value;
+                document.getElementById("toDoList").appendChild(li);
+
+            // 2) 추후 삭제를 가능하게 하기 위해서, 지금 생성된 li 노드에 이벤트 리스너 추가
+                document.getElementById(li.id).addEventListener("click", () => {
+                    style = "line-through";
+                    console.log(li);
+                });
+            }
+
+            // 3) textbox 입력값 지우기
+            document.getElementById("newToDo").value = "";
+        });
+
+
+        // 2. To-Do List Item 삭제 (취소선)
+/* 
+        let lis = document.getElementsByTagName("li");
+        console.log(lis);
+        
+        for (let li of lis) {            
+            document.getElementById(li.id).addEventListener("click", () => {
+                li.style = "line-through";
+                console.log(lis);
+                console.log(li);
+            });
+        };
+         */
+/*         
+        .addEventListener("click", () => {
+            console.log("test");
+        });
+        
+ */
+    </script>
+</body>
+</html>

@@ -4,16 +4,27 @@
     <meta charset="UTF-8">
     <title>Document</title>
     <style>
-
-
         #content {
+            width: 800px;
             height: 1200px;
-            background: linear-gradient(45deg, red 80%, blue 100%);
+            background: linear-gradient(45deg, orange 60%, blue 100%);            
+            justify-content: center;
+            align-items: center;
+        }
+        #layer1 {
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background-color: rgba(255, 69, 0, 0.5);
+            box-shadow: 5px 5px 30px red;            
         }
     </style>
 </head>
 <body>
-    <div id="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo recusandae similique cumque nihil quo. Velit ipsum iste, beatae incidunt non, ipsam eius blanditiis dolor magni explicabo necessitatibus eaque consequuntur! Fugit.</div>
+    <div id="content">
+        <div id="layer1">Ich liebe dich</div>
+    </div>
+    
     <script>
         window.addEventListener("scroll", () => {
             console.log("페이지 스크롤됨");
