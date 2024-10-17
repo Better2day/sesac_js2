@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #trackingArea {
+            width: 400px;
+            height: 400px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <div id="trackingArea"></div>
+    <script>
+        document.getElementById("trackingArea").addEventListener("mousemove", (e) => {
+            console.log(`마우스 이동중. X=${e.clientX} Y=${e.clientY}`);
+        });
+        
+        window.addEventListener("beforeunload", function(event) {
+            console.log("여기 왔어");
+            event.returnValue = "가지마~~~~~";
+        });        
+    </script>
+</body>
+</html>

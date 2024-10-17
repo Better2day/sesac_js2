@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .dragItem {
+            width: 100px;
+            height: 100px;
+            cursor: pointer;
+            margin: 10px;
+            flex-shrink: 0;
+        }
+        #dragItem1 {
+            background-color: #ffcc00;
+        }
+        #dragItem2 {
+            background-color: #00ffdd;
+        }
+        #dragItem3 {
+            background-color: #dd88ff;
+        }
+
+        #dropZone {
+            width: 200px;
+            min-height: 200px;
+            margin-top: 50px;
+            border: 2px dashed #ccc;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: right;
+        }
+    </style>
+</head>
+<body>
+    <div id="dragItem1" class="dragItem" draggable="true">Drag me 1</div>
+    <div id="dragItem2" class="dragItem" draggable="true">Drag me 2</div>
+    <div id="dragItem3" class="dragItem" draggable="true">Drag me 3</div>
+    <div id="dropZone">Drop here!</div>
+    <script>
+        //const dragItems = document.getElementsByClassName("dragItem");
+        const dragItems = document.querySelectorAll(".dragItem");
+        const dropZone = document.getElementById("dropZone");
+
+        for (let dragItem of dragItems) {
+            dragItem.addEventListener("dragstart", (event) => {
+                event.dataTransfer.setData("target", event.target.id);
+            });
+        };
+
+/*         
+        dragItems.forEach(dragItem => {
+            dragItem.addEventListener("dragstart", (event) => {
+                event.dataTransfer.setData("target", event.target.id);
+            });
+        })
+ */
+        dropZone.addEventListener("dragover", (event) => {
+            event.preventDefault(); // 웹 브라우저 본연의 기능 비활성화 (주로 File/URL 주소 ~ ?? ~ )
+        });
+
+        let currentWidth = 200;
+        dropZone.addEventListener("drop", (event) => {
+            //event.preventDefault(); // 여기는 안 해줘도 똑같이 작동
+            const data = event.dataTransfer.getData("target");
+
+            // DOM tree 구조상, 멀티 parent를 가질 수 없음. 그래서 appendChild 하면 이전 부모에게서 떨어져나와서 새 부모 아래로 감
+            dropZone.appendChild(document.getElementById(data));
+
+            currentWidth += 100;
+            dropZone.style.width = currentWidth + 'px';
+        });
+    </script>
+</body>
+</html>

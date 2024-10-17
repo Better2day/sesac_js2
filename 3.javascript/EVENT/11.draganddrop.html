@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #dragItem {
+            width: 100px;
+            height: 100px;
+            background-color: #ffcc00;
+            cursor: pointer;
+        }
+        #dropZone {
+            width: 200px;
+            height: 200px;
+            border: 2px dashed #ccc;
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <div id="dragItem" draggable="true">Drag me!</div>
+    <div id="dropZone">Drop here!</div>
+    <script>
+        const dragItem = document.getElementById("dragItem");
+        const dropZone = document.getElementById("dropZone");
+
+        dragItem.addEventListener("dragstart", () => {
+            console.log("드래그 시작");
+        });
+        dropZone.addEventListener("dragover", (event) => {
+            event.preventDefault(); // 웹 브라우저 본연의 기능 비활성화 (주로 File/URL 주소 ~ ?? ~ )
+            console.log("누가 내 위에 올라왔는가?");
+        });
+        dropZone.addEventListener("drop", (event) => {
+            event.preventDefault();
+            console.log("드롭 발생!");
+            // DOM tree 구조상, 멀티 parent를 가질 수 없음. 그래서 appendChild 하면 이전 부모에게서 떨어져나와서 새 부모 아래로 감
+            dropZone.appendChild(dragItem);
+        });
+    </script>
+    
+</body>
+</html>

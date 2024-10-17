@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #dragItem1 {
+            width: 100px;
+            height: 100px;
+            background-color: #ffcc00;
+            cursor: pointer;
+            margin: 10px;
+        }
+        #dragItem2 {
+            width: 100px;
+            height: 100px;
+            background-color: lightblue;
+            cursor: pointer;
+            margin: 10px;
+        }
+        #dragItem3 {
+            width: 100px;
+            height: 100px;
+            background-color: #dd88ff;
+            cursor: pointer;
+            margin: 10px;
+        }        
+        #dropZone {
+            width: 350px;
+            height: 200px;
+            border: 2px dashed #ccc;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: right;
+            align-items: right;
+        }
+    </style>
+</head>
+<body>
+    <div id="dragItem1" draggable="true">Drag me 1</div>
+    <div id="dragItem2" draggable="true">Drag me 2</div>
+    <div id="dragItem3" draggable="true">Drag me 3</div>
+    <div id="dropZone">Drop here!</div>
+    <script>
+        const dragItem1 = document.getElementById("dragItem1");
+        const dragItem2 = document.getElementById("dragItem2");
+        const dragItem3 = document.getElementById("dragItem3");
+        const dropZone = document.getElementById("dropZone");
+
+        dragItem1.addEventListener("dragstart", (event) => {
+            console.log("드래그 시작" + event.target.id);
+            event.dataTransfer.setData("target", event.target.id);
+            // event object 안의 dataTransfer라는 객체 안에 내가 원하는 key, value로 저장 가능.
+            // {"target", id} 형태로 데이터 저장
+        });
+        dragItem2.addEventListener("dragstart", (event) => {
+            console.log("드래그 시작" + event.target.id);
+            event.dataTransfer.setData("target", event.target.id);
+        });
+        dragItem3.addEventListener("dragstart", (event) => {
+            console.log("드래그 시작" + event.target.id);
+            event.dataTransfer.setData("target", event.target.id);
+        });
+
+        dropZone.addEventListener("dragover", (event) => {
+            event.preventDefault(); // 웹 브라우저 본연의 기능 비활성화 (주로 File/URL 주소 ~ ?? ~ )
+            console.log("누가 내 위에 올라왔는가?");
+        });
+
+        dropZone.addEventListener("drop", (event) => {
+            //event.preventDefault();
+            const data = event.dataTransfer.getData("target");
+
+            console.log("드롭 발생!");
+            // DOM tree 구조상, 멀티 parent를 가질 수 없음. 그래서 appendChild 하면 이전 부모에게서 떨어져나와서 새 부모 아래로 감
+            dropZone.appendChild(document.getElementById(data));
+            
+        });
+    </script>
+</body>
+</html>

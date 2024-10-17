@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //const array = ['a', 'b', 'c'];
+
+        /*
+        const logArrayElements = (element, index) => {
+            console.log(`a${index} == ${element}`);
+        };
+        */
+
+        //[2, 5, , 8].forEach(logArrayElements);
+        [2, 5, , 8].forEach((bbb, index) => {
+            console.log(`a[${index}] == ${bbb}`);
+        });
+        
+
+        class Counter {
+            constructor() {
+                this.sum = 0;   
+                this.count = 0;
+            }
+            
+            add(array) {
+                // 오직 함수 표현식만 자신의 this 바인딩을 가집니다.
+                array.forEach(function countEntry(bbb) {
+                this.sum += bbb;
+                ++this.count;
+                }, this);
+            }
+        }
+
+        const obj = new Counter();
+        obj.add([2, 4, 8, 16]);
+        console.log(obj.sum);
+        console.log(obj.count);
+
+        // array.forEach(element => console.log(element));
+
+/*         
+        array.forEach(element, index => {
+            console.log(`array[${index}] == ${element}`);
+        });
+*/
+/* 
+        array.forEach(ele => {
+            console.log(array.lastIndex(ele), ele);
+        });
+         */
+    </script>
+    
+</body>
+</html>

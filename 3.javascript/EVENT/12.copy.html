@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <textarea id="myTextArea">이 글자를 복사해보시오</textarea>
+    <script>
+        document.getElementById("myTextArea").addEventListener("copy", () => {
+            alert("텍스트가 복사되었습니다");
+        })
+        document.getElementById("myTextArea").addEventListener("paste", () => {
+            alert("텍스트가 붙여넣어졌습니다.");
+        })
+    </script>
+    
+</body>
+</html>

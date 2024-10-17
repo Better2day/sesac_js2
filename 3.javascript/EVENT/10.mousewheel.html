@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #content {
+            height: 2000px;
+            background: linear-gradient(to top, #ffcc00 0%, #ff6600 100%);
+        }
+    </style>
+</head>
+<body>
+    <div id="content"></div>
+    <script>
+        document.addEventListener("wheel", (e) => {
+            console.log(`마우스 휠 움직임: ${e.deltaY}`);
+        });
+    </script>
+</body>
+</html>

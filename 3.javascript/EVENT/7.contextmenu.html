@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #myElement {
+            width: 100px;
+            height: 100px;
+            background-color: lightblue;
+        }
+    </style>
+</head>
+<body>
+    <div id="myElement">Right Click</div>
+    <script>
+        document.getElementById("myElement").addEventListener("contextmenu", (e) => {
+            e.preventDefault();
+            //event.preventDefault();
+            console.log("커스텀 메뉴 중단함");
+    });
+    </script>
+</body>
+</html>

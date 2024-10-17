@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button id="resizeBtn">창 크기 변경</button>
+    <script>
+        window.addEventListener("resize", () => {
+            //console.log("윈도우 크기 변경됨");
+            /*
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+
+            console.log(`내 창 크기는 ${width} x ${height}`);
+            */
+            console.log(`내 창 크기는 ${window.innerWidth} x ${window.innerHeight}`);
+        })
+
+        document.getElementById("resizeBtn").addEventListener("click", () => {
+            console.log("창 크기 변경 버튼 리스너");
+            // window.resizeTo(800, 600); // 창 크기 변경은 사용자 보호 차원에서 막혔음
+            const popup = window.open("", "pop-up window", "width=400, height=300);");
+            // 팝업창 드래그 이동 불가. 다른 인자 주어야 가능할 듯?
+        })
+    </script>
+</body>
+</html>

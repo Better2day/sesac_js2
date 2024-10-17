@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+
+
+        #content {
+            height: 1200px;
+            background: linear-gradient(45deg, red 80%, blue 100%);
+        }
+    </style>
+</head>
+<body>
+    <div id="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo recusandae similique cumque nihil quo. Velit ipsum iste, beatae incidunt non, ipsam eius blanditiis dolor magni explicabo necessitatibus eaque consequuntur! Fugit.</div>
+    <script>
+        window.addEventListener("scroll", () => {
+            console.log("페이지 스크롤됨");
+/* 
+            const scrollPosition = window.pageYOffset;
+            console.log(`현재 위치: ${scrollPosition}`);
+
+            const scrollPosition2 = document.documentElement.scrollTop;
+            console.log(`현재 위치: ${scrollPosition2}`);
+
+ */            const scrollPosition3 = window.pageYOffset || document.documentElement.scrollTop;
+            console.log(`현재 위치: ${scrollPosition3}`);
+        })
+    </script>
+</body>
+</html>

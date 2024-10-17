@@ -20,7 +20,39 @@
         document.getElementById("myElement").addEventListener("mouseout", () => {
             console.log("Mouseout 탐지")
         })
-        // 다른 마우스 이벤트 해보기            
+        document.getElementById("myElement").addEventListener("mousedown", (e) => {
+            console.log("Mousedown: 마우스 버튼 눌림")
+            switch(e.button) {
+                case 0:
+                    console.log("왼쪽 버튼");
+                    break;
+                case 1:
+                    console.log("휠스크롤? 버튼?");
+                    break;
+                case 2:
+                    console.log("오른쪽 버튼");
+                    break;
+                default:
+                    console.log("무슨? 버튼");
+                    break;
+            }
+        })
+        document.getElementById("myElement").addEventListener("mouseup", () => {
+            console.log("Mouseup: 마우스 버튼 뗌")
+        })
+
+        document.getElementById("myElement").addEventListener("mouseenter", () => {
+            console.log("Mouseenter 탐지. Mouseover와 같은 것 같은데..")
+        })
+        document.getElementById("myElement").addEventListener("mouseleave", () => {
+            console.log("Mouseleave 탐지. Mouseout와 같은 것 같은데..")
+        })        
+
+        /*
+        document.getElementById("myElement").addEventListener("mousemove", () => {
+            console.log("Mousemove 탐지. 포인터 움직임")
+        })
+        */ 
     </script>
 </body>
 </html>

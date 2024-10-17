@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <input id="myInput" type="text" value="console.log('hello, world');">
+    <button id="copyButton1">Textbox 코드 복사</button>
+    <!--
+    <textarea id="myTextarea" placeholder="마음대로 입력하세요"></textarea>
+    <button id="copyButton2">Textarea 코드 복사</button>
+    -->
+
+    <script>
+        document.getElementById("copyButton1").addEventListener("click", () => {
+            const copyText = document.getElementById("myInput");
+            console.log(copyText);
+            copyText.focus();
+            copyText.select();
+            //copyText.select();
+            //document.execCommand("copy");
+            //alert("클립보드에 복사되었습니다");
+        })
+        /*      
+        document.getElementById("copyButton2").addEventListener("click", () => {
+            const copyText = document.getElementById("myTextarea");
+            console.log(copyText);
+            copyText.focus();
+            copyText.select();
+            //copyText.select();
+            //document.execCommand("copy");
+            //alert("클립보드에 복사되었습니다");
+        })
+         */
+    </script>
+</body>
+</html>
