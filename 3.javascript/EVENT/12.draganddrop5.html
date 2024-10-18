@@ -39,23 +39,18 @@
     <div id="dragItem3" class="dragItem" draggable="true">Drag me 3</div>
     <div id="dropZone">Drop here!</div>
     <script>
+        // 리팩토링 완료
         //const dragItems = document.getElementsByClassName("dragItem");
         const dragItems = document.querySelectorAll(".dragItem");
         const dropZone = document.getElementById("dropZone");
-
+         
+        // ragItems.forEach(dragItem => {
         for (let dragItem of dragItems) {
             dragItem.addEventListener("dragstart", (event) => {
                 event.dataTransfer.setData("target", event.target.id);
             });
         };
 
-/*         
-        dragItems.forEach(dragItem => {
-            dragItem.addEventListener("dragstart", (event) => {
-                event.dataTransfer.setData("target", event.target.id);
-            });
-        })
- */
         dropZone.addEventListener("dragover", (event) => {
             event.preventDefault(); // 웹 브라우저 본연의 기능 비활성화 (주로 File/URL 주소 ~ ?? ~ )
         });
