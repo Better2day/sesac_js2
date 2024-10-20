@@ -44,7 +44,7 @@
         const dragItems = document.querySelectorAll(".dragItem");
         const dropZone = document.getElementById("dropZone");
          
-        // ragItems.forEach(dragItem => {
+        // dragItems.forEach(dragItem => {
         for (let dragItem of dragItems) {
             dragItem.addEventListener("dragstart", (event) => {
                 event.dataTransfer.setData("target", event.target.id);

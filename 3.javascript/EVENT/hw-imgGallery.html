@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Gallery</title>
+    <style>
+        img {
+            width: 100px;
+            height: 100px;
+        }
+        img#gallery {
+            width: 400px;
+            height: 400px;
+        }
+        div#layer1 {
+            width: 400px;
+            height: 400px;
+            /* border: 1px solid black; */
+            justify-self: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <H1>Image Gallery</H1>
+    <img id="p1" src="../../images/puppy1.jpg" alt="puppy1">
+    <img id="p2" src="../../images/puppy2.jpg" alt="puppy2">
+    <img id="p3" src="../../images/puppy3.jpg" alt="puppy3">
+    <div id="layer1"><img id="gallery" src="../../images/blank.jpg" alt="gallery"></div>
+    <script>
+        const imgs = document.querySelectorAll("img");
+        imgs.forEach(img => {
+            img.addEventListener("mouseenter", () => {
+                document.getElementById("gallery").src = img.src;
+            })
+        });
+
+    </script>
+</body>
+</html>
