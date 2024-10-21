@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .calculator {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 10px;
+            max-width: 300px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .calculator input {
+            grid-column: span 4;
+            padding: 10px;
+        }
+        .calculator button {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" id="result" readonly>
+        <button onclick="appendSymbol(this.innerText)">+</button>
+        <button onclick="appendSymbol(this.innerText)">-</button>
+        <button onclick="appendSymbol(this.innerText)">*</button>
+        <button onclick="appendSymbol(this.innerText)">/</button>
+        <button onclick="appendNumber(this.innerText)">7</button>
+        <button onclick="appendNumber(this.innerText)">8</button>
+        <button onclick="appendNumber(this.innerText)">9</button>
+        <button onclick="calculate()">=</button>
+        <button onclick="appendNumber(this.innerText)">4</button>
+        <button onclick="appendNumber(this.innerText)">5</button>
+        <button onclick="appendNumber(this.innerText)">6</button>
+        <button onclick="clearResult()">C</button>
+        <button onclick="appendNumber(this.innerText)">1</button>
+        <button onclick="appendNumber(this.innerText)">2</button>
+        <button onclick="appendNumber(this.innerText)">3</button>
+        <button onclick="appendNumber(this.innerText)">0</button>
+    </div>
+    
+    <script>
+        function appendNumber(number) {            
+            document.getElementById("result").value += number;
+            // const resultDOM = document.getElementById("result");
+            // To-do: 이 숫자를 입력하기 직전에 입력된 게 무엇인지
+            // 그게 숫자이면 심볼을 더할 수 있지만, 
+            // resultDOM.value += symbol;
+        }
+        function isSymbol(value) {
+/*             
+            if (value === "+" || value === "-" || value === "*" || value === "/") {
+                return ture;
+            } else {
+                return false;
+            }
+ */            
+            return ["+", "-", "*", "/"].includes(value);
+
+        }
+        function appendSymbol(symbol) {            
+            const resultDOM = document.getElementById("result");
+            // To-do: 이 기호를 입력하기 직전에 입력된 게 무엇인지
+            // 그게 숫자이면 심볼을 더할 수 있지만, 
+            const lastInput = resultDOM.value[resultDOM.length-1];
+
+            if (!isSymbol(lastInput)) {
+                console.log(lastInput, symbol);
+                resultDOM.value = resultDOM.value.slice(0, -1) + symbol;
+            } else {
+                resultDOM.value += symbol;
+            }
+            
+            // resultDOM.value += symbol;
+/* 
+            console.log(resultDOM.substring(resultDOM.length-1, resultDOM.length));
+            resultDOM += symbol;
+             */
+        }
+        function calculate() {
+            
+            const resultDOM = document.getElementById("result");
+            const lastInpue = resultDOM.value[resultDOM.value.length - 1];
+
+            if (isSymbol(lastInput)) {
+                // 심볼로 끝났으면 마지막 심볼 삭제
+                //resultDOM.value = resultDOM.value.slice(0, -1);
+                resultDOM.value = 'ERROR';
+                return;
+            }
+
+            const result = eval(resultDOM.value);
+            resultDOM.value = result;
+            
+
+            // refactoring
+            // document.getElementById("result").value = eval(document.getElementById("result").value);
+        }
+        function clearResult() {
+            document.getElementById("result").value = "";
+        }
+
+
+    </script>
+</body>
+</html>
