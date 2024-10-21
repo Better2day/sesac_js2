@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Slider</title>
+    <style>
+        h1 {
+            justify-self: center;
+        }
+        img#slider {
+            width: 400px;
+            height: 400px;
+        }
+        div {
+            width: 400px;
+            height: 50px;
+            border: 1px solid black;
+            justify-self: center;
+            text-align: center;
+            /* margin: 0 auto; */
+            margin-top: 10px;
+        }
+        div#layer1 {
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+    <H1>Image Slider</H1>
+    <div id="layer1"><img id="slider" src="../../images/puppy1.jpg" alt="imageSlider"></div>
+    <div>
+        <button>Prev</button>
+        <button>Next</button>
+    </div>
+    <script>
+        imgs.forEach(img => {
+            img.addEventListener("mouseenter", () => {
+                document.getElementById("gallery").src = img.src;
+            })
+        });
+
+        // 1 2 3 1 2 3
+        // 0 1 2 0 1 2
+
+
+    </script>
+</body>
+</html>
