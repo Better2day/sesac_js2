@@ -242,19 +242,18 @@ function heart2(row) {
         currentLine = '';
     }
     
+    // 중간줄
     for(let i = 0; i < row*4+1; i++) {
         currentLine += '*';        
     };
-
-    //console.log('임시 선');
     console.log(currentLine);
     currentLine = '';
 
-    for(let i = 0; i < row; i++) {
-        for(let j = 0; j < (i+1)*2; j++) {
+    for(let i = 1; i <= row; i++) {
+        for(let j = 1; j <= i*2; j++) {
             currentLine += ' ';
         }
-        for(let j = 4*(row-i-1)+1; j > 0; j--) {
+        for(let j = 1; j <= 4*(row-i)+1; j++) {
             currentLine += '*';
         }
         console.log(currentLine);
@@ -262,12 +261,11 @@ function heart2(row) {
     }
 }
 
-// 중간줄 아래 줄은 loop 회차와 반비례해서 *을 반복 출력해야 한다. 4 x (중간줄 아래 줄 개수 - 반복 회차(i) - 1 (0 회차에도 1번은 돌아야 개수)) + 1
-// 0 17  4*4+1
-// 1 13  4*3+1
+// 중간줄 아래 줄은 loop 회차와 반비례해서 *을 반복 출력해야 한다. 4 (한 줄마다 별 증감 개수) x (row 개수 - 중간줄 아래 기준 현재 줄 번호(i)) + 1
+// 1 13  4*3+1 // 1회차일 때 4 x (4줄 - 첫째줄) + 1
 // 2 9   4*2+1
 // 3 5   4*1+1
-// 4 1   4*0+1
+// 4 1   4*0+1 // 4회차일 때 4 x (4줄 - 넷째줄) + 1
 
-heart2(9);
+heart2(4); 
 console.log('');
