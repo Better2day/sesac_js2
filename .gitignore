@@ -1,0 +1,8 @@
+# node module 전체 제외
+node_modules/
+
+# 원래는 커밋해야 하지만, 강의 목적상 커밋이 불필요함
+# package-lock.json
+
+# 개발중 생성되는 각종 중간 산출물 제외
+*.txt

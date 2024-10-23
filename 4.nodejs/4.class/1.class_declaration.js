@@ -18,11 +18,15 @@ class Car { // 실명 필수. 호이스팅 가능(초기화는 안 됨)
 // 클래스를 사용하는 방법은?
 
 const myCar = new Car('Honda', 'Civic');
+const myCar2 = new Car('Kia', 'Morning');
 console.log(myCar);
 
 // myCar.drive();
 // console.log(myCar.drive());
 const status2 = myCar.drive();
+const status3 = myCar2.drive();
+
 console.log(status2);
+console.log(status3);
 console.log(myCar.open());
 console.log(myCar.close());
