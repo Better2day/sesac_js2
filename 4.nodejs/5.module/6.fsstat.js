@@ -4,7 +4,8 @@ const directoryPath = './'; // 현재 디렉토리
 
 fs.readdir(directoryPath, (err, files) => {
     if (err) {
-        console.log('디렉토리 읽기 오류');
+        console.log('디렉토리 읽기 오류');y73 =\\ 
+         
         return;
     }
     files.forEach(file => {

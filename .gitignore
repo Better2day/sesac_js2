@@ -6,3 +6,4 @@ node_modules/
 
 # 개발중 생성되는 각종 중간 산출물 제외
 *.txt
+*.csv
