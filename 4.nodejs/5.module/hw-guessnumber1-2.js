@@ -7,6 +7,7 @@ const rl = readline.createInterface({
 });
 
 const randomNum = Math.floor(Math.random() * 100) + 1;
+// console.log(randomNum); // 빠른 테스트를 위한 엿보기
 let count = 1; // 추측 횟수
 
 // 2. readline.on() 함수 방식
@@ -14,7 +15,7 @@ function getNum() {
     // 사용자 추측값 입력 받기 (랜덤값을 맞출 때까지 반복)
     rl.on('line', (userInput) => {
         const userInputNum = parseInt(userInput, 10);
-
+        
         // 랜덤값과 입력값 비교
         if (isNaN(userInputNum)) {
             console.log('1~100 사이의 [숫자]만 입력해주세요');
