@@ -3,7 +3,7 @@ const readline = require('readline');
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
-    prompt: '1부터 100 사이의 숫자를 맞춰보세요: ',
+    prompt: '1부터 100 사이의 숫자를 맞춰보세요: '
 });
 
 const randomNum = Math.floor(Math.random() * 100) + 1;
