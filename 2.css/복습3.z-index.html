@@ -9,8 +9,22 @@
                 height: 100px;
                 color: white;
             }
-            .div1 {}
-            .div2 {}
+            .div1 {
+                background-color: orange;
+                /* display: block; */
+                position: absolute;
+                top: 50px;
+                left: 50px;                
+                z-index: 1;
+            }
+            .div2 {
+                background-color: rgb(243, 65, 11);
+                /* display: block; */
+                position: absolute;
+                top: 100px;
+                left: 100px;
+                z-index: 2;
+            }
             
 
         </style>
@@ -18,7 +32,6 @@
     <body>
         <div class="div1">ORANGE</div>
         <div class="div2">TOMATO</div>
-
     </body>
 
 </html>

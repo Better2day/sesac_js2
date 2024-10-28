@@ -2,6 +2,7 @@ const numbers = [1,2,3,4,5];
 const fruits = ['apple', 'banana', 'orange'];
 const mixed = [1, 'hello', true, null, {key: 'value'}];
 
+console.log(mixed);
 console.log(numbers[0]); // 배열 첫 번째 인덱스는 0
 console.log(fruits.length);
 console.log(fruits[fruits.length - 1]);

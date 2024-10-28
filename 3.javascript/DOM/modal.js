@@ -7,6 +7,7 @@ console.log(modal);
 
 open.onclick  = () => {modal.style.display = 'flex'};
 close.onclick = () => {modal.style.display = 'none'};
+
 /*
 open.onClick = function() {
     modal.style.display = 'block';
