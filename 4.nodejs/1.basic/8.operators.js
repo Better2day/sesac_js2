@@ -6,7 +6,9 @@ console.log(a - b);
 console.log(a * b);
 console.log(a / b);
 console.log(a % b); // 모듈러 연산나. 나눈 이후 나머지 값
-console.log(a ** b); // a의 b제곱. 10^5 승을 의미.
+console.log(a ** b); // a의 b제곱. 10^5 승을 의미
+
+console.log(3 ** 3);
 
 let x = 10;
 x += 5; // x = x + 5;
@@ -42,5 +44,5 @@ console.log(3 || 2); // 3;
 
 console.log('--- 연산자 우선순위 ---');
 console.log(2 + 3 * 2);
-console.log(2 + 3 * 2 && 3 % 7 || 2* 3 && 1 * 8);
-console.log(((2 + (3 * 2)) && (3 % 7)) || ((2 * 3) && (1 * 8)));
+console.log(2 + 3 * 2 && 3 % 7 || 2 * 3 && 1 * 8);
+console.log(((2 + (3 * 2)) && (3 % 7)) || ((2 * 3) && (1 * 8))); // (8 && 3) || (6 && 8)

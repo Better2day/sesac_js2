@@ -8,7 +8,7 @@ console.log(sum);
 
 // 상수 = 변경할 수 없음
 const gravity = 9.81;
-// gravity = 10;
+//gravity = 10;
 
 console.log("오류 발생 이후");
 
