@@ -62,6 +62,7 @@ const userdb = [];
 for (let i = 0; i < 5; i++) {
     // console.log(generateName(), generateGender(), generateBirthdate(), generateAddress());
     userdb.push([generateName(), generateGender(), generateBirthdate(), generateAddress()]);
+    
 }
 
 // db (db 아직 안 배워서, 실제로는 메모리)에 있는 내용
@@ -87,7 +88,7 @@ function writeDataToCSV(data, filePath) {
 }
 
 console.log('사용자 데이터 출력: ', userdb);
-writeDataToCSV(userdb, 'user.csv');
+writeDataToCSV(userdb, './user.csv');
 // writeCSV(filePath, userdb, (err) => { console.log(''); });
 
 

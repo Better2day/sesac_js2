@@ -1,4 +1,4 @@
-// redduce() 함수는, 전체 배열 내의 데이터를 합산 등을 통해서 누계하는 것 (accumulator)
+// reduce() 함수는, 전체 배열 내의 데이터를 합산 등을 통해서 누계하는 것 (accumulator)
 const numbers = [1, 2, 3, 4, 5]; // 하나로 합치면? 합산
 
 //                          이전 리턴값,  현재값        => (        함수 연산        ), 초기값
@@ -13,7 +13,7 @@ console.log(product);
 
 const numbers2 = [-999, -10, -20, -8, -15];
 // 저 배열에서 가장 큰 값은?
-const max = numbers2.reduce((accumulator, currentValue) => accumulator = accumulator < currentValue ? currentValue : accumulator, (0, 0));
+const max = numbers2.reduce((accumulator, currentValue) => accumulator = (accumulator < currentValue) ? currentValue : accumulator, (0, 0));
 console.log(max);
 // console.log(Math.max(numbers2));
 console.log(Math.max(5, 10, 5, 20, 8, 15));

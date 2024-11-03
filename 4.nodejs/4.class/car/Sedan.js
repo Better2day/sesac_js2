@@ -1,4 +1,4 @@
-const Car = require('Car.js');
+const Car = require('./Car.js');
 
 class Sedan extends Car {
     constructor(brand, model, color, displacement) {

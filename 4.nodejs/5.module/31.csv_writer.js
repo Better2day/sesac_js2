@@ -1,7 +1,7 @@
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 
 const csvWriter = createCsvWriter({
-    path: 'example.csv',
+    path: 'D:\\src\\SESAC_JS2\\sesac_js2\\4.nodejs\\5.module\\example.csv',
     header: [
         // 내 파일의 헤더
         { id: 'column1', title: 'Column 1'},

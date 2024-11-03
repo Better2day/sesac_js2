@@ -1,6 +1,6 @@
 const fs = require("fs");
 
-const filePath = "hello.txt";
+const filePath = "D:\\src\\SESAC_JS2\\sesac_js2\\4.nodejs\\5.module\\hello.txt";
 
 function csv_readfile(filePath, callback) {
     fs.readFile(filePath, "utf8", (err, data) => {
@@ -42,9 +42,9 @@ function csv_writeFile(filePath, csvContent) {
     console.log(content);
     console.log(typeof content);
 
-    const csvContent = content.map((row) => row.join(',')).join('\n');
+    const csvContentMapped = content.map((row) => row.join(',')).join('\n');
 
-    fs.writeFile(filePath, csvContent, (err) => {
+    fs.writeFile(filePath, csvContentMapped, (err) => {
     if (err) {
         console.error("파일 쓰기 오류", err.message);
         return;
@@ -59,4 +59,4 @@ function csv_writeFile(filePath, csvContent) {
 // });
 
 
-csv_writeFile(filePath, csvContent);
+csv_writeFile(filePath, content);

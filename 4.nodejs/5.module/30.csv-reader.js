@@ -5,7 +5,7 @@ const csv = require('csv-parser'); // 외부
 
  const results = [];
 
-fs.createReadStream('hello.csv')
+fs.createReadStream('D:\\src\\SESAC_JS2\\sesac_js2\\4.nodejs\\5.module\\hello.csv')
     .pipe(csv())
     .on('data', (data) => {
         // 데이터를 스트림으로 읽으면서 처리

@@ -21,7 +21,7 @@ class MyUtility {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 }
-// 다른 파일에서 MyUtility.getRandomInRange(~, ~) 식으로 객체를 생성하지 않고도 사용 가능
+// 정적 (클래스) 메서드. 다른 파일에서 객체를 생성하지 않아도, MyUtility.getRandomInRange(~, ~) 형태로 사용 가능
 
 class BirthdateGenerator {
     generateBirthdate() {
@@ -74,15 +74,15 @@ class UserGenerator {
     }
 }
 
-// class DataPrinter extends UserGenerator{
-//     printData(count) {
-//         const data = this.generateData(count);
-//         for (const [name, birthdate, gender, address] of data) {
-//             console.log(`이름: ${name}, 생년월일: ${birthdate}, 성별: ${gender}, 주소: ${address}`);
-//         }
-//     }
 
-// }
+class DataPrinter extends UserGenerator{
+    printData(count) {
+        const data = this.generateData(count);
+        for (const [name, birthdate, gender, address] of data) {
+            console.log(`이름: ${name}, 생년월일: ${birthdate}, 성별: ${gender}, 주소: ${address}`);
+        }
+    }
+}
 
 class DataPrinter {
     constructor (data) {
