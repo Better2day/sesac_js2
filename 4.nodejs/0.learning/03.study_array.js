@@ -19,10 +19,16 @@ arr.forEach((v, i) => {
 /* 
 // join: 배열 요소를 합쳐서 문자열 생성
 console.log([1, 2, 3].join(' '));
+console.log(typeof [1, 2, 3].join(' ')); // string
+console.log(Array.isArray([1, 2, 3].join(' '))); // 배열? false
 console.log(['1', '2', '3'].join());
 // split: 문자열을 나눠서 배열 생성
 console.log('2345'.split(''));
+console.log('2345'.split(',')); // 없는 문자로 나누려니 실패 → 원 문자열 한 개가 들어가 있는 배열 생성
 console.log('2,3,4,5'.split(','));
+console.log('2,3,4,5'.split('')); // 공백으로 나누니 개별 쉼표까지 전부 배열 요소로 들어감
+console.log(typeof '2345'.split('')); // object
+console.log(Array.isArray('2345'.split(''))); // 배열? true
  */
 
 // at: 배열의 특정 인덱스 값 반환. -1 = 배열 끝 인덱스
@@ -61,14 +67,14 @@ console.log(filterResult);
 console.log(result2);
 console.log('');
 
-// Array.map() method: 함수를 받아서 특정 기능을 수행하고, 그 결과 생성된 새로운 배열을 반환. 1:1 mapping 개념인 듯
 
+// Array.map() method: 함수를 받아서 특정 기능을 수행하고, 그 결과 생성된 새로운 배열을 반환. 1:1 mapping 개념인 듯
 console.log('Array.map() method')
 /* 
 const mapResult = arr.map(item => item * 10);
 console.log(mapResult);
  */
-let userList = [
+let userList2 = [
     { name: 'Mike', age: 30 },
     { name: 'Jane', age: 27 },
     { name: 'Tom', age: 15 },
@@ -77,7 +83,7 @@ let userList = [
 // callback function's parameter identifier는 임의로 지어도 된다.
 // map 메소드가 콜백 함수를 호출할 때 넘기는 인자가 첫 번째는 배열의 요소, 두 번째(optional)는 index라는 것만 기억하면 된다!
 // forEach, filter 등 Array 객체의 여러 메소드가 비슷한 인자를 받는 것 같다.
-let newUserList = userList.map((user, index) => {
+let newUserList = userList2.map((user, index) => {
     return Object.assign({}, user, {
         id: index + 1,
         isAdult: user.age > 18,
@@ -91,6 +97,41 @@ console.log(newUserList);
 console.log('');
 
 
-//Array.reduce()
-// Array.reduce()
-// Array.map()
+// Array.reduce() method
+const result = arr.reduce((prev, cur) => {
+    return prev + cur;
+}, 10);
+console.log(result);
+
+let userList3 = [
+    { name: 'Mike', age: 30 },
+    { name: 'Tom', age: 10 },
+    { name: 'Jane', age: 27 },
+    { name: 'Sue', age: 26 },
+    { name: 'Harry', age: 45 },
+    { name: 'Steve', age: 50 },
+];
+let result3 = userList3.reduce((prev, cur) => {
+    if (cur.age > 19) {
+        prev.push(cur.name);
+    }
+    return prev;
+}, []);
+console.log(result3);
+// filter로 구현해도 비슷할 듯
+// 1)
+/* 
+let result4 = userList3.filter(cur => cur.age > 19);
+let result5 = [];
+for (let user of result4) {
+    result5.push(user.name);
+}
+console.log(result5);
+ */
+// 2)
+let result4 = userList3.filter(cur => cur.age > 19);
+let result5 = [];
+result4.forEach(user => {
+    result5.push(user.name);
+});
+console.log(result5);

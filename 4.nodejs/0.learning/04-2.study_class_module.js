@@ -35,12 +35,15 @@ class Game { // 게임 클래스
         this.showMessage(`몬스터와 마주쳤다. ${this.monster.name}인 것 같다.`);
     }
     updateMonsterStat() {
-        const { hero } = this;
-        if (hero === null) {
-            console.log('주인공이 없습니다');
+        const { monster } = this;
+        if (monster === null) {
+            console.log('몬스터가 없습니다');
             return;
         }
-        console.log(hero);
+        console.log(monster);
+    }
+    showMessage(text) {
+        console.log(text);
     }
 }
 

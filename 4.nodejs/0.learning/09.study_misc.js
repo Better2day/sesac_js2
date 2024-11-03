@@ -124,5 +124,8 @@ const user2 = {
         city: 'Seoul',
     }
 };
-const { address: { city } } = user2;
+
+const { address: { city } } = user2; // city 키를 가지고 값만 가지고 온 것. address는 제외
+console.log(city); // Seoul. 이 상태에서 address 접근 불가
+const { address } = user2;
 console.log(address);
