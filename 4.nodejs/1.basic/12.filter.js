@@ -57,7 +57,7 @@ const words = ['apple', 'banana', 'grape', 'blueberry', 'avocado'];
 
 function containALetter(word) {
     // 이 단어를 for 문으로 단어 길이만큼 반복하면서
-    // 만약 현재 검사하는 char 위치에 'a'가 있으면 true를 반환하는 하수 작성
+    // 만약 현재 검사하는 char 위치에 'a'가 있으면 true를 반환하는 함수 작성
 
     // word.forEach(n => {
     for (let i = 0; i < word.length; i++) {    
@@ -77,7 +77,7 @@ const people = [
     { name: "Alice", age: 25 },
     { name: "Bob", age: 30 },
     { name: "Charlie", age: 20},
-    {name: "David", age: 35 }
+    { name: "David", age: 35 }
 ]
 
 // const adults = people.filter(); // 30세 이상
@@ -89,7 +89,7 @@ const people2 = [
     { name: "Alice", age: 25 },
     { name: "Bob", age: 30 },
     { name: "Charlie" },
-    {name: "David", age: 35 }
+    { name: "David", age: 35 }
 ]
 
 // Object가 어떤 속성을 갖고 있는가??

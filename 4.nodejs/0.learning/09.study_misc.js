@@ -129,3 +129,44 @@ const { address: { city } } = user2; // city 키를 가지고 값만 가지고 �
 console.log(city); // Seoul. 이 상태에서 address 접근 불가
 const { address } = user2;
 console.log(address);
+
+
+// Rest parameter(나머지 매개변수): 정해지지 않은 개수의 인수를 배열로 받는다.
+function showName(...names) {
+    console.log(names);
+    console.log(arguments.length); // arguments: 함수로 넘어온 모든 인수에 접근 가능한 객체 (배열 X ∴ Array method 사용 불가)
+}
+showName();
+showName('Mike');
+showName('Mike', 'Tom');
+
+function add(...number) {
+    let sum = 0;
+    number.forEach(num => {
+        sum += num;
+    });
+    return sum;
+}
+console.log(add(1, 2, 3, 4, 5));
+
+function User(name, age, ...skills) { // ※ Rest는 매개 변수 목록에서 마지막에 위치해야 한다!
+    this.name = name;
+    this.age = age;
+    this.skills = skills;
+}
+const user3 = new User('Mike', 30, 'HTML', 'CSS');
+const user4 = new User('Tom', 20, 'JS', 'React');
+console.log(user3);
+console.log(user4);
+
+// Spread (점 세 개라 rest와 겉보기에 같지만, 다른 용도)
+let arr1 = [1, 2, 3];
+let arr2 = [4, 5, 6];
+console.log([0, ...arr1, -1, ...arr2, -2]);
+
+let user5 = { name: 'Mike' };
+let info = { age: 30 };
+let fe = ['JS', 'React'];
+let lang = ['Korean', 'English'];
+user5 = {...user5, ...info, skills: [...fe, ...lang]};
+console.log(user5);
