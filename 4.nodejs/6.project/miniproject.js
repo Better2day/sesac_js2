@@ -52,22 +52,22 @@ class GenderGenerator {
     }
 }
 
-class MyUtility {
+class Utility {
     static getRandomInRange(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 }
-// 다른 파일에서 MyUtility.getRandomInRange(~, ~) 식으로 객체를 생성하지 않고도 사용 가능
+// 다른 파일에서 Utility.getRandomInRange(~, ~) 식으로 객체를 생성하지 않고도 사용 가능
 
 class BirthdateGenerator {
     generateBirthdate() {
         // YYYY-MM-DD 포맷으로 반환하기
         // const year = Math.floor(Math.random() * (2010 - 1960 + 1)) + 1960;
-        const year = MyUtility.getRandomInRange(1960, 2010);
+        const year = Utility.getRandomInRange(1960, 2010);
         // const month = Math.floor(Math.random() * 12) + 1;
-        const month = MyUtility.getRandomInRange(1, 12);
+        const month = Utility.getRandomInRange(1, 12);
         // const day = Math.floor(Math.random() * 28) + 1; // 1~30일까지가 나온다.
-        const day = MyUtility.getRandomInRange(1, 28);
+        const day = Utility.getRandomInRange(1, 28);
         
         // return `${year}-${month}-${day}`;
         // 생년월일에서 월이나 일이 한 자리일 때는 앞에 0을 한 개 채워서(padding) YYYY-MM-DD 양식 유지
@@ -86,7 +86,7 @@ class AddressGenerator {
         // 앞에 1~100 까지의 번지수를 붙인 주소를  생성하시오.        
         const city = this.cities[Math.floor(Math.random() * this.cities.length)];
         const gu = this.gu[Math.floor(Math.random() * this.gu.length)];
-        const street = MyUtility.getRandomInRange(1, 100);
+        const street = Utility.getRandomInRange(1, 100);
         return `${city} ${gu} ${street}`;
     }
 }
@@ -160,12 +160,12 @@ class StoreGenerator {
 
 class OrderAtGenerator {
     generateOrderAt() {
-        const year = MyUtility.getRandomInRange(1980, 2024);
-        const month = MyUtility.getRandomInRange(1, 12);
-        const day = MyUtility.getRandomInRange(1, 28);
-        const hh = MyUtility.getRandomInRange(0, 23);
-        const mm = MyUtility.getRandomInRange(0, 60);
-        const ss = MyUtility.getRandomInRange(0, 60);
+        const year = Utility.getRandomInRange(1980, 2024);
+        const month = Utility.getRandomInRange(1, 12);
+        const day = Utility.getRandomInRange(1, 28);
+        const hh = Utility.getRandomInRange(0, 23);
+        const mm = Utility.getRandomInRange(0, 60);
+        const ss = Utility.getRandomInRange(0, 60);
         return `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')} ${hh.toString().padStart(2, '0')}:${mm.toString().padStart(2, '0')}:${ss.toString().padStart(2, '0')}`;
     }
 }
