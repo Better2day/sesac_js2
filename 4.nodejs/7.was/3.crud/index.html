@@ -26,20 +26,23 @@
     </section>
     <!-- <script src="static/user.js"></script> -->
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            console.log("나의 JS 코드");;
-            
+        document.addEventListener("DOMContentLoaded", async () => {
             const userTable = document.getElementById('userTable');
-            const form = docuemnt.getElementById('form');
+            const form = document.getElementById('form');
             // form 버튼을 클릭해서 post
-            form.addEventListener('submit', (e) => {
+            form.addEventListener('submit', e => {
                 e.preventDefault(); // 폼의 기본 기능 차단 (전체 페이지를 refresh 하지 않고, AJAX처럼 처리하기 위해서)
+                console.log('fetch 전: ' + document.getElementById('username').value);
                 fetch('/user', {
                     method: 'POST',
-                }).then(); // 여기는 더 작성해야 함
+                    headers: { 'content-type': 'application/json'},
+                    body: JSON.stringify({ name: document.getElementById('username').value }),
+                }).then(response => response.json())
+                .then(data => console.log(data))
+                .catch(err => console.error(err));
             })
 
-            fetch('/user', {
+            await fetch('/user', {
                 method: 'GET',
             }).then(response => {
                 if (response.ok) {
@@ -50,8 +53,13 @@
                 }
             }).then(data => { // 이전 then에서 리턴한 response.json을 받아서 처리
                 console.log(data);
-                userTable.textContent = JSON.parse(data);
-            })
+                console.log('data: ' + data);
+                const users = JSON.stringify(data);
+                console.log('users: ' + users);
+                users.forEach(user => {
+                    userTable.innerHTML += `<b>ID</b>: ${Object.key(user)}, <b>Name</b>: ${Object.value(user)},`;
+                });
+            }).catch(err => console.error(err));
         })
     </script>
 </body>

@@ -1,6 +1,7 @@
 const fs = require('fs').promises;
 const http = require('http');
 const path = require('path');
+const { parse } = require('querystring');
 
 const HTTP_RES_STATUS_CODE = {
     '200': 'OK',
@@ -16,10 +17,10 @@ const HTTP_RES_STATUS_CODE = {
     '504': 'Gateway Timeout',
 };
 const HTTP_REQ_HANDLER = {
-    'GET': handleGetRequest(req, res),
-    'POST': handlePostRequest(req, res),
-    'PUT': handlePutRequest(req, res),
-    'DELETE': handleDeleteRequest(req, res),
+    'GET': handleGetRequest,
+    'POST': handlePostRequest,
+    'PUT': handlePutRequest,
+    'DELETE': handleDeleteRequest,
 };
 
 const users = {};
@@ -32,7 +33,7 @@ http.createServer((req, res) => {
     // ['GET', 'POST', 'PUT', 'DELETE'].includes(req.method)
     if (Object.keys(HTTP_REQ_HANDLER).includes(req.method)) {
         HTTP_REQ_HANDLER[req.method](req, res);
-    } else {    
+    } else {
     // 여기까지 왔으면 그 외의 Request Method를 사용했다든지, 오류 발생 상황
         res.writeHead(405);
         res.end('Method Not Allowed');
@@ -43,33 +44,43 @@ http.createServer((req, res) => {
 })
 // server.listen(3000, () => {  왼쪽 부분 단축하고 변수 하나 덜 쓰려고 위처럼 수정
 
-
 // 오류 처리 사용자 함수
 function handleError(err = 'Error', res, statusCode) {
-    console.error(err);
+    //console.error(err);
     res.writeHead(statusCode); // 헤더에 HTTP Response Status Code, 바디에 상응하는 오류 메시지를 넣어서 전송하면서 응답 종료
     res.end((HTTP_RES_STATUS_CODE.statusCode) ? HTTP_RES_STATUS_CODE.statusCode : '알 수 없는 오류');
 }
 
 // 요청 파일 응답 사용자 함수
 async function sendResource(path, res) {
-    const data = await fs.readFile(filepath, 'utf-8');
+    console.log(path);
+    const data = await fs.readFile(path, 'utf-8');
     res.end(data);
 }
 
 
-function handleGetRequest(req, res) {
-    console.log(req.headers['content-type']);
+async function handleGetRequest(req, res) {
+    // console.log(`Request Header Content-Type: ${req.headers['content-type']}`);
     try {
         if (req.url === '/') {
+            console.log(users);
             sendResource('./index.html', res);
         } else if (req.url === '/about') {
             sendResource('./about.html', res);
         } else if (req.url === '/user') {
-            // console.log(users);
+            console.log(users);
             res.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'});
-            res.end(users);
-            // res.end(JSON.stringify(users));
+            res.end(JSON.stringify(users));
+        } else if (req.url.startsWith('/image/') &&
+                   ['jpg','jpeg','png','gif'].includes(path.extname(req.url.toLowerCase()).slice(1))) {
+            res.writeHead(200, {'Content-Type': 'image/jpeg'});
+            const imageName = path.basename(req.url);
+            const imagePath = path.join('static', imageName);
+            const imageData = await fs.readFile(imagePath);
+            // console.log(`req.url = ${req.url}, extname = ${path.extname(req.url.toLowerCase()).slice(1)}`);
+            // console.log(`이미지 파일명: ${imageName}`);
+            // console.log(`이미지 경로: ${imagePath}`);
+            return res.end(imageData);
         } else {
             handleError(res, '404');
         }
@@ -86,17 +97,20 @@ function handlePostRequest(req, res) {
             req.on('end', () => {
                 console.log(req.headers['content-type']);
                 if (req.headers['content-type'] === 'text/plain') {
+                    console.log('text/plain 조건 블럭 안');
                     return res.end('plaintext로 데이터 요청');
                 } else if (req.headers['content-type'] === 'application/json') {
                     const parsedData = JSON.parse(body);
                     const username = parsedData.name;
                     users[username] = username;
-                    return res.end(`application/json 데이터 요청. body: ${body}, json: ${parsedData}`);
+                    console.log(users);
+                    // console.log(`application/json 데이터 요청. body: ${body}, json: ${parsedData}`);
+                    res.writeHead(200, {'Content-Type':'text/html; charset=utf-8'});
+                    res.end(`${username} 등록 성공.`);
                 } else {
                     handleError(res, '404');
                     return -1;
                 }
-                console.log('req.on("end") 끝');
             })
         }
     } catch (err) {
@@ -111,9 +125,19 @@ function handlePutRequest(req, res) {
 function handleDeleteRequest(req, res) {
     try {
         if (req.url === '/user') {
-
+            let userToDelete = '';
+            req.on('data', data => {
+                userToDelete += data;
+            })
+            req.on('end', () => {
+                const parsedObject = parse(userToDelete);
+                delete users[parsedObject.username]; // 문자열을 객체로 변환 후 삭제
+                res.writeHead(200, {'Content-Type':'text/html; charset=utf-8'});
+                res.end(`${parsedObject} 삭제 성공`);
+                console.log(users);
+                return 1;
+            })
         }
-
     } catch (err) {
         handleError(err, res, '500');
     }
