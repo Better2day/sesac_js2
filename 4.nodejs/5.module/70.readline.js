@@ -34,7 +34,7 @@ askQuestions();
 askQuestion('원하는 값1을 입력하세요')
     .then((answer) => {
         console.log(`입력한 값 1은: ${answer}`);
-        return askQuestion('원하는 값1을 입력하세요');
+        return askQuestion('원하는 값2을 입력하세요');
     })
     .then((answer) => {
         console.log(`입력한 값 2은: ${answer}`);

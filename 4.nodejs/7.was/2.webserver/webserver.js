@@ -34,8 +34,8 @@ http.createServer(async (req, res) => {
                 // console.log(`./static/${url.slice(0,6)}`);
                 const imageName = path.basename(req.url);
                 const imagePath = path.join('static', imageName);
-                console.log(`이미지 파일명: ${imageName}`);
-                console.log(`이미지 경로: ${imagePath}`);
+                // console.log(`이미지 파일명: ${imageName}`);
+                // console.log(`이미지 경로: ${imagePath}`);
                 const imageData = await fs.readFile(imagePath);
                 res.end(imageData);
                 //const data = await fs.readFile(`./static/${url.slice(0,6)}`);

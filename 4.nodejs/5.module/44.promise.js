@@ -31,7 +31,6 @@ function asyncOperation2(response, callback) {
 
 
 asyncOperation1()
-  .then
   .then((response1) => asyncOperation2(response1))
   .then((response2) => asyncOperation1(response2))
   .then((response3) => asyncOperation2(response3))
@@ -49,7 +48,7 @@ asyncOperation1()
 		console.error('');
 	}
  */
-
+/* 
 async function executeOperations() {
     try {
         const response1 = await asyncOperation1(null);
@@ -63,3 +62,4 @@ async function executeOperations() {
 }
 
 executeOperations();
+ */

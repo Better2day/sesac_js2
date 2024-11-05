@@ -9,7 +9,7 @@ fs.readdir(directoryPath, (err, files) => {
     }
     files.forEach(file => { // 비동기 처리 함수인데, 이것을 동기 처리 함수로 바꿔보기
         try {
-            const stat = fs.statSync(file);
+            const stats = fs.statSync(file);
             if (stats.isDirectory()) {
                 console.log(`이 파일 ${file}은 디렉토리입니다.`);
             }
