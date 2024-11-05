@@ -54,11 +54,15 @@
             }).then(data => { // 이전 then에서 리턴한 response.json을 받아서 처리
                 console.log(data);
                 console.log('data: ' + data);
-                const users = JSON.stringify(data);
-                console.log('users: ' + users);
-                users.forEach(user => {
-                    userTable.innerHTML += `<b>ID</b>: ${Object.key(user)}, <b>Name</b>: ${Object.value(user)},`;
-                });
+                //const users = JSON.stringify(data);
+                // console.log('users: ' + users);
+                Object.keys(data).forEach(key => {
+                    userTable.innerHTML += `<span><b>ID</b>: ${key}, <b>Name</b>: ${data[key]}</span><br>`;
+                    // console.log(`key: ${key}, value: ${data[key]}, `);
+                })
+                // users.forEach(user => {
+                //     
+                // });
             }).catch(err => console.error(err));
         })
     </script>

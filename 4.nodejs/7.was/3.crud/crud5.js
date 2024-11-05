@@ -130,10 +130,10 @@ function handleDeleteRequest(req, res) {
                 userToDelete += data;
             })
             req.on('end', () => {
-                const parsedObject = parse(userToDelete);
-                delete users[parsedObject.username]; // 문자열을 객체로 변환 후 삭제
+                const parsedObject = JSON.parse(userToDelete);
+                delete users[parsedObject.name]; // 문자열을 객체로 변환 후 삭제
                 res.writeHead(200, {'Content-Type':'text/html; charset=utf-8'});
-                res.end(`${parsedObject} 삭제 성공`);
+                res.end(`${parsedObject.name} 삭제 성공`);
                 console.log(users);
                 return 1;
             })
@@ -141,5 +141,4 @@ function handleDeleteRequest(req, res) {
     } catch (err) {
         handleError(err, res, '500');
     }
-    res.end('DELETE 요청 응답 완료');
 }
