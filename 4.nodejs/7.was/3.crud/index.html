@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/user">User</a>
+    </nav>
+    <section>
+        <h1>Hello Node!</h1>
+        <p>Hello Server!</p>
+    </section>
+    <section>
+        <h2>Users</h2>
+        <form id="form">
+            <input type="text" id="username"></input>
+            <button type="submit">Submit</button>
+        </form>
+
+        <!-- 여기에 사용자 목록 출력할 div 영역 -->
+        <div id="userTable"></div>
+    </section>
+    <!-- <script src="static/user.js"></script> -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            console.log("나의 JS 코드");;
+            
+            const userTable = document.getElementById('userTable');
+            const form = docuemnt.getElementById('form');
+            // form 버튼을 클릭해서 post
+            form.addEventListener('submit', (e) => {
+                e.preventDefault(); // 폼의 기본 기능 차단 (전체 페이지를 refresh 하지 않고, AJAX처럼 처리하기 위해서)
+                fetch('/user', {
+                    method: 'POST',
+                }).then(); // 여기는 더 작성해야 함
+            })
+
+            fetch('/user', {
+                method: 'GET',
+            }).then(response => {
+                if (response.ok) {
+                    console.log('성공');
+                    return response.json();
+                } else {
+                    console.log('실패(오류)');
+                }
+            }).then(data => { // 이전 then에서 리턴한 response.json을 받아서 처리
+                console.log(data);
+                userTable.textContent = JSON.parse(data);
+            })
+        })
+    </script>
+</body>
+</html>
