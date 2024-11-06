@@ -26,7 +26,7 @@ app.get('user', (req, res) => { //
     res.json(users);
 })
 
-ㅎapp.post('user', (req, res) => {
+app.post('user', (req, res) => {
     const { name } = req.body; // const name = req.body.name 문을 객체 구조 분해 할당 (destructuring assignment)
     users[name] = name;
     res.status(201).send('등록 성공');
