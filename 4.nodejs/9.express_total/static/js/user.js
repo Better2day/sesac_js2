@@ -82,6 +82,30 @@ function updateUsers() {
     })
 }
 
+function modifyUser(userId) {
+    const newName = prompt('수정할 이름을 입력핫요.');
+    if (newName !== null) {
+        fetch(`/user/${userId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => {
+            if (response.ok) {
+                updateUsers(); // 화면 갱신
+            } else {
+                alert('수정 실패');
+            }
+        })
+        .catch(error => {
+            console.error('수정 중 오류 발생:', error);
+            alert('수정 중 오류가 발생했습니다.');
+        });
+    }
+
+}
+
 function deleteUser(userId) {
     console.log(encodeURI(userId));
     console.log(encodeURIComponent(userId));
@@ -91,7 +115,7 @@ function deleteUser(userId) {
     })
     .then(response => {
         if (response.ok) {
-            alert('삭제 성공');
+            // alert('삭제 성공');
             updateUsers();
         } else {
             alert('삭제 실패');

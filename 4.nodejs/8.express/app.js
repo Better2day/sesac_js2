@@ -3,6 +3,7 @@ const app = express();
 const port = 3000;
 
 // 라우트 '/' 생성
+
 app.get('/', (req, res) => {
     res.send('<H1>Hello, Express</H1>');
 });

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index page</title>
+</head>
+<body>
+    
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/user">User</a>
+    </nav>
+    <section>
+        <h1>Hello Node!</h1>
+        <p>Hello Server!</p>
+    </section>
+    <section>
+        <h2>Users</h2>
+        <form id="form"> <!-- action="/user" method="POST"> -->
+            <input type="text" id="username"></input>
+            <button type="submit">Submit</button>
+        </form>
+
+        <!-- 여기에 사용자 목록 출력할 div 영역 -->
+        <div id="userTable"></div>
+    </section>
+
+    <script src="static/js/user.js"></script>
+</body>
+</html>
