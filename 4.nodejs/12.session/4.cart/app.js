@@ -29,6 +29,9 @@ app.use(session({
 
 app.get('/products', (req, res) => {
     res.json(products);
+    const a = document.getElementById('');
+    const b = document.getElementById('');
+
 })
 
 app.get('/cart', (req, res) => {
