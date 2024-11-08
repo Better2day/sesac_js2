@@ -10,7 +10,7 @@ app.use(session({
     saveUninitialized: true, // 초기화되지 않은 세션을 저장소에 저장할지 여부
 }));
 
-function userCount(req, res,next) {
+function userCount(req, res, next) {
     // 세션에 방문 카운트 변수 있으면 재사용, 없으면 0으로 초기화
     req.session.visitCount = req.session.visitCount || 0;
 
@@ -43,7 +43,6 @@ app.get('/readsession', (req, res) => {
     } else {
         res.send(`새로 오셨군요 호갱님. 상품을 담아주세요~`);
     }
-
 
     console.log(`세션 ID: ${req.sessionID}`);
     console.log(`세션 내용: ${JSON.stringify(req.session)}`);
