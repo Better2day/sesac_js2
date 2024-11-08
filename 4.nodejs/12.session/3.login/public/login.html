@@ -3,17 +3,162 @@
 <head>
     <meta charset="UTF-8">
     <title>로그인 페이지</title>
+    <style>
+        nav {
+            background-color: #f2f2f2;
+            overflow: hidden;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav li {
+            float: left;
+        }
+
+        nav a {
+            display: block;
+            padding: 14px 16px;
+            color: #333;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+    </style>
 </head>
 <body>
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Login</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Logout</a></li>
+        </ul>
+    </nav>
     <H1>로그인</H1>
-    <form action="/login" method="post">
+    <div id="loginFormContainer">
+    <!-- <form> action="/login" method="post"> -->
+    <form>
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required />
         <br />
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required />
         <br />
-        <input type="submit" value="로그인" />
-    </form>    
+        <input type="submit" id="loginButton" value="로그인" />
+    </form>
+    </div>
+
+    <div id="profile" style="display:none"></div>
+        <h2>안녕하세요, <span id="usernameSpan"></span>님!!</h2>
+        <button id="logoutButton">Logout</button>
+    </div>
+
+    <!-- <script src="/static/login.js"></script> -->
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('loginButton').addEventListener('click', login);
+        document.getElementById('logoutButton').addEventListener('click', logout);
+
+        checkLoginStatus();
+    });
+
+    async function checkLoginStatusAsyncAwait() {
+        try {
+            const response = await fetch('/check-login');
+            const data = await response.json();
+
+            if (data && data.username) {
+                console.log(data.username);
+                showProfile(data.username);
+            } else {
+                showLoginForm();
+            }
+        } catch {
+            console.log('');
+            showLoginForm();
+        }
+    }
+
+
+    function checkLoginStatus() {
+        // 내 로그인 정보가 아직 유효한지 어떻게 알까? 서버에게 문의
+        //const {userid, username} = req.session;
+
+        fetch('/check-login', {
+/* 
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({userid}),
+ */            
+        })
+            .then(response => {
+                // BE에게 내 세션이 살아 있는지 보고, 살아 있으면 사용자 이름을 받아온다.
+                if (response.ok) {
+                    console.log('로그인 성공');
+                    // window.location.href = '/profile';
+                    // showProfile(username);
+                    return response.json();
+                } else {
+                    console.log('로그인 실패');
+                }
+            })        
+            .then(data => {
+                console.log(data.username);
+                showProfile(data.username);
+            })    
+    }
+    
+    function logout() {
+        fetch('/logout')
+            .then(response => {
+                if (response.ok) {
+                    showLoginForm();
+                }
+            })
+    }
+
+    function login(e) {
+        e.preventDefault();
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+    
+        console.log('로그인 버튼 클릭');
+    
+        fetch('/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({username, password}),
+        })
+            .then(response => {
+                if (response.ok) {
+                    console.log('로그인 성공');
+                    // window.location.href = '/profile';
+                    showProfile(username);
+                } else {
+                    console.log('로그인 실패');
+                }
+            });
+    }
+
+    function showProfile(username) {
+        document.getElementById('loginFormContainer').style.display = 'none';
+        document.getElementById('profile').style.display = 'block';
+        document.getElementById('usernameSpan').innerText = username;
+    }
+
+    function showLoginForm() {
+        document.getElementById('loginFormContainer').style.display = 'block';
+        document.getElementById('profile').style.display = 'none';
+    }
+</script>
+    
 </body>
 </html>

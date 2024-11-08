@@ -51,6 +51,6 @@ app.use((err, req, res, next) => {
     res.status(500).json({ message: '내부 서버 오류'});
 })
 
-app.listen(port, () => {
+app.listen(port, () => {     
     console.log("Server's running");
 })
