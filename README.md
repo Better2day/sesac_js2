@@ -1,4 +1,4 @@
-# 프로젝트 기반🎲 자바스크립트 웹서비스 개발자 과정
+# Project-based 🎲 JavaScript Web-Service Developer course
 
 1️⃣ HTML/CSSS, JavaScript
    Project: JS-based CRM (Data Populator)
