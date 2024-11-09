@@ -1,14 +1,22 @@
 # Project-based 🎲 JavaScript Web-Service Developer course
 
-1️⃣ HTML/CSSS, JavaScript  
+1️⃣ Class 101  
+   HTML/CSSS, JavaScript  
+  
    Project: JS-based CRM (Data Populator)  
-   
-2️⃣ Back-end - Node.js/Express: Asynchronous programming, Express Routing, Middleware, Template Engine, REST-API design  
-
-3️⃣ Back-end - DB / Web service: DBMS, SQL, CRUD, Join  
+  
+2️⃣ Back-end  
+   Node.js: Asynchronous programming, Modularization, HTTP Web Server  
+   Express: Routing, Middleware, Template Engine, REST-API design, Web Server  
+   DB / Web service: DB, SQL, CRUD, Join  
+  
    Project: Express-based CRM Solution, Kiosk & Mobile Touch project  
-   
-4️⃣ Front-end - Bootstrap/React: Component Design, Processing Asynchronous Request (JS), FE development  
+  
+3️⃣ Front-end  
+   Bootstrap: Component Design, Processing Asynchronous Request (JS)  
+   React: Frone-end Development  
+  
    Project: BBS, Web Game  
-   
-5️⃣ Final Team Proejct: Development, Distribution, Operation, Monitoring  
+  
+4️⃣ Team Project  
+Development, Distribution, Operation, Monitoring  
