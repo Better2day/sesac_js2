@@ -8,7 +8,7 @@
 2️⃣ Back-end  
    Node.js: Asynchronous programming, Modularization, HTTP Web Server  
    Express: Routing, Middleware, Template Engine, REST-API design, Web Server  
-   DB / Web service: DB, SQL, CRUD, Join  
+   DB / Web service: DB, SQL, CRUD, Join, Index  
   
    Project: Express-based CRM Solution, Kiosk & Mobile Touch project  
   
