@@ -1,5 +1,7 @@
 const express = require('express');
 const session = require('express-session');
+// const bodyParser = require('body-parser');
+
 const path = require('path');
 
 const app = express();
@@ -20,6 +22,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 // app.use('/static', static(path.join(__dirname, 'public')));
 
 // app('/') 없어도 기본값(index.html)으로 설정됨
+
+// app.use(bodyParser.json());
+app.use(express.json());
 
 app.use(session({
     secret: 'my-secret-1234',
@@ -50,7 +55,13 @@ app.post('/cart/:productId', (req, res) => {
 
     // To-do: 장바구니에 담는 코드 작성
     const cart = req.session.cart || [];
-    cart.push(product); // 객체 형식이 같으므로 product를 통채로 넘겨주는 게 간결
+    cart.push({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        quantity: 1,
+        priceperitem: product.price
+    }); // 객체 형식이 같으므로 product를 통채로 넘겨주는 게 간결
     req.session.cart = cart;
 
     // res.json({ message: '상품이 장바구니에 담겼습니다'});
@@ -67,6 +78,25 @@ app.delete('/cart/:productId', (req, res) => {
     cart.splice(cart.findIndex((product) => product.id === productId), 1);
     req.session.cart = cart;
 
+    res.json({ "status" : "SUCCESS" });
+});
+
+app.patch('/cart/:productId', (req, res) => {
+    const productId = parseInt(req.params.productId);
+
+    const cart = req.session.cart;
+    const product = cart.find((product) => product.id === productId);
+    if (!product) {
+        return res.status(404).json({ "status" : "FAIL" });
+    }
+
+    product.quantity = req.body.quantity;
+    product.priceperitem = product.quantity * product.price;
+    cart.splice(cart.findIndex((product) => product.id === productId), 1, product);
+
+    req.session.cart = cart;
+
+    // res.json({ message: '상품이 장바구니에 담겼습니다'});
     res.json({ "status" : "SUCCESS" });
 });
 

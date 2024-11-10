@@ -1,13 +1,16 @@
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 20px;
+    margin-bottom: 20px;    
 }
 
 th, td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
+    vertical-align: middle;
+    /* display: inline-flex;
+    align-items: center; */
 }
 
 th {
@@ -16,4 +19,6 @@ th {
 
 button {
     cursor: pointer; /* 손가락 모양 버튼 */
+    height: 24px;
+    /* align-items: top; */
 }
