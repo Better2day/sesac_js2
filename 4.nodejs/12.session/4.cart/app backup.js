@@ -50,24 +50,25 @@ app.post('/cart/:productId', (req, res) => {
 
     // To-do: 장바구니에 담는 코드 작성
     const cart = req.session.cart || [];
-    cart.push(product); // 객체 형식이 같으므로 product를 통채로 넘겨주는 게 간결
+
+    cart.push({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+    });
+
     req.session.cart = cart;
+    console.log(cart);
 
     // res.json({ message: '상품이 장바구니에 담겼습니다'});
     res.json({ "status" : "SUCCESS" });
 });
 
 app.delete('/cart/:productId', (req, res) => {
-    // productId 품목을 카트에서 삭제
-    // req.session.cart 에서 req.params.productId에 해당하는 항목 삭제
-    const productId = parseInt(req.params.productId);
-
-    const cart = req.session.cart;
-    // 장바구니 목록(객체 배열)에서 해당 품목이 있는 인덱스를 찾아서, 해당 객체 삭제
-    cart.splice(cart.findIndex((product) => product.id === productId), 1);
-    req.session.cart = cart;
-
-    res.json({ "status" : "SUCCESS" });
+    // 삭제를 원하는 품목을 세션에 있는 장바구니에서 삭제
+    // cart.
+    // 세션에서도 삭제
+    console.log('app.delete 진입');
 });
 
 app.listen(port, () => {

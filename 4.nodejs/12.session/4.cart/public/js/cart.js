@@ -12,7 +12,6 @@ function displayProducts(products) {
     // 여기에 DOM 요소 가져와서 tbody에 상품 목록 출력
     const productTableBody = document.querySelector('#productTable tbody');
 
-    
     products.forEach((product) => {
         const row = document.createElement('tr');
         row.innerHTML = `
