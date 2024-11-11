@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My shopping mall</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/products">Products</a></li>
+            <li><a href="/cart">Cart</a></li>
+            <div id="user-info" style="display:none;">
+            <!-- 사용자 정보와 로그아웃 버튼이 추가될 곳 -->
+            </div>
+        </ul>
+    </nav>
+    <h1>Welcome to my Store</h1>
+    <p>아무 정보나 입력하세요</p>
+    <div id="loginFormContainer">
+        <h2>로그인</h2>
+        <form id="loginForm">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br>
+            <button type="submit" id="login">Login</button>
+        </form>
+    </div>
+
+    <div id="profile" style="display:none">
+        <h2>안녕하세요, <span id="usernameSpan"></span>님!</h2>
+    </div>
+    <script type="module" src="/js/home.js"></script> 
+    <!-- 스크립트 안에서 다른 스크립트를 불러오기 위해서 type="module" 속성 추가
+     이 속성이 없으면 보안 때문에 js 안에서 다른 js를 불러올 수 없다. -->
+</body>
+</html>
