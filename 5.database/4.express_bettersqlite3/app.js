@@ -112,8 +112,9 @@ app.get('/products', (req, res) => {
         } else {
         // Prepared Statement Binding 문제!
         // db.prepare("SELECT * FROM products WHERE name like '%" + name + "%'").all() // 이건 정상 작동
-        // db.prepare("SELECT * FROM products WHERE name like '%?%'").all() // 이건 아래 같은 오류 발생
+        // db.prepare("SELECT * FROM products WHERE name like '%?%'").all() // 이건 RangeError 발생
         // RangeError: Too many parameter values were provided (%과 ?가 붙어있으면 바인딩 오류가 발생하는 듯)
+        // db.prepare("SELECT * FROM products WHERE name like %?%").all() // "
         // db.prepare("SELECT * FROM products WHERE name like ?").all(`'%${name}%'`); // 오류 없지만 결과 null
         // db.prepare("SELECT * FROM products WHERE name like ?").all(`"%${name}%"`); // "
         const rows = db.prepare("SELECT * FROM products WHERE name like ?").all(`%${name}%`);
