@@ -23,7 +23,7 @@ function csv_readfile(filePath, callback) {
             const columns = row.split(',');
             console.log(columns);
         }
-
+22
         const result = rows.map((row => row.split(',')));
 
         callback(result);;
@@ -39,7 +39,7 @@ const content = [
 
 function csv_writeFile(filePath, csvContent) {
 
-    console.log(content);
+    console.log(content);2
     console.log(typeof content);
 
     const csvContentMapped = content.map((row) => row.join(',')).join('\n');
