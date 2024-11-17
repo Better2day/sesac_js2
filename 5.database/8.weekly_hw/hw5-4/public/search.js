@@ -19,15 +19,18 @@ function searchDB(offset = 0) {
             }
         })
         .then(rows => {
-            renderResult(rows, offset);
+            renderResult(rows, offset, searchType);
         })
         .catch(error => {
             console.error(error);
         })
 }
 
-function renderResult(rows, offset) {
+async function renderResult(rows, offset, searchType) {
     const RESULT_PER_PAGE = 10;
+    // console.log(`offset = ${offset}, offset - RESULT_PER_PAGE = ${offset - RESULT_PER_PAGE}, offset + RESULT_PER_PAGE = ${offset + RESULT_PER_PAGE}`);
+
+    const count = await getCount(searchType);
 
     let tagsToAppend = '<ul>';
     for(let row of rows) {
@@ -35,13 +38,38 @@ function renderResult(rows, offset) {
     };
     tagsToAppend += '</ul>';
     tagsToAppend += '<button id="prev" style="margin-right: 10px">이전</button>';
-    tagsToAppend += (offset / RESULT_PER_PAGE) + 1;
+    tagsToAppend += `페이지 ${(offset / RESULT_PER_PAGE) + 1} / ${Math.ceil(count / RESULT_PER_PAGE)}`;
     tagsToAppend += '<button id="next" style="margin-left:  10px">다음</button>';
     document.getElementById('searchResult').innerHTML = tagsToAppend;
-    document.getElementById('prev').addEventListener('click', () => {
-        searchDB(offset - RESULT_PER_PAGE);
-    })
-    document.getElementById('next').addEventListener('click', () => {
-        searchDB(offset + RESULT_PER_PAGE);
-    })
+
+    prevBtn = document.getElementById('prev');
+    nextBtn = document.getElementById('next');
+    if (offset - RESULT_PER_PAGE >= 0) {
+        prevBtn.addEventListener('click', () => {
+            searchDB(offset - RESULT_PER_PAGE);
+        })
+    } else {
+        prevBtn.setAttribute('disabled', true);
+    }
+    if (offset + RESULT_PER_PAGE <= count) {
+        nextBtn.addEventListener('click', () => {
+            searchDB(offset + RESULT_PER_PAGE);
+        })
+    } else {
+        nextBtn.setAttribute('disabled', true);
+    }        
+}
+
+async function getCount(searchType) {
+    try {
+        const response = await fetch(`/count?searchType=${searchType}`);
+        if (response.ok) {
+            const data = await response.json();
+            return data.total;
+        } else {
+            console.log('response is not ok');
+        }
+    } catch (error) {
+        console.error(error);
+    }
 }

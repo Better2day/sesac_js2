@@ -49,6 +49,29 @@ app.get('/search', (req, res) => {
     db.prepare(queryString).all(`%${searchQuery}%`, (err, rows) => {
         const searchResult = rows.map((row) => Object.values(row).pop());
         res.send(searchResult);
+        // db.close();
+    });
+
+});
+
+app.get('/count', (req, res) => {
+    const { searchType } = req.query;
+    console.log(searchType);
+
+    const endString = { // 이 객체의 key는 search.html form(select) searchType과 동일
+        artistName: 'artists',
+        albumTitle: 'albums',
+        trackName: 'tracks',
+        composer: 'tracks',
+        genre: 'genres',
+        customerName: 'customers',
+    };
+    const queryString = `SELECT COUNT(*) AS total FROM ${endString[searchType]}`;
+
+    db.prepare(queryString).get((err, result) => {
+        console.log(result);
+        res.json(result);
+        // db.close();
     });
 });
 
