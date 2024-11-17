@@ -16,7 +16,7 @@
    Bootstrap: Component Design, Processing Asynchronous Request (JS)  
    React: Frone-end Development  
   
-   Project: BBS, Web Game  
+   Project: BBS, Chatting, Web Game  
   
 4️⃣ Team Project  
-Development, Distribution, Operation, Monitoring  
+Planning, Development, Testing, Distribution, Operation, Monitoring  
