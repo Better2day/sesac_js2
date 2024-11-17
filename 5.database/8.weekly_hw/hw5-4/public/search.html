@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chinook DB Search Engine</title>
+    <script src="search.js" defer></script>
+</head>
+<body>
+    <h1>Chinook DB Search Engine</h1>
+    <form id="searchForm" action="/search" method="GET">
+    <!-- <form id="searchForm"></form> -->
+        <input type="text" id="searchQuery" name="searchQuery" placeholder="검색어 입력">
+        <select id="searchType">
+            <!-- value는 DB table/column name 조합 -->
+            <option value="artistName">아티스트 이름</option>
+            <option value="albumTitle">앨범 제목</option>
+            <option value="trackName">트랙 제목</option>
+            <option value="composer">작곡가</option>
+            <option value="genre">장르</option>
+            <option value="customerName">고객 이름</option>
+            <!-- 봐서 추가할 것 있으면 더 추가 -->
+        </select>
+        <button type="submit">검색</button>
+        <!-- <button id="searchBtn">검색</button> -->
+    </form>
+    <h2>검색 결과:</h2>
+    <div id="searchResult"></div>
+</body>
+</html>
