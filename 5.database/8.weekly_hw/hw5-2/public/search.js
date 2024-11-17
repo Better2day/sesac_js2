@@ -1,14 +1,36 @@
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOMContentLoaded event 진입');
-
     // document.getElementById('searchBtn').addEventListener('click', (e) => {
     document.getElementById('searchForm').addEventListener('submit', (e) => {
-        console.log('searchForm submit event 진입');
         e.preventDefault();
         searchDB();
     });
 });
 
 function searchDB() {
-    console.log('searchDB() 함수 진입');
+    const searchQuery = document.getElementById('searchQuery').value;
+    const searchType = document.getElementById('searchType').value;
+
+    fetch(`/search?searchQuery=${searchQuery}&searchType=${searchType}`)
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                console.log('response is not ok');
+            }
+        })
+        .then(rows => {
+            renderResult(rows);
+        })
+        .catch(error => {
+            console.error(error);
+        })
+}
+
+function renderResult(rows) {
+    let tagsToAppend = '<ul>';
+    for(let row of rows) {
+        tagsToAppend += `<li>${row}</li>`;
+    };
+    tagsToAppend += '</ul>';
+    document.getElementById('searchResult').innerHTML = tagsToAppend;
 }
