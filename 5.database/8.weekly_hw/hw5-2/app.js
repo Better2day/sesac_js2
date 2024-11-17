@@ -24,49 +24,35 @@ app.get('/', (req, res) => {
 app.get('/search', (req, res) => {
     const { searchQuery, searchType } = req.query;
 
-    const stringStart = 'SELECT * FROM ';
-    const stringEnd = { // 이 객체의 key는 search.html form(select) searchType, DB table column name과 동일
-        artistName: 'artists WHERE Name LIKE ?',
-        // artistName: 'artists',
-        albumTitle: 'albums WHERE Title LIKE ?',
-        trackName: 'tracks WHERE Name LIKE ?',
-        composer: 'tracks WHERE Composer LIKE ?',
-        genre: 'genres WHERE Name LIKE ?',
-        customerName: 'customers WHERE FirstName LIKE ?',
-    };
-    const queryString = stringStart + stringEnd[searchType];
-
-    const columnToSend = {
-        artistName: 'artists WHERE Name LIKE ?',
-        // artistName: 'artists',
-        albumTitle: 'albums WHERE Title LIKE ?',
-        trackName: 'tracks WHERE Name LIKE ?',
-        composer: 'tracks WHERE Composer LIKE ?',
-        genre: 'genres WHERE Name LIKE ?',
-        customerName: 'customers WHERE FirstName LIKE ?',
+    // const stringStart = 'SELECT * FROM ';
+    // 아래 두 객체 리터럴은 다중 if/switch 문 대신, 간편하게 키에 상응하는 값을 반환하는 용도로 사용하는 객체
+    const dbCol = { // 이 객체의 key는 search.html form(select) searchType, value는 DB table column name과 동일
+        artistName: 'Name',
+        albumTitle: 'Title',
+        trackName: 'Name',
+        composer: 'DISTINCT Composer',
+        genre: 'Name',
+        customerName: 'FirstName || " " || LastName AS CustomerName',
     }
+    const endString = { // 이 객체의 key는 search.html form(select) searchType과 동일
+        artistName: 'artists WHERE Name LIKE ?',
+        albumTitle: 'albums WHERE Title LIKE ?',
+        trackName: 'tracks WHERE Name LIKE ?',
+        composer: 'tracks WHERE Composer LIKE ?',
+        genre: 'genres WHERE Name LIKE ?',
+        customerName: 'customers WHERE FirstName || LastName LIKE ?',
+    };
+    const queryString = 'SELECT ' + dbCol[searchType] + ' FROM ' + endString[searchType];
 
     let searchResult = [];
-    // const rows = db.prepare(queryString).all(`"%${searchQuery}%"`);
     // "%${searchQuery}%", '%${searchQuery}%' 둘 다 결과 안 나옴. % 앞뒤에 따옴표 종류 없어야 결과 나옴
     db.prepare(queryString).all(`%${searchQuery}%`, (err, rows) => {
         for (let row of rows) {
-            // console.log(row);
-            searchResult.push(row.Name);
+            // searchResult.push(row[dbCol[searchType]]);
+            searchResult.push(Object.values(row).pop());
         };
-        console.log(searchResult);
         res.send(searchResult);
     });
-    // res.json(JSON.stringify(rows));
-
-    /* 
-    const query1 = 'SELECT * FROM artists WHERE Name LIKE ?';
-    const query2 = 'SELECT * FROM albums WHERE Title LIKE ?';
-    const query3 = 'SELECT * FROM tracks WHERE Name LIKE ?';
-    const query4 = 'SELECT * FROM tracks WHERE Composer LIKE ?';
-    const query5 = 'SELECT * FROM genres WHERE Name LIKE ?';
-    const query6 = 'SELECT * FROM customers WHERE FirstName LIKE ?';
-     */
 });
 
 app.listen(port, () => {
