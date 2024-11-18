@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>Document</title>
+</head>
+<body>
+    <h1>사용자 테이블</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Age</th>
+                <th>Birthday</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in data %}
+            <tr onclick="window.location='/users/{{ row.Id }}';">
+                <td>{{ row.Id }}</td>
+                <td>{{ row.Name }}</td>
+                <td>{{ row.Gender }}</td>
+                <td>{{ row.Age }}</td>
+                <td>{{ row.Birthdate }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
