@@ -18,8 +18,12 @@ const object1 = {
     num: 35,
     bb: false
 };
-// console.log(Object.entries(object1));
-// console.log(Object.entries(object1).toString());
+/* 
+console.log('Object.keys(object1) = ', Object.keys(object1));
+console.log('Object.values(object1) = ', Object.values(object1));
+console.log('Object.entries(object1) = ', Object.entries(object1));
+console.log(Object.entries(object1).toString());
+ */
 
 // 배열 안의 3번째 배열의 key-value 값을 인수로 받아서 출력
 // 공백이나 __를 사용하면 되는 줄 알았는데, __도 식별자로 작동하는지 중복으로 사용하면 오류 발생
@@ -247,7 +251,7 @@ console.log(object.b);
 // 일반 매개변수를 생각하고 { pa, pb } 식으로 받았더니 인수를 못 받아온다.]
 // 구조분해 할당을 이용할 때는, 순서만이 아니라 객체의 키 값도 일치해야 한다!
 function print5({ b, a }) {
-    console.log(a, b);
+    console.log(b, a);
 }
 
 const arr1 = [1, 2, 3, 4, 5];
@@ -271,7 +275,7 @@ const purpleCuteSlime = {
 console.log(purpleCuteSlime);
 
 // Rest: 객체, 배열, 함수 파라미터에서 사용 가능
-// 이미 있는 객체, 배열에서 일부 속성이나 요소를 제거해서 새 객체, 배열 생성))
+// 이미 있는 객체, 배열에서 일부 속성이나 요소를 제거해서 새 객체, 배열 생성
 // Rest는 목록에서 제일 끝(오른쪽)에만 위치할 수 있다는 제약이 있다.
 const { color, ...rest } = purpleCuteSlime;
 console.log(rest);

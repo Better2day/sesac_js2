@@ -1,19 +1,23 @@
-require('dotenv').config({ path: './.env.production'});
+require('dotenv').config({ path: '.env.development'});
 // require('dotenv').config(); // .env 파일 로드
 const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
-const path = require('path');
 const morgan = require('morgan');
+const debug = require('debug');
+const path = require('path');
 const fs = require('fs');
 
+const debugLog = debug('app:log');
+const debugError = debug('app:error');
+
 const app = express();
-const db = new sqlite3.Database('user-sample.db');
+const db = new sqlite3.Database('../user-sample.db');
 
 const PORT = process.env.PORT || 3000;
 const DB_HOST = process.env.DB_HOST;
 const DB_USER = process.env.DB_USER;
 const DB_PASSS = process.env.DB_PASS;
-console.log(`Database Config: Host=${DB_HOST}, User=${DB_USER}`);
+// console.log(`Database Config: Host=${DB_HOST}, User=${DB_USER}`);
 
 // const logStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a'});
 
@@ -64,12 +68,17 @@ app.get('/users/:id', (req, res) => {
 })
 
 app.get('/', (req, res) => {
+    debugLog('Handling root route');
     res.sendFile(path.resolve('public/users.html'));
     // res.sendFile(path.join(__dirname, 'public', 'users.html'));
 });
 
+app.get('/error', (req, res) => {
+    debugError('Simulated error occurred');
+    res.status(500).send('Something went wrong!');
+});
+
 // 서버 시작
 app.listen(PORT, () => {
-    console.log('CRM Server is ready to start...');
-    console.log(`Server is ready on http://localhost:${PORT}`)
+    console.log(`CRM Server is listening on http://localhost:${PORT}`)
 });

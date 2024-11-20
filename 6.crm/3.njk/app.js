@@ -8,7 +8,7 @@ const debug = require('debug');
 
 const app = express();
 const port = 3000;
-const db = new sqlite3('user-sample.db');
+const db = new sqlite3('../user-sample.db');
 const isDebugMode = process.env.DEBUG === 'true'
 const debugS = new debug('myapp:server');
 const debugR = new debug('myapp:request');
