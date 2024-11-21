@@ -19,19 +19,21 @@ app.get('/', (req, res) => {
 })
 
 app.get('/fruits', (req, res) => {
-    const fruits = ['Apple', 'Banana', 'Orange', 'Grapes']
-    res.render('fruits', {fruits: fruits});
+    const fruits = ['Apple', 'Banana', 'Orange']
+    const fruits2 = ['Blueberry', 'Grapes', 'Watermelon']
+    // res.render('fruits', {fruits: fruits});
+    res.render('fruits', {fruits: fruits2});
 });
 
 app.get('/greeting', (req, res) => {
     const username = 'js'; // DB 배운 이후에는 DB에서 가져올 것
-    res.render('greeting', {username: username});
+    res.render('greeting', {username: username}); // {username} 으로 단축 가능
 });
 
 app.get('/welcome', (req, res) => {
     const isAdmin = true; // 나중에는 실제 사용자 권한
     // res.render('welcome', {isAdmin: isAdmin});
-    res.render('welcome', { isAdmin }); // 똑같으면 축약 가능. 그러나 실무에서는 헷갈리므로 따로 쓰기도 함
+    res.render('welcome', { isAdmin }); // 똑같으면 축약 가능. 그러나 실무에서는 헷갈리므로 따로 쓰기도 함    
 });
 
 

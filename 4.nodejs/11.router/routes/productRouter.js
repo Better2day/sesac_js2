@@ -15,5 +15,4 @@ router.get('/:id/details', (req, res) => {
     res.send(`상품 개발 ${productId}) 상세 목록 출력`)
 });
 
-    
 module.exports = router;

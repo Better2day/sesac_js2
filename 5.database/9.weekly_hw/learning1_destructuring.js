@@ -1,5 +1,5 @@
 // 객체 구조 분해 할당 (비구조화 할당)
-function print({actor, alias, name, }) {
+function print({ actor, alias, name }) {
     // function print(hero) {
     //     const {alias, name, actor} = hero;
         console.log(`${alias}(${name}) 역할을 맡은 배우는 ${actor}입니다`);

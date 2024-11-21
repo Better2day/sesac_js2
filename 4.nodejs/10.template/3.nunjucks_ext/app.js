@@ -22,7 +22,6 @@ app.get('/', (req, res) => {
     res.render('main', data);
 });
 
-
 app.get('/user', (req, res) => {
     const data = {
         title: '사용자 페이지',
@@ -37,7 +36,7 @@ app.get('/product', (req, res) => {
         title: '상품 페이지',
         content: 'This is my product page',
     };
-
+    
     res.render('product', data);
 });
 
@@ -67,7 +66,6 @@ app.get('/page3', (req, res) => {
 
     res.render('page3', data);
 });
-
 
 
 app.listen(3000, () => {

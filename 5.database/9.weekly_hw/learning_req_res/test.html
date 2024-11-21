@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resonse, Request Test</title>
+</head>
+<body>
+    <h1>Resonse, Request Test</h1>
+    <p>1-1. 실제 json 객체: res.json() - response.json()</p><button id="btn1">send</button>
+    <p>1-2. 실제 json 객체: res.json() - response.text()</p><button id="btn2">send</button>
+    <p>1-3. 실제 json 객체: res.send() - response.json()</p><button id="btn3">send</button>
+    <p>1-4. 실제 json 객체: res.send() - response.text()</p><button id="btn4">send</button>
+    <p>2-1. Text: res.json() - response.json()</p><button id="btn5">send</button>
+    <p>2-2. Text: res.json() - response.text()</p><button id="btn6">send</button>
+    <p>2-3. Text: res.send() - response.json()</p><button id="btn7">send</button>
+    <p>2-4. Text: res.send() - response.text()</p><button id="btn8">send</button>
+    
+    <p>express.json() - express.urlencoded()</p>
+
+    <form action="/api/test" method="POST">
+        <input id="in1" type="text" name="in1">
+        <input id="in2" type="text" name="in2">
+        <button type="submit">Send</button>
+    </form>
+    
+    <p>req.query 단독</p><button id="btn9">send</button>
+</body>
+<script src="test.js"></script>
+</html>

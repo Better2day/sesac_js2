@@ -3,14 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>과일 목록</title>
+    <style>
+        ::marker {
+            color: green;
+        }
+    </style>
 </head>
 <body>
     <H1>과일 목록</H1>
     <UL>
         {% for fruit in fruits %}
-        <LI></LI>
-        {% %}
+        <LI>{{fruit}}</LI>
+        {% endfor %}
     </UL>
-    
 </body>
 </html>
