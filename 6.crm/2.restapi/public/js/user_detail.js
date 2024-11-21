@@ -1,6 +1,7 @@
 const userDetail = document.getElementById('user-detail');
 
 const userId = window.location.pathname.split('/').pop();
+
 console.log(userId);
 
 function fetchUserDetail() {
