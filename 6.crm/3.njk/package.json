@@ -4,7 +4,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "start:dev": "cross-env DEBUG=myapp:* node app.js",
+    "start:dev": "set DEBUG=server,request && node app.js",
+    "start:devall": "cross-env DEBUG=myapp:* node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

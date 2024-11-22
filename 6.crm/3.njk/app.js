@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv').config({ path: '.env.development'});
 const express = require('express');
 const nunjucks = require('nunjucks');
 const sqlite3 = require('better-sqlite3');
@@ -9,16 +9,17 @@ const debug = require('debug');
 const app = express();
 const port = 3000;
 const db = new sqlite3('../user-sample.db');
-const isDebugMode = process.env.DEBUG === 'true'
-const debugS = new debug('myapp:server');
-const debugR = new debug('myapp:request');
-const debugDEV = new debug('myapp:DEV');
-const debugERR = new debug('myapp:ERR');
+const isDebugMode = process.env.NODE_ENV === 'development'; // DEBUG 변수는 어떤 것을 로깅할지 결정할 때 사용
+const debugS = new debug('server');
+const debugR = new debug('request');
+const debugDEV = new debug('DEV');
+const debugERR = new debug('ERR');
 
 nunjucks.configure('views', {
     autoescape: true,
     express: app,
 });
+
 
 // 미들웨어
 app.use(express.static('public'));
@@ -47,6 +48,7 @@ app.get('/users/:id', (req, res) => {
 
     const query = db.prepare('SELECT * FROM users WHERE Id = ?')
     const data = query.get(userId);
+    console.log(data);
 
     res.render('user_detail.html', {user:data});
 })
