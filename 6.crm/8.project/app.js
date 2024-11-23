@@ -43,9 +43,10 @@ const rowsPerPage = 20;
 
 app.get(`/crm/users`, (req, res) => {
     const { userName = '', gender } = req.query;
-    const page = parseInt(req.query.page) || 1; // parseInt: null, undefined, 또는 숫자가 아닌 글자면 NaN 반환
-    console.log(userName, gender);
-
+    let page = parseInt(req.query.page) // parseInt: null, undefined, 또는 숫자가 아닌 글자면 NaN 반환
+    page = (!page) ? ((page === 0) ? page : 1) : page; // null, undefined, NaN이면 1로 수정, 0이면 아래에서 리디렉트하도록 그대로 둠
+    console.log(userName, gender, page);
+    
     // 검색 기능 추가 관련: WHERE 1=1 AND name LIKE '%what%' AND col1=val1 (1=1 부분은 논란이 있어서 보류)
     let queryCols = 'SELECT COUNT(*) AS TOTAL '
     const queryCenter = 'FROM users WHERE NAME LIKE ? ';
@@ -60,9 +61,15 @@ app.get(`/crm/users`, (req, res) => {
     // const cnt = cntQuery.get(`%${userName}%`, gender);
 
     const totalPage = Math.ceil(cnt.TOTAL / rowsPerPage);
-    if (!page) { // page 번호가 1 ~ 전체 페이지 수 범위를 넘지 않도록 강제
-        page = ( page < 1 ) ? 1 : ((page > totalPage) ? totalPage : page);
+
+    // page 번호가 1 ~ 전체 페이지 수 범위를 넘으면 정상 범위로 강제 수정해서 리디렉션 (URL까지 수정하기 위함)
+    if (page < 1) {
+        return res.redirect(`/crm/users?userName=${userName}&gender=${gender}&page=1`);
+    } else if (page > totalPage) {
+        return res.redirect(`/crm/users?userName=${userName}&gender=${gender}&page=${totalPage}`);
     }
+    // page = ( page < 1 ) ? 1 : ((page > totalPage) ? totalPage : page);
+    console.log('page 범위 수정 후: ', page);
     // console.log(cnt);
     // console.log(`page = ${page}, totalPage = ${totalPage}`);
     // console.log('rowsPerPage * (page - 1) = ', rowsPerPage * (page - 1));
@@ -108,10 +115,15 @@ crmTables.forEach(table => {
     if (tbl !== 'users') {
         app.get(`/crm/${tbl}`, (req, res) => {
             const cnt = db.prepare(`SELECT COUNT(*) AS TOTAL FROM ${tbl}`).get();
-            const page = parseInt(req.query.page) || 1; // parseInt: null, undefined, 또는 숫자가 아닌 글자면 NaN 반환
+            let page = parseInt(req.query.page) // parseInt: null, undefined, 또는 숫자가 아닌 글자면 NaN 반환
+            page = (!page) ? ((page === 0) ? page : 1) : page; // null, undefined, NaN이면 1로 수정, 0이면 아래에서 리디렉트하도록 그대로 둠
             const totalPage = Math.ceil(cnt.TOTAL / rowsPerPage);
-            if (!page) { // page 번호가 1 ~ 전체 페이지 수 범위를 넘지 않도록 강제
-                page = ( page < 1 ) ? 1 : ((page > totalPage) ? totalPage : page);
+
+            // page 번호가 1 ~ 전체 페이지 수 범위를 넘으면 정상 범위로 강제 수정해서 리디렉션 (URL까지 수정하기 위함)
+            if (page < 1) {
+                return res.redirect(`/crm/${tbl}?page=1`);
+            } else if (page > totalPage) {
+                return res.redirect(`/crm/${tbl}?page=${totalPage}`);
             }
 
             const query = db.prepare(`SELECT * FROM ${tbl} LIMIT ? OFFSET ?`);
