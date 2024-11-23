@@ -1,21 +1,51 @@
 {% include './header.html' %}
-<main>
-    <h1>{{ title }}</h1>
-    
-    <table>
-        <thead>
-            <tr>
-                {% for key in data %}
-                {% if key !== 'id' && key !== 'address' %}
-                <th>{{ key }}</th>
-                {% endif %}
+    <main>
+        <h1>{{ tbl }}</h1>
+        <form id="searchForm">
+            <input id="userName" type="text" name="userName" value="{{ userName }}" placeholder="고객 이름을 입력하세요">
+            <select id="gender" name="gender">
+                <option value=""></option>
+                <option value="Male" {{ "selected" if gender == "Male"}}>Male</option>
+                <option value="Female" {{ "selected" if gender == "Female"}}>Female</option>
+            </select>
+            <button id="searchBtn">검색</button>
+        </form>
+        <table>
+            <thead>
+                <tr>
+                    {% for key in keys %}
+                    {% if key != 'Address' %}
+                    <th>{{ key }}</th>
+                    {% endif %}
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in rows %}
+                <tr>
+                    {% for key in keys %}
+                    {% if key != 'Address' %}
+                    <td>{{ row[key] }}</td>
+                    {% endif %}
+                    {% endfor %}
+                </tr>
                 {% endfor %}
-            </tr>
-        </thead>
-        <tbody>
-            <tr>{{ data }}</tr>
-        </tbody>
-    </table>
-</main>
+            </tbody>
+        </table>
+        <div>
+            {% if page.page > 1 %}
+            <button id="prev" value={{ page.page - 1 }}>이전</button>
+            {% else %}
+            <button id="prev" disabled>이전</button>
+            {% endif %}
+            <span id="page">{{ page.page }}</span> / <span>{{ page.totalPage }}</span>
+            {% if page.page < page.totalPage %}
+            <button id="next" value={{ page.page + 1 }}>다음</button>
+            {% else %}
+            <button id="next" disabled>다음</button>
+            {% endif %}
+        </div>
+    </main>
+    <script src="/js/users.js"></script>
 </body>
 </html>

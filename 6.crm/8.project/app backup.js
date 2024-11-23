@@ -91,17 +91,10 @@ app.get(`/crm/users`, (req, res) => {
 });
 
 // 테이블 배열
-const crmTables = [
-     {'users': 'user_detail'},
-     {'stores': 'store_detail'},
-     {'items': 'item_detail'},
-     {'orders': 'order_detail'},
-     {'order_items': 'orderitem_detail'},
-];
+const tables = [ 'users', 'stores', 'items', 'orders', 'order_items' ];
 // 사용자 요청에 HTML 파일을 전송하는 로직은 검색 기능이 있는 사용자 테이블을 제외한
 // 4개 테이블 모두 동일하므로, 테이블 배열을 순환하며 실행해서 app.get 코드 축약
-crmTables.forEach(table => {
-    const [ tbl ] = Object.keys(table);
+tables.forEach(tbl => {
     if (tbl !== 'users') {
     app.get(`/crm/${tbl}`, (req, res) => {
         const cnt = db.prepare(`SELECT COUNT(*) AS TOTAL FROM ${tbl}`).get();
@@ -140,20 +133,20 @@ app.get('/order_items', ~
 */
 
 // 각 테이블별 상세 페이지
-crmTables.forEach(table => {
-    const [ tbl ] = Object.keys(table);
-    const [ detailTbl ] = Object.values(table);
-    app.get(`/crm/${detailTbl}`, (req, res) => {
-        const query = db.prepare(`SELECT * FROM ${tbl}`);
-        const rows = query.get();
+
+tables.forEach(tbl => {
+    app.get(`/crm/${tbl}`, (req, res) => {
+        const query = db.prepare(`SELECT * FROM ${tbl} LIMIT ? OFFSET ?`);
+        const rows = query.all(rowsPerPage, rowsPerPage * (page - 1));
 
         debugLog('query.all 실행 직후, res.render 실행 직전');
 
-        res.render(`${detailTbl}`,
-                                {table: tbl,
-                                keys: Object.keys(rows),
-                                rows: rows,
-                                });
+        res.render(`${tbl}`,
+                            {table: tbl,
+                             keys: Object.keys(rows[0]),
+                             rows: rows,
+                             page: {page, totalPage},
+                            });
         debugLog('res.render 실행 직후');
     });
 });

@@ -5,9 +5,7 @@
             <thead>
                 <tr>
                     {% for key in keys %}
-                    {% if key != 'Address' %}
                     <th>{{ key }}</th>
-                    {% endif %}
                     {% endfor %}
                 </tr>
             </thead>
@@ -15,9 +13,7 @@
                 {% for row in rows %}
                 <tr>
                     {% for key in keys %}
-                    {% if key != 'Address' %}
                     <td>{{ row[key] }}</td>
-                    {% endif %}
                     {% endfor %}
                 </tr>
                 {% endfor %}

@@ -1,17 +1,47 @@
 {% include './header.html' %}
-<main>
-    <h1>{{ title }}</h1>
-    
-    <table>
-        <thead>
-            <tr>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-
-        </tbody>
-    </table>
-</main>
+    <main>
+        <h1>{{ tbl }}</h1>
+        <table>
+            <thead>
+                <tr>
+                    {% for key in keys %}
+                    <th>{{ key }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in rows %}
+                <tr>
+                    {% for key in keys %}
+                    <td>{{ row[key] }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div>
+            {% if page.page > 1 %}
+            <button id="prev" value={{ page.page - 1 }}>이전</button>
+            {% else %}
+            <button id="prev" disabled>이전</button>
+            {% endif %}
+            <span>{{ page.page }}</span> / <span>{{ page.totalPage }}</span>
+            {% if page.page < page.totalPage %}
+            <button id="next" value={{ page.page + 1 }}>다음</button>
+            {% else %}
+            <button id="next" disabled>다음</button>
+            {% endif %}
+        </div>
+    </main>
+    <script>
+        const prev = document.getElementById('prev');
+        prev.addEventListener('click', () => {
+            location.replace(`/crm/stores?page=${prev.value}`);
+        });
+        const next = document.getElementById('next');
+        next.addEventListener('click', () => {
+            location.replace(`/crm/stores?page=${next.value}`);
+        });
+    </script>
 </body>
 </html>
