@@ -10,15 +10,16 @@
                 </tr>
             </thead>
             <tbody>
-                {% for row in rows %}
                 <tr>
+                    <!-- Id에서 링크 제외, store id, user id에 링크해야 함 -->
                     {% for key in keys %}
                     <td>{{ row[key] }}</td>
                     {% endfor %}
                 </tr>
-                {% endfor %}
             </tbody>
         </table>
+        <div>
+        </div>
     </main>
 </body>
 </html>

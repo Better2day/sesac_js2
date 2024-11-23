@@ -10,15 +10,16 @@
                 </tr>
             </thead>
             <tbody>
-                {% for row in rows %}
                 <tr>
+                    <!-- id에서 링크 제외, order id, item id에 링크해야 함. item 테이블과 조인해서 아이템명 가져와야 함 -->
                     {% for key in keys %}
                     <td>{{ row[key] }}</td>
                     {% endfor %}
                 </tr>
-                {% endfor %}
             </tbody>
         </table>
+        <div>
+        </div>
     </main>
 </body>
 </html>

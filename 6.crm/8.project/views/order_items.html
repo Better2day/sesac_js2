@@ -15,14 +15,41 @@
                 {% for row in rows %}
                 <tr>
                     {% for key in keys %}
-                    {% if key != 'Address' %}
-                    <td>{{ row[key] }}</td>
-                    {% endif %}
+                    <td>
+                        {% if key == 'Id' %}
+                            <a href="/crm/orderitem_detail/{{ row[key] }}">{{ row[key] }}</a>
+                        {% else %}
+                            {{ row[key] }}
+                        {% endif %}
+                    </td>
                     {% endfor %}
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
+        <div>
+            {% if page.page > 1 %}
+            <button id="prev" value={{ page.page - 1 }}>이전</button>
+            {% else %}
+            <button id="prev" disabled>이전</button>
+            {% endif %}
+            <span id="page">{{ page.page }}</span> / <span>{{ page.totalPage }}</span>
+            {% if page.page < page.totalPage %}
+            <button id="next" value={{ page.page + 1 }}>다음</button>
+            {% else %}
+            <button id="next" disabled>다음</button>
+            {% endif %}
+        </div>
     </main>
+    <script>
+        const prev = document.getElementById('prev');
+        prev.addEventListener('click', () => {
+            location.replace(`/crm/order_items?page=${prev.value}`);
+        });
+        const next = document.getElementById('next');
+        next.addEventListener('click', () => {
+            location.replace(`/crm/order_items?page=${next.value}`);
+        });
+    </script>
 </body>
 </html>

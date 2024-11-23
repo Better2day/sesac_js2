@@ -43,7 +43,7 @@ const rowsPerPage = 20;
 
 app.get(`/crm/users`, (req, res) => {
     const { userName = '', gender } = req.query;
-    const page = parseInt(req.query.page) || 1;
+    const page = parseInt(req.query.page) || 1; // parseInt: null, undefined, 또는 숫자가 아닌 글자면 NaN 반환
     console.log(userName, gender);
 
     // 검색 기능 추가 관련: WHERE 1=1 AND name LIKE '%what%' AND col1=val1 (1=1 부분은 논란이 있어서 보류)
@@ -60,6 +60,9 @@ app.get(`/crm/users`, (req, res) => {
     // const cnt = cntQuery.get(`%${userName}%`, gender);
 
     const totalPage = Math.ceil(cnt.TOTAL / rowsPerPage);
+    if (!page) { // page 번호가 1 ~ 전체 페이지 수 범위를 넘지 않도록 강제
+        page = ( page < 1 ) ? 1 : ((page > totalPage) ? totalPage : page);
+    }
     // console.log(cnt);
     // console.log(`page = ${page}, totalPage = ${totalPage}`);
     // console.log('rowsPerPage * (page - 1) = ', rowsPerPage * (page - 1));
@@ -103,31 +106,34 @@ const crmTables = [
 crmTables.forEach(table => {
     const [ tbl ] = Object.keys(table);
     if (tbl !== 'users') {
-    app.get(`/crm/${tbl}`, (req, res) => {
-        const cnt = db.prepare(`SELECT COUNT(*) AS TOTAL FROM ${tbl}`).get();
-        const page = parseInt(req.query.page || 1);
-        const totalPage = Math.ceil(cnt.TOTAL / rowsPerPage);
+        app.get(`/crm/${tbl}`, (req, res) => {
+            const cnt = db.prepare(`SELECT COUNT(*) AS TOTAL FROM ${tbl}`).get();
+            const page = parseInt(req.query.page) || 1; // parseInt: null, undefined, 또는 숫자가 아닌 글자면 NaN 반환
+            const totalPage = Math.ceil(cnt.TOTAL / rowsPerPage);
+            if (!page) { // page 번호가 1 ~ 전체 페이지 수 범위를 넘지 않도록 강제
+                page = ( page < 1 ) ? 1 : ((page > totalPage) ? totalPage : page);
+            }
 
-        const query = db.prepare(`SELECT * FROM ${tbl} LIMIT ? OFFSET ?`);
-        const rows = query.all(rowsPerPage, rowsPerPage * (page - 1));
+            const query = db.prepare(`SELECT * FROM ${tbl} LIMIT ? OFFSET ?`);
+            const rows = query.all(rowsPerPage, rowsPerPage * (page - 1));
 
-        console.log(cnt);
-        console.log(`page = ${page}, totalPage = ${totalPage}`);
-        console.log('rowsPerPage * (page - 1) = ', rowsPerPage * (page - 1));
+            // console.log(cnt);
+            // console.log(`page = ${page}, totalPage = ${totalPage}`);
+            // console.log('rowsPerPage * (page - 1) = ', rowsPerPage * (page - 1));
 
-        debugLog('query.all 실행 직후, res.render 실행 직전');
+            debugLog('query.all 실행 직후, res.render 실행 직전');
 
-        // res.setHeader('Cache-Control', 'no-store');
-        res.render(`${tbl}`,
-                            {table: tbl,
-                             keys: Object.keys(rows[0]),
-                             rows: rows,
-                             page: {page, totalPage},
-                            });
-        // res.redirect(`/${tbl}?page=${page}`);
-        debugLog('res.render 실행 직후');
-        // 검색 기능 추가해야 할 것: WHERE name like ? AND 1=1
-    });
+            // res.setHeader('Cache-Control', 'no-store');
+            res.render(`${tbl}`,
+                                {table: tbl,
+                                keys: Object.keys(rows[0]),
+                                rows: rows,
+                                page: {page, totalPage},
+                                });
+            // res.redirect(`/${tbl}?page=${page}`);
+            debugLog('res.render 실행 직후');
+            // 검색 기능 추가해야 할 것: WHERE name like ? AND 1=1
+        });
     }
 });
 /* // 아래처럼 테이블 별로 app.get('/tablename', ~) 을 4개 반복 작성해야 할 것을 위 코드로 축약
@@ -143,16 +149,17 @@ app.get('/order_items', ~
 crmTables.forEach(table => {
     const [ tbl ] = Object.keys(table);
     const [ detailTbl ] = Object.values(table);
-    app.get(`/crm/${detailTbl}`, (req, res) => {
-        const query = db.prepare(`SELECT * FROM ${tbl}`);
-        const rows = query.get();
+    app.get(`/crm/${detailTbl}/:id`, (req, res) => {
+        const id = req.params.id;
+        const query = db.prepare(`SELECT * FROM ${tbl} WHERE ID = ?`);
+        const row = query.get(id);
 
         debugLog('query.all 실행 직후, res.render 실행 직전');
 
         res.render(`${detailTbl}`,
                                 {table: tbl,
-                                keys: Object.keys(rows),
-                                rows: rows,
+                                keys: Object.keys(row),
+                                row: row,
                                 });
         debugLog('res.render 실행 직후');
     });

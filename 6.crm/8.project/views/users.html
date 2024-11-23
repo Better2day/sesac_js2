@@ -25,7 +25,13 @@
                 <tr>
                     {% for key in keys %}
                     {% if key != 'Address' %}
-                    <td>{{ row[key] }}</td>
+                    <td>
+                        {% if key == 'Id' %}
+                            <a href="/crm/user_detail/{{ row[key] }}">{{ row[key] }}</a>
+                        {% else %}
+                            {{ row[key] }}
+                        {% endif %}
+                    </td>
                     {% endif %}
                     {% endfor %}
                 </tr>

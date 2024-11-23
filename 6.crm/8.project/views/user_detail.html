@@ -10,13 +10,12 @@
                 </tr>
             </thead>
             <tbody>
-                {% for row in rows %}
                 <tr>
+                    <!-- Id 제외해야 함 -->
                     {% for key in keys %}
                     <td>{{ row[key] }}</td>
                     {% endfor %}
                 </tr>
-                {% endfor %}
             </tbody>
         </table>
         <div>

@@ -13,7 +13,13 @@
                 {% for row in rows %}
                 <tr>
                     {% for key in keys %}
-                    <td>{{ row[key] }}</td>
+                    <td>
+                        {% if key == 'Id' %}
+                            <a href="/crm/store_detail/{{ row[key] }}">{{ row[key] }}</a>
+                        {% else %}
+                            {{ row[key] }}
+                        {% endif %}
+                    </td>
                     {% endfor %}
                 </tr>
                 {% endfor %}
@@ -25,7 +31,7 @@
             {% else %}
             <button id="prev" disabled>이전</button>
             {% endif %}
-            <span>{{ page.page }}</span> / <span>{{ page.totalPage }}</span>
+            <span id="page">{{ page.page }}</span> / <span>{{ page.totalPage }}</span>
             {% if page.page < page.totalPage %}
             <button id="next" value={{ page.page + 1 }}>다음</button>
             {% else %}
@@ -34,6 +40,7 @@
         </div>
     </main>
     <script>
+        const page = parseInt(document.getElementById('page').textContent);
         const prev = document.getElementById('prev');
         prev.addEventListener('click', () => {
             location.replace(`/crm/stores?page=${prev.value}`);

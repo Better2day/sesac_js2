@@ -35,5 +35,12 @@ tr:hover {
 
 a {
     text-decoration: none;
+}
+
+nav a {
     color: white;
+}
+
+td a {
+    color: rgba(90, 90, 255, 0.952);
 }

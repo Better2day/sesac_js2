@@ -15,9 +15,13 @@
                 {% for row in rows %}
                 <tr>
                     {% for key in keys %}
-                    {% if key != 'Address' %}
-                    <td>{{ row[key] }}</td>
-                    {% endif %}
+                    <td>
+                        {% if key == 'Id' %}
+                            <a href="/crm/order_detail/{{ row[key] }}">{{ row[key] }}</a>
+                        {% else %}
+                            {{ row[key] }}
+                        {% endif %}
+                    </td>
                     {% endfor %}
                 </tr>
                 {% endfor %}
@@ -29,7 +33,7 @@
             {% else %}
             <button id="prev" disabled>이전</button>
             {% endif %}
-            <span>{{ page.page }}</span> / <span>{{ page.totalPage }}</span>
+            <span id="page">{{ page.page }}</span> / <span>{{ page.totalPage }}</span>
             {% if page.page < page.totalPage %}
             <button id="next" value={{ page.page + 1 }}>다음</button>
             {% else %}
