@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const debug = require('debug');
 const userRouter = require('./routes/userRouter');
 const otherRouter = require('./routes/otherRouter');
+const detailRouter = require('./routes/detailRouter');
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -34,7 +35,8 @@ app.get('/', (req, res) => {
 });
 
 app.use('/crm/users', userRouter);
-app.use('/crm/', otherRouter);
+app.use('/crm', otherRouter);
+app.use('/crm', detailRouter);
 
 
 app.listen(PORT, () => {

@@ -1,26 +1,76 @@
 {% include './header.html' %}
     <main>
-        <h1>{{ tbl }}</h1>
-        <table>
-            <thead>
-                <tr>
-                    {% for key in keys %}
-                    <th>{{ key }}</th>
+        <h3>고객 상세 정보</h3>
+        <div class="table-container">
+            <table> <!-- 고객 인적사항 -->
+                <thead>
+                    <tr>
+                        {% for key in userKeys %}
+                            {% if key != 'Id' %}
+                                <th>{{ key }}</th>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        {% for key in userKeys %}
+                            {% if key != 'Id' %}
+                                <td>{{ userInfo[key] }}</td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br />
+        <div class="table-container">
+            <table> <!-- 고객 주문 기록 -->
+                <thead>
+                    <tr>
+                        {% for key in orderKeys %}
+                            {% if key != 'UserId' and key != 'StoreId' %}
+                                <th>{{ key }}</th>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                        <tr>
+                            {% for key in orderKeys %}
+                                {% if key == 'StoreId' %}
+                                    {% set storeId = order[key] %}
+                                {% elif key == 'OrderId' %}
+                                    <td><a href="/crm/orderitem_detail/{{ order[key] }}">{{ order[key] }}</a></td>
+                                {% elif key == 'StoreName' %}
+                                    <td><a href="/crm/store_detail/{{ storeId }}">{{ order[key] }}</a></td>
+                                {% elif key != 'UserId' and key != 'StoreId' %}
+                                    <td>{{ order[key] }}</td>
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
                     {% endfor %}
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <!-- Id 제외해야 함 -->
-                    {% for key in keys %}
-                    <td>{{ row[key] }}</td>
-                    {% endfor %}
-                </tr>
-            </tbody>
-        </table>
-        <div>
+                </tbody>
+            </table>
+        </div>
+        <br />
+        <div class="info-section">
+            <span>자주 방문한 매장 Top 5</span>
+            <ul class="info-list">
+                {% for fStore in freqStores %}
+                <li>{{ fStore.StoreName }} ({{ fStore.Frequency }}번 방문)</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="info-section">
+            <span>자주 주문한 상품 Top 5</span>
+            <ul class="info-list">
+                {% for fItem in freqItems %}
+                <li>{{ fItem.ItemName }} ({{ fItem.Frequency }}번 주문)</li>
+                {% endfor %}
+            </ul>
         </div>
     </main>
-    <!-- <script src="/js/users.js"></script> -->
 </body>
 </html>

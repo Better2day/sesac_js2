@@ -1,46 +1,92 @@
-nav {
-    background: #333333;
-    color: white;
-    padding: 14px;    
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* border: 1px solid black; */
 }
 
+nav {
+    width: 60%;
+    /* align-content: center; */
+    background-color: #333333;
+    color: white;
+    padding: 18px;
+}
 nav > span {
     padding-right: 10px;
 }
 
-table {
-    border-collapse: collapse;
-    width: 100%;
+main {
+    width: 62%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* max-height: 90vh; */ /* user_detail 깨져서 임시로 해제. 추후 수정해야 함 */
+    overflow-y: hidden;
 }
 
+.table-container {
+    overflow-y: auto;
+}
+
+.paging-container {
+    margin-top: 8px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;    
+}
 th, td {
+    height: 24px;
     border: 1px solid #888888;
     padding: 5px;
 }
-
 th {
     background-color: #333333;
     color: white;
     text-align: left;
 }
-
 tr:nth-child(even) {
     background-color: #eeeeee;
 }
-
 tr:hover {
-    background-color: orange;
-    cursor: pointer;
+    background-color: rgb(210, 235, 255);    
 }
 
 a {
-    text-decoration: none;
+    text-decoration: none;    
 }
-
 nav a {
     color: white;
 }
-
 td a {
     color: rgba(90, 90, 255, 0.952);
+}
+
+h3, h4 {
+    color: #333333;
+    margin: 10px 15px;
+}
+
+form {
+    margin-bottom: 8px;
+}
+
+button {
+    cursor: pointer;
+}
+button:disabled {
+    cursor: default;
+}
+
+div.info-section {
+    margin: 5px;
+    padding: 0px;
+}
+
+ul.info-list {
+    margin-top: 0;
 }

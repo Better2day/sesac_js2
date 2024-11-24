@@ -1,6 +1,7 @@
 {% include './header.html' %}
     <main>
-        <h1>{{ tbl }}</h1>
+        <h3>주문 내 상품 정보</h3>
+        <div class="table-container">
         <table>
             <thead>
                 <tr>
@@ -16,8 +17,10 @@
                 <tr>
                     {% for key in keys %}
                     <td>
-                        {% if key == 'Id' %}
+                        {% if key == 'OrderId' %}
                             <a href="/crm/orderitem_detail/{{ row[key] }}">{{ row[key] }}</a>
+                        {% elif key == 'ItemId' %}
+                            <a href="/crm/item_detail/{{ row[key] }}">{{ row[key] }}</a>
                         {% else %}
                             {{ row[key] }}
                         {% endif %}
@@ -27,7 +30,8 @@
                 {% endfor %}
             </tbody>
         </table>
-        <div>
+        </div>
+        <div class="paging-container">
             {% if page.page > 1 %}
             <button id="prev" value={{ page.page - 1 }}>이전</button>
             {% else %}

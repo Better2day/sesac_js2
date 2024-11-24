@@ -1,6 +1,7 @@
 {% include './header.html' %}
     <main>
-        <h1>{{ tbl }}</h1>
+        <h3>상품 정보</h3>
+        <div class="table-container">
         <table>
             <thead>
                 <tr>
@@ -27,7 +28,8 @@
                 {% endfor %}
             </tbody>
         </table>
-        <div>
+        </div>
+        <div class="paging-container">
             {% if page.page > 1 %}
             <button id="prev" value={{ page.page - 1 }}>이전</button>
             {% else %}

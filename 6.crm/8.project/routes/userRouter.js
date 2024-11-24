@@ -48,13 +48,12 @@ router.route('/')
         // const query = db.prepare(`SELECT * FROM users WHERE NAME LIKE ? AND GENDER=? LIMIT ? OFFSET ?`);
         // const rows = query.all(`%${userName}%`, gender, rowsPerPage, rowsPerPage * (page - 1));
 
-        res.render(`users`,
-                            {table: 'users',
-                                keys: Object.keys(rows[0]),
-                                rows: rows,
-                                userName: userName,
-                                gender: gender,
-                                page: {page, totalPage},
+        res.render(`users`, {
+                            keys: Object.keys(rows[0]),
+                            rows: rows,
+                            userName: userName,
+                            gender: gender,
+                            page: {page, totalPage},
                             });
         
     });

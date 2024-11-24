@@ -1,6 +1,7 @@
 {% include './header.html' %}
     <main>
-        <h1>{{ tbl }}</h1>
+        <h3>고객 정보</h3>
+        <div class="table-container"></div>
         <form id="searchForm">
             <input id="userName" type="text" name="userName" value="{{ userName }}" placeholder="고객 이름을 입력하세요">
             <select id="gender" name="gender">
@@ -38,7 +39,8 @@
                 {% endfor %}
             </tbody>
         </table>
-        <div>
+        </div>
+        <div class="paging-container">
             {% if page.page > 1 %}
             <button id="prev" value={{ page.page - 1 }}>이전</button>
             {% else %}

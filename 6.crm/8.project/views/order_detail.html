@@ -1,25 +1,31 @@
 {% include './header.html' %}
     <main>
-        <h1>{{ tbl }}</h1>
+        <h3>주문 상세 정보</h3>
+        <div class="table-container"></div>
         <table>
             <thead>
                 <tr>
                     {% for key in keys %}
-                    <th>{{ key }}</th>
+                        <th>{{ key }}</th>
                     {% endfor %}
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <!-- Id에서 링크 제외, store id, user id에 링크해야 함 -->
                     {% for key in keys %}
-                    <td>{{ row[key] }}</td>
+                        <td>
+                            {% if key == 'StoreId' %}
+                                <a href="/crm/store_detail/{{ row[key] }}">{{ row[key] }}</a>
+                            {% elif key == 'UserId' %}
+                                <a href="/crm/user_detail/{{ row[key] }}">{{ row[key] }}</a>
+                            {% else %}
+                                {{ row[key] }}
+                            {% endif %}
+                        </td>
                     {% endfor %}
                 </tr>
             </tbody>
         </table>
-        <div>
-        </div>
     </main>
 </body>
 </html>

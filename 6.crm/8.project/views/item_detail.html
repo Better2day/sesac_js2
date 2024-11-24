@@ -1,25 +1,27 @@
 {% include './header.html' %}
     <main>
-        <h1>{{ tbl }}</h1>
+        <h3>상품 상세 정보</h3>
+        <div class="table-container"></div>
         <table>
             <thead>
                 <tr>
                     {% for key in keys %}
-                    <th>{{ key }}</th>
+                        {% if key != 'Id' %}
+                            <th>{{ key }}</th>
+                        {% endif %}
                     {% endfor %}
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <!-- Id, Type 제외해야 함 -->
                     {% for key in keys %}
-                    <td>{{ row[key] }}</td>
+                        {% if key != 'Id' %}
+                            <td>{{ row[key] }}</td>
+                        {% endif %}
                     {% endfor %}
                 </tr>
             </tbody>
         </table>
-        <div>
-        </div>
     </main>
 </body>
 </html>

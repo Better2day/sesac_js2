@@ -1,25 +1,35 @@
 {% include './header.html' %}
     <main>
-        <h1>{{ tbl }}</h1>
+        <h3>주문 내 상품 상세 정보</h3>
+        <div class="table-container"></div>
         <table>
             <thead>
                 <tr>
                     {% for key in keys %}
-                    <th>{{ key }}</th>
+                        {% if key != 'ItemId' %}
+                            <th>{{ key }}</th>
+                        {% endif %}
                     {% endfor %}
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <!-- id에서 링크 제외, order id, item id에 링크해야 함. item 테이블과 조인해서 아이템명 가져와야 함 -->
-                    {% for key in keys %}
-                    <td>{{ row[key] }}</td>
-                    {% endfor %}
-                </tr>
+                {% for row in rows %}
+                    <tr>
+                        {% for key in keys %}
+                            {% if key == 'ItemId' %}
+                                {% set itemId = row[key] %}
+                            {% elif key == 'OrderId' %}
+                                <td><a href="/crm/order_detail/{{ row[key] }}">{{ row[key] }}</a></td>
+                            {% elif key == 'ItemName' %}
+                                <td><a href="/crm/item_detail/{{ itemId }}">{{ row[key] }}</a></td>
+                            {% else %}
+                                <td>{{ row[key] }}</td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
             </tbody>
         </table>
-        <div>
-        </div>
     </main>
 </body>
 </html>
