@@ -19,7 +19,7 @@ const crmTables = [
 // 4개 테이블 모두 동일하므로, 테이블 배열을 순환하며 실행해서 app.get 코드 축약
 crmTables.forEach(table => {
     const [ tbl ] = Object.keys(table);
-    const [ detailTbl ] = Object.values(table);
+    // const [ detailTbl ] = Object.values(table);
 
     // 사용자 테이블 외 모든 테이블 메인 페이지
     if (tbl !== 'users') {
@@ -51,42 +51,6 @@ crmTables.forEach(table => {
                                      });
             })
     }
-
-/* 
-    // 테이블 상세 페이지
-    if (detailTbl != 'orderitem_detail') { // 주문 내 상품 정보 외 모든 테이블 상세 페이지
-        router.route(`/${detailTbl}/:id`)
-            .get((req, res) => {
-                const id = req.params.id;
-                const query = db.prepare(`SELECT * FROM ${tbl} WHERE Id = ?`);
-                const row = query.get(id);
-                console.log(row);
-                console.log('keys(Object.keys(row)):', Object.keys(row));
-
-                res.render(`${detailTbl}`, {
-                                            keys: Object.keys(row),
-                                            row: row,
-                                           });
-            });
-    } else { // 주문 내 상품 정보 테이블 상세 페이지
-        router.route(`/orderitem_detail/:id`)
-            .get((req, res) => {
-                const id = req.params.id;
-                const query = db.prepare(`SELECT oi.*, i.Name AS ItemName
-                                            FROM order_items oi
-                                            JOIN items i ON oi.ItemId = i.Id
-                                           WHERE OrderId = ?`);
-                const rows = query.all(id);
-                console.log(rows);
-                console.log('keys(Object.keys(rows[0])):', Object.keys(rows[0]));
-
-                res.render(`${detailTbl}`, {
-                                            keys: Object.keys(rows[0]),
-                                            rows: rows,
-                                           });
-            });
-    }
-     */
 });
 /* // 아래처럼 테이블 별로 app.get('/tablename', ~) 을 4개 반복 작성해야 할 것을 위 코드로 축약
 app.get('/stores', (req, res) => {

@@ -1,27 +1,50 @@
 {% include './header.html' %}
     <main>
         <h3>상품 상세 정보</h3>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        {% for key in keys %}
+                            {% if key != 'Id' %}
+                                <th>{{ key }}</th>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        {% for key in keys %}
+                            {% if key != 'Id' %}
+                                <td>{{ row[key] }}</td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br />
+        <h4>월별 매출</h4>
         <div class="table-container"></div>
-        <table>
-            <thead>
-                <tr>
-                    {% for key in keys %}
-                        {% if key != 'Id' %}
+            <table> <!-- 월별 매출 -->
+                <thead>
+                    <tr>
+                        {% for key in revenueKeys %}
                             <th>{{ key }}</th>
-                        {% endif %}
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for rev in revenue %}
+                        <tr>
+                            {% for key in revenueKeys %}
+                                <td>{{ rev[key] }}</td>
+                            {% endfor %}
+                        </tr>
                     {% endfor %}
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    {% for key in keys %}
-                        {% if key != 'Id' %}
-                            <td>{{ row[key] }}</td>
-                        {% endif %}
-                    {% endfor %}
-                </tr>
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>        
     </main>
 </body>
 </html>

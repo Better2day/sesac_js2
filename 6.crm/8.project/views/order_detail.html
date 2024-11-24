@@ -1,31 +1,32 @@
 {% include './header.html' %}
     <main>
         <h3>주문 상세 정보</h3>
-        <div class="table-container"></div>
-        <table>
-            <thead>
-                <tr>
-                    {% for key in keys %}
-                        <th>{{ key }}</th>
-                    {% endfor %}
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    {% for key in keys %}
-                        <td>
-                            {% if key == 'StoreId' %}
-                                <a href="/crm/store_detail/{{ row[key] }}">{{ row[key] }}</a>
-                            {% elif key == 'UserId' %}
-                                <a href="/crm/user_detail/{{ row[key] }}">{{ row[key] }}</a>
-                            {% else %}
-                                {{ row[key] }}
-                            {% endif %}
-                        </td>
-                    {% endfor %}
-                </tr>
-            </tbody>
-        </table>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        {% for key in keys %}
+                            <th>{{ key }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        {% for key in keys %}
+                            <td>
+                                {% if key == 'StoreId' %}
+                                    <a href="/crm/store_detail/{{ row[key] }}">{{ row[key] }}</a>
+                                {% elif key == 'UserId' %}
+                                    <a href="/crm/user_detail/{{ row[key] }}">{{ row[key] }}</a>
+                                {% else %}
+                                    {{ row[key] }}
+                                {% endif %}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </main>
 </body>
 </html>

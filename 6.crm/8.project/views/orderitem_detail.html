@@ -1,35 +1,36 @@
 {% include './header.html' %}
     <main>
         <h3>주문 내 상품 상세 정보</h3>
-        <div class="table-container"></div>
-        <table>
-            <thead>
-                <tr>
-                    {% for key in keys %}
-                        {% if key != 'ItemId' %}
-                            <th>{{ key }}</th>
-                        {% endif %}
-                    {% endfor %}
-                </tr>
-            </thead>
-            <tbody>
-                {% for row in rows %}
+        <div class="table-container">
+            <table>
+                <thead>
                     <tr>
                         {% for key in keys %}
-                            {% if key == 'ItemId' %}
-                                {% set itemId = row[key] %}
-                            {% elif key == 'OrderId' %}
-                                <td><a href="/crm/order_detail/{{ row[key] }}">{{ row[key] }}</a></td>
-                            {% elif key == 'ItemName' %}
-                                <td><a href="/crm/item_detail/{{ itemId }}">{{ row[key] }}</a></td>
-                            {% else %}
-                                <td>{{ row[key] }}</td>
+                            {% if key != 'ItemId' %}
+                                <th>{{ key }}</th>
                             {% endif %}
                         {% endfor %}
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {% for row in rows %}
+                        <tr>
+                            {% for key in keys %}
+                                {% if key == 'ItemId' %}
+                                    {% set itemId = row[key] %}
+                                {% elif key == 'OrderId' %}
+                                    <td><a href="/crm/order_detail/{{ row[key] }}">{{ row[key] }}</a></td>
+                                {% elif key == 'ItemName' %}
+                                    <td><a href="/crm/item_detail/{{ itemId }}">{{ row[key] }}</a></td>
+                                {% else %}
+                                    <td>{{ row[key] }}</td>
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </main>
 </body>
 </html>
