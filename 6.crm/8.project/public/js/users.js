@@ -22,11 +22,11 @@ document.getElementById('searchBtn').addEventListener('click', (e) => {
     // location.replace(`/crm/users?userName=${userName.value}&gender=${gender.value}&page=${page}`);
 });
 prev.addEventListener('click', (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     location.replace(`/crm/users?userName=${userName.value}&gender=${gender.value}&page=${prev.value}`);
 });
 next.addEventListener('click', (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     location.replace(`/crm/users?userName=${userName.value}&gender=${gender.value}&page=${next.value}`);
 });
 // fetch(`/crm/users?page=${prev.value}`);

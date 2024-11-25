@@ -16,31 +16,37 @@ router.route('/:id')
         // console.log('keys(Object.keys(userInfo)):', Object.keys(userInfo));
 
         // 고객 주문 기록
-        query = db.prepare(`SELECT o.Id AS OrderId, o.OrderAt AS "Purchase datetime", s.Id AS StoreId, s.Name AS StoreName
-                              FROM orders o
-                              JOIN stores s ON o.StoreId = s.Id
-                             WHERE o.UserId = ?`);
+        query = db.prepare(`
+            SELECT o.Id AS OrderId, o.OrderAt AS "Purchase datetime", s.Id AS StoreId, s.Name AS StoreName
+            FROM orders o
+            JOIN stores s ON o.StoreId = s.Id
+            WHERE o.UserId = ?
+        `);
         const orders = query.all(id);
 
         // 자주 방문한 매장 Top 5
-        query = db.prepare(`SELECT s.Name AS StoreName, COUNT(s.Id) AS Frequency
-                              FROM orders o
-                              JOIN stores s ON o.StoreId = s.Id
-                             WHERE o.UserId = ?
-                             GROUP BY s.Id
-                             ORDER BY Frequency DESC
-                             LIMIT 5`);
+        query = db.prepare(`
+            SELECT s.Name AS StoreName, COUNT(s.Id) AS Frequency
+            FROM orders o
+            JOIN stores s ON o.StoreId = s.Id
+            WHERE o.UserId = ?
+            GROUP BY s.Id
+            ORDER BY Frequency DESC
+            LIMIT 5
+        `);
         const freqStores = query.all(id);
 
         // 자주 주문한 상품 Top 5
-        query = db.prepare(`SELECT i.Name AS ItemName, COUNT(i.Id) AS Frequency
-                              FROM orders o
-                              JOIN order_items oi ON o.Id = oi.OrderId
-                              JOIN items i ON oi.ItemId = i.Id
-                             WHERE o.UserId = ?
-                             GROUP BY i.Id
-                             ORDER BY Frequency DESC
-                             LIMIT 5`);
+        query = db.prepare(`
+            SELECT i.Name AS ItemName, COUNT(i.Id) AS Frequency
+            FROM orders o
+            JOIN order_items oi ON o.Id = oi.OrderId
+            JOIN items i ON oi.ItemId = i.Id
+            WHERE o.UserId = ?
+            GROUP BY i.Id
+            ORDER BY Frequency DESC
+            LIMIT 5
+        `);
         const freqItems = query.all(id);
 
         res.render('user_detail', {

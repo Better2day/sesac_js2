@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    </head>
+<body>
+    <h1>월별 매출액</h1>
+    <table>
+        <tr>
+            <th>년-월</th>
+            <th>해당월 매출액</th>
+        </tr>
+        {% for row in rows %}
+        <tr>
+            <td>{{ row.YearMonth }}</td>
+            <td>{{ row.MonthlyRevenue }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <canvas id="myChart"></canvas>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Backend에서 넘겨주는 변수 받아오기 - 우리가 원하는 데이터는 어떤 형태인지 살펴보기
+        // 1. BE에서 rows 라고 보냈으니, FE에서 어떻게든 데이터를 원하는 형태로 추출한다.
+        // 중간에 쉼표 넣어주지 않으면 배열 안에서 문자열 요소 사이에 쉼표가 없어서 오류 발생
+        
+        const labels = [
+            {% for row in rows %}
+                "{{ row.YearMonth }}"
+            {% if not loop.last %}
+                ,
+            {% endif %}
+            {% endfor %}
+        ];
+        const revenues = [
+            {% for row in rows %}
+                "{{ row.MonthlyRevenue }}"
+            {% if not loop.last %}
+                ,
+            {% endif %}
+            {% endfor %}
+        ];
+
+        // 2. BE에서 내가 원하는 형태로 데이터를 보내준다.
+        // | safe는 이 값은 신뢰할 수 있으니 escaping 처리하지 말라는 명령
+        // const labels = {{ labels | safe }};
+        // const revenues = {{ revenues | safe }};
+
+        const ctx = document.getElementById('myChart');
+        // .getContext('2d');
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Monthly Revenue',
+                    data: revenues,
+                    borderWidth: 1,
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

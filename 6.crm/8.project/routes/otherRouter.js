@@ -45,10 +45,10 @@ crmTables.forEach(table => {
                 const rows = query.all(rowsPerPage, rowsPerPage * (page - 1));
     
                 res.render(`${tbl}`, {
-                                        keys: Object.keys(rows[0]),
-                                        rows: rows,
-                                        page: {page, totalPage},
-                                     });
+                    keys: Object.keys(rows[0]),
+                    rows: rows,
+                    page: {page, totalPage},
+                });
             })
     }
 });
