@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <h2>월별 매출액</h2>
+    <canvas id="revenueChart"></canvas>
+
+    <h2>고객 성별 분포도</h2>
+    <canvas id="genderChart"></canvas>
+    <canvas id="genderChart2"></canvas>
+
+    <script>
+        // 차트에 입력할 데이터를 BE에 요청한다.
+        fetch('/revenue_data')
+            .then(response => response.json())
+            .then(data => {
+                // console.log(data);
+                const ctx = document.getElementById('revenueChart').getContext('2d');
+                const revenueChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: data.labels,
+                        datasets: [{
+                            label: '월별 매출액',
+                            data: data.revenues, 
+                        }]
+                    },
+                });
+            });
+
+        fetch('/gender_dist_data')
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                const ctx = document.getElementById('genderChart').getContext('2d');
+                const genderChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: data.labels,
+                        datasets: [
+                            {
+                                label: '남성 연령대별 숫자',
+                                data: data.maleCount, 
+                            },
+                            {
+                                label: '여성 연령대별 숫자',
+                                data: data.femaleCount, 
+                            },
+                        ],
+                    },
+                });
+
+                const ctx2 = document.getElementById('genderChart2').getContext('2d');
+                const genderChart2 = new Chart(ctx2, {
+                    type: 'bar',
+                    data: {
+                        labels: data.labels,
+                        datasets: [
+                            {
+                                label: '남성 연령대별 숫자',
+                                data: data.maleCount, 
+                            },
+                            {
+                                label: '여성 연령대별 숫자',
+                                data: data.femaleCount, 
+                            }
+                        ]
+                    },
+                    options: {
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: '성별 분포 차트'
+                            }
+                        },
+                        scales: {
+                            x: {
+                                stacked: true
+                            },
+                            y: {
+                                stacked: true,
+                                title: {
+                                    display: true,
+                                    text: 'Count'
+                                }
+                            }
+                        }
+                    },
+                });
+            });
+    </script>
+</body>
+</html>

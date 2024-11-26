@@ -4,7 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    </head>
+    <style>
+        table {
+            width: 50%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        #chart {
+            display: block;
+            width: 200px;
+            height: auto;
+        }
+    </style>
+</head>
 <body>
     <h1>월별 매출액</h1>
     <table>
@@ -20,15 +43,36 @@
         {% endfor %}
     </table>
 
-    <canvas id="myChart"></canvas>
+    <canvas id="chartBar"></canvas>
+    <canvas id="chartLine"></canvas>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         // Backend에서 넘겨주는 변수 받아오기 - 우리가 원하는 데이터는 어떤 형태인지 살펴보기
         // 1. BE에서 rows 라고 보냈으니, FE에서 어떻게든 데이터를 원하는 형태로 추출한다.
         // 중간에 쉼표 넣어주지 않으면 배열 안에서 문자열 요소 사이에 쉼표가 없어서 오류 발생
+        const labels = [];
+        {% for row in rows %}
+            labels.push({{ row.YearMonth }});
+        {% endfor %}
+        console.log(labels);
+
+        const revenues = [];
+        {% for row in rows %}
+            revenues.push({{ row.MonthlyRevenue }});
+        {% endfor%}
+        console.log(revenues);
         
-        const labels = [
+        const itemCounts = [];
+        {% for row in rows %}
+            itemCounts.push({{ row.itemCounts }});
+        {% endfor%}
+        console.log(itemCounts);
+
+// {# #}: nunjucks comment block (.njk 일 때만 사용 가능하고, 사용해야 하는 듯)
+/* 
+{#
+        const labels2 = [
             {% for row in rows %}
                 "{{ row.YearMonth }}"
             {% if not loop.last %}
@@ -44,17 +88,38 @@
             {% endif %}
             {% endfor %}
         ];
-
+ #}
+  */
         // 2. BE에서 내가 원하는 형태로 데이터를 보내준다.
         // | safe는 이 값은 신뢰할 수 있으니 escaping 처리하지 말라는 명령
         // const labels = {{ labels | safe }};
         // const revenues = {{ revenues | safe }};
+        
+        const ctxChartBar = document.getElementById('chartBar').getContext('2d');
 
-        const ctx = document.getElementById('myChart');
-        // .getContext('2d');
-
-        new Chart(ctx, {
+        new Chart(ctxChartBar, {
             type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Monthly Revenue',
+                    data: revenues,
+                    borderWidth: 1,
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                    }
+                }
+            }
+        })
+
+        const ctxChartLine = document.getElementById('chartLine').getContext('2d');
+
+        new Chart(ctxChartLine, {
+            type: 'line',
             data: {
                 labels: labels,
                 datasets: [{

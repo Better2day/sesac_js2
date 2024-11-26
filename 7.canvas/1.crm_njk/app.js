@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
         if (err) {
             console.error('파일 없음');
         } else {
-            console.error('DB Loading 성공');
+            console.log('DB Loading 성공');
         }
     });
 
@@ -26,7 +26,8 @@ app.get('/', (req, res) => {
     db.all(`
         SELECT 
             strftime('%Y-%m', "orders"."OrderAt") AS YearMonth,
-            SUM(items.UnitPrice) AS MonthlyRevenue
+            SUM(items.UnitPrice) AS MonthlyRevenue,
+            COUNT(order_items.ItemId) AS ItemCount
         FROM 
             "orders"
         JOIN 
@@ -43,11 +44,16 @@ app.get('/', (req, res) => {
         if (err) {
             console.error('Query failed!');
         } else {
+            // console.log(rows);
+            // const testObj = {};
+            // rows.map((row) => testObj[row.key] = row.value);
+            // console.log(testObj);
             const labels = rows.map((row) => row.YearMonth);
             // console.log(labels);
             // console.log(JSON.stringify(labels));
             const revenues = rows.map((row) => row.MonthlyRevenue);
             // console.log(JSON.stringify(revenues));
+            const itemCounts = rows.map((row) => row.ItemCount);
 
             // console.log('Object.keys(rows) = ', Object.keys(rows));
             // console.log('Object.values(rows) = ', Object.values(rows));
@@ -55,8 +61,19 @@ app.get('/', (req, res) => {
                 rows,
                 labels: JSON.stringify(labels),
                 revenues: JSON.stringify(revenues),
+                itemCounts: itemCounts
             });
         }
+    });
+
+    // Closing Database connection
+    db.close((err) => {
+        if (err) {
+            console.error('DB 닫기 실패. 왜?', err.message);
+        } else  {
+            console.log('DB 닫기 성공');
+        }
+
     });
 
 });
