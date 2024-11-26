@@ -14,7 +14,7 @@ nunjucks.configure('views', {
 app.set('view engine', 'html'); // Nunjuck 기본 확장자 njk 대신 html 사용
 
 app.get('/', (req, res) => {
-    const db = new sqlite3.Database('user-sample.db', (err) => {
+    const db = new sqlite3.Database('../user-sample.db', (err) => {
         if (err) {
             console.error('파일 없음');
         } else {
@@ -45,23 +45,21 @@ app.get('/', (req, res) => {
             console.error('Query failed!');
         } else {
             // console.log(rows);
-            // const testObj = {};
-            // rows.map((row) => testObj[row.key] = row.value);
-            // console.log(testObj);
             const labels = rows.map((row) => row.YearMonth);
             // console.log(labels);
-            // console.log(JSON.stringify(labels));
             const revenues = rows.map((row) => row.MonthlyRevenue);
+            // console.log(revenues);
             // console.log(JSON.stringify(revenues));
             const itemCounts = rows.map((row) => row.ItemCount);
-
-            // console.log('Object.keys(rows) = ', Object.keys(rows));
-            // console.log('Object.values(rows) = ', Object.values(rows));
+            
             res.render('monthly_revenue', {
                 rows,
                 labels: JSON.stringify(labels),
                 revenues: JSON.stringify(revenues),
-                itemCounts: itemCounts
+                itemCounts: JSON.stringify(itemCounts),
+                // labels: labels,
+                // revenues: revenues,
+                // itemCounts: itemCounts,
             });
         }
     });

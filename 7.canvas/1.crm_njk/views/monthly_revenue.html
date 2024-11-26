@@ -43,32 +43,26 @@
         {% endfor %}
     </table>
 
-    <canvas id="chartBar"></canvas>
-    <canvas id="chartLine"></canvas>
+    <canvas id="revenueChartBar"></canvas>
+    <canvas id="revenueChartLine"></canvas>
+    <canvas id="itemChartLine"></canvas>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         // Backend에서 넘겨주는 변수 받아오기 - 우리가 원하는 데이터는 어떤 형태인지 살펴보기
         // 1. BE에서 rows 라고 보냈으니, FE에서 어떻게든 데이터를 원하는 형태로 추출한다.
         // 중간에 쉼표 넣어주지 않으면 배열 안에서 문자열 요소 사이에 쉼표가 없어서 오류 발생
-        const labels = [];
+        /* 
+{#
+        const labels = [], revenues = [], itemCounts = [];
         {% for row in rows %}
             labels.push({{ row.YearMonth }});
+            revenues.push({{ row.MonthlyRevenue }});
+            itemCounts.push({{ row.itemCounts }});
         {% endfor %}
         console.log(labels);
-
-        const revenues = [];
-        {% for row in rows %}
-            revenues.push({{ row.MonthlyRevenue }});
-        {% endfor%}
-        console.log(revenues);
-        
-        const itemCounts = [];
-        {% for row in rows %}
-            itemCounts.push({{ row.itemCounts }});
-        {% endfor%}
-        console.log(itemCounts);
-
+#}
+ */
 // {# #}: nunjucks comment block (.njk 일 때만 사용 가능하고, 사용해야 하는 듯)
 /* 
 {#
@@ -90,14 +84,16 @@
         ];
  #}
   */
+
         // 2. BE에서 내가 원하는 형태로 데이터를 보내준다.
         // | safe는 이 값은 신뢰할 수 있으니 escaping 처리하지 말라는 명령
-        // const labels = {{ labels | safe }};
-        // const revenues = {{ revenues | safe }};
+        const labels = {{ labels | safe }};
+        const revenues = {{ revenues }};
+        const itemCounts = {{ itemCounts }};
         
-        const ctxChartBar = document.getElementById('chartBar').getContext('2d');
+        const ctxRevenueChartBar = document.getElementById('revenueChartBar').getContext('2d');
 
-        new Chart(ctxChartBar, {
+        new Chart(ctxRevenueChartBar, {
             type: 'bar',
             data: {
                 labels: labels,
@@ -116,9 +112,9 @@
             }
         })
 
-        const ctxChartLine = document.getElementById('chartLine').getContext('2d');
+        const ctxRevenueChartLine = document.getElementById('revenueChartLine').getContext('2d');
 
-        new Chart(ctxChartLine, {
+        new Chart(ctxRevenueChartLine, {
             type: 'line',
             data: {
                 labels: labels,
@@ -132,6 +128,33 @@
                 scales: {
                     y: {
                         beginAtZero: true,
+                    }
+                }
+            }
+        })
+
+        const ctxItemChartLine = document.getElementById('itemChartLine').getContext('2d');
+
+        new Chart(ctxItemChartLine, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [
+                {
+                    label: 'Monthly Revenue',
+                    data: revenues,
+                    borderWidth: 1,
+                },
+                {
+                    label: 'Item Count',
+                    data: itemCounts,
+                    borderWidth: 1,
+                }],
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: false,
                     }
                 }
             }

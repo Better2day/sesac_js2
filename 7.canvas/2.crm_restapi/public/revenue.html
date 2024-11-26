@@ -12,8 +12,9 @@
     <canvas id="revenueChart"></canvas>
 
     <h2>고객 성별 분포도</h2>
-    <canvas id="genderChart"></canvas>
+    <canvas id="genderChart1"></canvas>
     <canvas id="genderChart2"></canvas>
+    <canvas id="genderChart3"></canvas>
 
     <script>
         // 차트에 입력할 데이터를 BE에 요청한다.
@@ -38,8 +39,8 @@
             .then(response => response.json())
             .then(data => {
                 console.log(data);
-                const ctx = document.getElementById('genderChart').getContext('2d');
-                const genderChart = new Chart(ctx, {
+                const ctx = document.getElementById('genderChart1').getContext('2d');
+                const genderChart1 = new Chart(ctx, {
                     type: 'bar',
                     data: {
                         labels: data.labels,
@@ -93,6 +94,26 @@
                         }
                     },
                 });
+
+                const ctx3 = document.getElementById('genderChart3').getContext('2d');
+                const genderChart3 = new Chart(ctx3, {
+                    type: 'doughnut',
+                    data: {
+                        labels: data.labels,
+                        datasets: [
+                        {
+                            label: '남성 연령대별 숫자',
+                            data: data.maleCount,
+                        },
+                        {
+                            label: '여성 연령대별 숫자',
+                            data: data.femaleCount,
+                        }
+                        ],
+                        options: {
+                        }
+                    }
+                })
             });
     </script>
 </body>
