@@ -1,4 +1,4 @@
-# Project-based 🎲 JavaScript Web-Service Developer course
+## SeSAC (Seoul Software Academy) - Project-based<br/>🎲 JavaScript Web-Service Developer course (2024. 10 ~ 2025. 1)
 
 1️⃣ Class 101  
 - [x] ${\textsf{\color{gray}HTML/CSSS, JavaScript}}$  
