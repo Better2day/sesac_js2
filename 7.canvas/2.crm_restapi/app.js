@@ -60,27 +60,27 @@ app.get('/gender_dist_data', (req, res) => {
         FROM users
         GROUP BY AgeGroup, Gender;
         `, (err, rows) => {
-            if (err) {
-                console.error('Query failed!', err.message);
-            } else {
-                console.log(rows);
+        if (err) {
+            console.error('Query failed!', err.message);
+        } else {
+            console.log(rows);
 
-                // 데이터 가공. 원하는 형식으로
-                // labels: ['10대', '20대', '30대', '40대', '50대']
-                // maleCount: [100, 124, 128, 107, 29]
-                // femaleCount: [101, 135, 126, 117, 33]
-                // 점심 시간 전에 급해서 아래처럼 하드코딩했지만, BE에서 받아오도록
+            // 데이터 가공. 원하는 형식으로
+            // labels: ['10대', '20대', '30대', '40대', '50대']
+            // maleCount: [100, 124, 128, 107, 29]
+            // femaleCount: [101, 135, 126, 117, 33]
+            // 점심 시간 전에 급해서 아래처럼 하드코딩했지만, BE에서 받아오도록
 
-                const chartData = {
-                    labels: ['10대', '20대', '30대', '40대', '50대'],
-                    maleCount: [100, 124, 128, 107, 29], 
-                    femaleCount: [101, 135, 126, 117, 33],
-                }
-
-                console.log(chartData);
-                res.json(chartData);
+            const chartData = {
+                labels: ['10대', '20대', '30대', '40대', '50대'],
+                maleCount: [100, 124, 128, 107, 29],
+                femaleCount: [101, 135, 126, 117, 33],
             }
-        });
+
+            console.log(chartData);
+            res.json(chartData);
+        }
+    });
 });
 
 app.get('/revenue_data', (req, res) => {

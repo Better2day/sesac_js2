@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +11,7 @@
         }
     </style>
 </head>
+
 <body>
     <canvas id="mycanvas" width="400" height="400"></canvas>
     <script>
@@ -18,12 +20,12 @@
 
         // Packman 그리기
         context.fillStyle = 'yellow';
-        context.beginPath();        
+        context.beginPath();
         // context.moveTo(300, 100); // 여기 모르겠음 ------------------------------------------
         const startAngle = 0.2 * Math.PI;
         const endAngle = 1.8 * Math.PI;
         context.arc(300, 100, 50, startAngle, endAngle);
-        // context.lineTo(200, 100);
+        context.lineTo(300, 100);
         context.fill();
         context.closePath();
 
@@ -34,9 +36,9 @@
         context.moveTo(110, 75);
         context.arc(75, 75, 35, 0, Math.PI); // 입
         context.moveTo(65, 65);
-        context.arc(60, 65, 5, 0, Math.PI*2); // 왼쪽 눈
+        context.arc(60, 65, 5, 0, Math.PI * 2); // 왼쪽 눈
         context.moveTo(95, 65);
-        context.arc(90, 65, 5, 0, Math.PI*2); // 오른쪽 눈
+        context.arc(90, 65, 5, 0, Math.PI * 2); // 오른쪽 눈
         context.stroke();;
         context.closePath();
         // context.moveTo(100, 100);
@@ -67,13 +69,14 @@
         drawText('25px Arial', 'yellow', 'Yellow TEXT', 50, 280);
 
         // Gradation 적용 // 실험 필요 ---------------------------------------------------
-/* 
-        const gradient = context.createLinearGradient(0, 0, canvas.width, 0);
-        gradient.addColorStop(0, 'red');
-        gradient.addColorStop(1, 'orange');
-        context.fillStyle = gradient;
-        context.fillRect(0, 0, canvas.width, canvas.height);
-         */
+        /*
+                const gradient = context.createLinearGradient(0, 0, canvas.width, 0);
+                gradient.addColorStop(0, 'red');
+                gradient.addColorStop(1, 'orange');
+                context.fillStyle = gradient;
+                context.fillRect(0, 0, canvas.width, canvas.height);
+                 */
     </script>
 </body>
+
 </html>

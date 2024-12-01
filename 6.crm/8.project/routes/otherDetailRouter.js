@@ -8,31 +8,32 @@ const db = new sqlite3('../user-sample.db');
 
 // 상품 상세 정보
 router.route('/item_detail/:id')
-.get((req, res) => {
-    const id = req.params.id;
-    // 상품 상세 정보
-    let query = db.prepare('SELECT * FROM items WHERE Id = ?');
-    const row = query.get(id);
-    console.log(row);
-    console.log('keys(Object.keys(row)):', Object.keys(row));
+    .get((req, res) => {
+        const id = req.params.id;
+        // 상품 상세 정보
+        let query = db.prepare('SELECT * FROM items WHERE Id = ?');
+        const row = query.get(id);
+        console.log(row);
+        console.log('keys(Object.keys(row)):', Object.keys(row));
 
-    // 월별 매출
-    query = db.prepare(`SELECT strftime('%Y-%m', o.OrderAt) AS Month, SUM(i.UnitPrice) AS Revenue, COUNT(i.Id) AS Count
+        // 월별 매출
+        query = db.prepare(`SELECT strftime('%Y-%m', o.OrderAt) AS Month, SUM(i.UnitPrice) AS Revenue, COUNT(i.Id) AS Count
                         FROM items i
                         JOIN order_items oi ON i.Id = oi.ItemId
                         JOIN orders o ON oi.OrderId = o.Id
                         WHERE i.Id = ?
                         GROUP BY Month
                         ORDER BY Month`);
-    const revenue = query.all(id);
+        const revenue = query.all(id);
+        console.log('revenue: ', revenue);
 
-    res.render('item_detail', {
-                                keys: Object.keys(row),
-                                row: row,
-                                revenueKeys: Object.keys(revenue[0]),
-                                revenue: revenue,
-                                });
-});
+        res.render('item_detail', {
+            keys: Object.keys(row),
+            row: row,
+            revenueKeys: Object.keys(revenue[0]),
+            revenue: revenue,
+        });
+    });
 
 // 주문 상세 정보
 router.route('/order_detail/:id')
@@ -44,9 +45,9 @@ router.route('/order_detail/:id')
         console.log('keys(Object.keys(row)):', Object.keys(row));
 
         res.render('order_detail', {
-                                    keys: Object.keys(row),
-                                    row: row,
-                                    });
+            keys: Object.keys(row),
+            row: row,
+        });
     });
 
 // 주문 내 상품 상세 정보
@@ -62,9 +63,9 @@ router.route('/orderitem_detail/:id')
         console.log('keys(Object.keys(rows[0])):', Object.keys(rows[0]));
 
         res.render('orderitem_detail', {
-                                        keys: Object.keys(rows[0]),
-                                        rows: rows,
-                                       });
+            keys: Object.keys(rows[0]),
+            rows: rows,
+        });
     });
 
 module.exports = router;
