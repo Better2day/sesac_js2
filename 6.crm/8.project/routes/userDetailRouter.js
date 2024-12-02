@@ -5,7 +5,6 @@ const router = express.Router();
 const db = new sqlite3('../user-sample.db');
 
 // 고객 상세 정보
-// router.route('/user_detail/:id')
 router.route('/:id')
     .get((req, res) => {
         const id = req.params.id;
@@ -50,13 +49,13 @@ router.route('/:id')
         const freqItems = query.all(id);
 
         res.render('user_detail', {
-                                    userKeys: Object.keys(userInfo),
-                                    userInfo: userInfo,
-                                    orderKeys: Object.keys(orders[0]),
-                                    orders: orders,
-                                    freqStores: freqStores,
-                                    freqItems: freqItems,
-                                  });
+            userKeys: Object.keys(userInfo),
+            userInfo: userInfo,
+            orderKeys: Object.keys(orders[0]),
+            orders: orders,
+            freqStores: freqStores,
+            freqItems: freqItems,
+        });
     });
 
 module.exports = router;
