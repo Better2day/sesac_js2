@@ -1,9 +1,22 @@
 {
-  "dependencies": {
-    "debug": "^4.3.7",
-    "dotenv": "^16.4.5",
-    "express": "^4.21.1",
-    "morgan": "^1.10.0",
-    "sqlite3": "^5.1.7"
-  }
-}
+    "name": "2.restapi",
+    "version": "1.0.0",
+    "main": "app.js",
+    "devDependencies": {},
+    "scripts": {
+        "start": "node app.js",
+        "dev": "nodemon --ext js,html app.js", // 개발할 때는 JS, HTML 추적?
+        "test": "echo \"Error: no test specified\" && exit 1",
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "description": "",
+    "dependencies": {
+        "debug": "^4.3.7",
+        "dotenv": "^16.4.5",
+        "express": "^4.21.1",
+        "morgan": "^1.10.0",
+        "sqlite3": "^5.1.7"
+    }
+} // "start": "nodemon --ext js, html node app.js" // JS, HTML 제외?
