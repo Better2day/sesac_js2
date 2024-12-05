@@ -18,4 +18,3 @@
 4️⃣ Team Project (5-weeks)  
 - [ ] Planning, Development, Testing, Distribution, Operation, Monitoring  
 - R&R: P/M & P/L  
-  
