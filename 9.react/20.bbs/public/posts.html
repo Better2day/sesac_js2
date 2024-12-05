@@ -4,24 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>게시판</title>
+    <title>글 작성</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <h1>게시판</h1>
-    <table>
-        <thead>
-            <th>번호</th>
-            <th>제목</th>
-            <th>내용</th>
-            <th>썸네일</th>
-            <th>작성일</th>
-            <th>삭제</th>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
-    <a href=''>글 작성</a>
+    <h1>글 작성</h1>
+    <form action="/posts" method="POST">
+        <label>제목</label><input type="text" name="title"><br />
+        <label>내용</label><input type="text" name="content"><br />
+        <label>사진 첨부</label> <button>파일 선택</button><br />
+        <button>작성</button>
+    </form>
+    <a href="/bbs">홈으로</a>
 </body>
 
 </html>
