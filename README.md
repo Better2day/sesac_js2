@@ -11,8 +11,8 @@
 - [x] 1-week Project: [CRM Administrator website (Express Framework, Nunjucks Template Engine)](https://github.com/Better2day/sesac_js2/tree/main/6.crm/8.project#crm-project)
   
 3️⃣ Front-end  
-- [ ] Bootstrap: Component Design, Processing Asynchronous Request (JS) ${\textsf{\color{orange}← I'm learning this now}}$  
-- [ ] React: Front-end Development  
+- [x] Bootstrap: Component Design, Processing Asynchronous Request (JS)  
+- [ ] React: Front-end Development  ${\textsf{\color{orange}← I'm learning this now}}$  
 - [ ] ${\textsf{\color{0000BB}1-week Project: BBS, Chatting, Web Game(Snake)}}$  
   
 4️⃣ Team Project (5-weeks)  
