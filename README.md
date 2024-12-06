@@ -12,11 +12,15 @@
   
 3️⃣ Front-end  
 - [x] Bootstrap: Component Design, Processing Asynchronous Request (JS)  
-- [x] React: Front-end Development  ${\textsf{\color{orange}← I'm learning this now}}$  
+- [x] React: Front-end Development  ${\textsf{\color{orange}← learning this week}}$  
 - [ ] ${\textsf{\color{0000BB}1-week Project: BBS, Chatting, Web Game(Snake)}}$  
   
-4️⃣ Team Project (5-weeks)  
-- [ ] Planning
+4️⃣ Infrastructure
+- [ ] Cloud(AWS), Linux
+- [ ] Container (Docker & Packaging)
+  
+5️⃣ Team Project (5-weeks)  
+- [ ] Planning  ${\textsf{\color{orange}← doing this simultaneously}}$  
 - [ ] Development
 - [ ] Testing
 - [ ] Distribution
