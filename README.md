@@ -12,9 +12,13 @@
   
 3️⃣ Front-end  
 - [x] Bootstrap: Component Design, Processing Asynchronous Request (JS)  
-- [ ] React: Front-end Development  ${\textsf{\color{orange}← I'm learning this now}}$  
+- [x] React: Front-end Development  ${\textsf{\color{orange}← I'm learning this now}}$  
 - [ ] ${\textsf{\color{0000BB}1-week Project: BBS, Chatting, Web Game(Snake)}}$  
   
 4️⃣ Team Project (5-weeks)  
-- [ ] Planning, Development, Testing, Distribution, Operation, Monitoring  
-- R&R: P/M & P/L  
+- [ ] Planning
+- [ ] Development
+- [ ] Testing
+- [ ] Distribution
+- [ ] Operation & Monitoring  
+- My R&R: P/M & Back-end Developer
