@@ -12,8 +12,8 @@
   
 3️⃣ Front-end  
 - [x] Bootstrap: Component Design, Processing Asynchronous Request (JS)  
-- [x] React: Front-end Development  ${\textsf{\color{orange}← learning this week}}$  
-- [ ] ${\textsf{\color{0000BB}1-week Project: BBS, Chatting, Web Game(Snake)}}$  
+- [x] React: Front-end Development  
+- [ ] ${\textsf{\color{0000BB}API / mini Project: BBS, Chatting, Web Game(Snake)}}$  ${\textsf{\color{orange}← learning this week}}$  
   
 4️⃣ Infrastructure
 - [ ] Cloud(AWS), Linux
