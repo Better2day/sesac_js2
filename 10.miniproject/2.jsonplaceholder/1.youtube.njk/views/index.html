@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Youtube Search Engine</title>
+</head>
+
+<body>
+    <div container="container">
+        <h1>Youtube 검색</h1>
+        <!-- 검색창 -->
+        <form action="/search" method="GET">
+            <input type="text" name="q" placeholder="Search Keyword" />
+            <button type="submit">검색</button>
+        </form>
+
+        <!-- Player -->
+        {% if selectedVideo %}
+        <div style="margin-top: 20px;">
+            <h2>{{ video.title }}</h2>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ selectedVideo.videoId }}"
+                frameborder="0">
+            </iframe>
+        </div>
+        {% endif %}
+
+        <!-- 결과 목록 -->
+        <ul>
+            {% for video in videos %}
+            <li>
+                <!-- <a href="https://www.youtube.com/watch?v={{ video.id.videoId}}"> -->
+                <a
+                    href="/play?videoId={{ video.videoId }}&videos={{ videos | stringify | decodeHtmlEntities | urlencode }}">
+                    <img src="{{ video.thumbnailUrl }}" />
+                </a>
+                <h3>{{ video.title }}</h3>
+                <p>{{ video.description }}</p>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+
+</html>
