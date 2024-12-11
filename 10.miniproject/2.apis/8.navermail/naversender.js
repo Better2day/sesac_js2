@@ -1,4 +1,5 @@
 const nodemailer = require('nodemailer');
+require('dotenv').config();
 
 const transporter = nodemailer.createTransport({
     host: 'smtp.naver.com',
@@ -6,8 +7,8 @@ const transporter = nodemailer.createTransport({
     auth: {
         user: process.env.NAVER_EMAIL,
         pass: process.env.NAVER_PASSWORD,
-    },
-});
+    }
+})
 
 const mailOptions = {
     from: process.env.NAVER_EMAIL,
@@ -21,6 +22,6 @@ transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
         console.error(error);
     } else {
-        console.log('이메일 전송 성공: ', info.response)
+        console.log('이메일 전송 성공: ', info.response);
     }
-})
+});

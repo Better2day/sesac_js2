@@ -21,13 +21,14 @@ const transporter = nodemailer.createTransport({
 });
 
 const database = {
-    users
+    users: []
 }
 
 app.get('/', (req, res) => {
-    res.sendFile(path.sendFile(__dirname, 'public', 'signup.html'));
+    res.sendFile(path.join(__dirname, 'public', 'signup.html'));
 });
 
+// 인증 코드 생성 함수
 const generateVerificationCode = () => {
     return randomstring.generate({
         length: 6,
@@ -63,7 +64,7 @@ app.post('/signup', (req, res) => {
             res.status(500).json({ message: '이메일 발송 중 오류 발생!' });
         } else {
             console.log();
-            res.status(250).json({ message: '???' });
+            res.json({ message: '이메일로 인증코드가 발송되었습니다' });
         }
     });
 
