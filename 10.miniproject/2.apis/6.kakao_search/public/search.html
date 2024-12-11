@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kooooogle</title>
+    <style>
+        header>div,
+        main>div,
+        footer>div {
+            width: 100%;
+            height: 80px;
+            background-color: green;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* text-align: center; */
+        }
+
+        main>div {
+            height: 80vh;
+            background-color: white;
+            justify-content: flex-start;
+        }
+
+        div#userInput {
+            align-self: flex-start;
+
+        }
+
+        input {
+            width: 70vw;
+        }
+
+        footer>div {
+            height: 50px;
+            background-color: black;
+            color: white;
+            /* align-self: flex-end; */
+            align-content: flex-end;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div>
+            <h1>Kooooogle</h1>
+        </div>
+    </header>
+
+    <main>
+        <div>
+            <div id="userInput">
+                <form id="searchForm">
+                    <input type="text" id="query" placeholder="검색어를 입력하세요" />
+                    <button data-type="web">웹 검색</button>
+                    <button data-type="image">이미지 검색</button>
+                    <button data-type="vclip">비디오 검색</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="results"><!-- 결과 출력할 곳 --></div>
+    </main>
+
+    <footer>
+        <div>
+            <h7>2024 Kooooogle. All rights reserved.</h7>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', async (e) => {
+                e.preventDefault();
+                const query = document.getElementById('query').value;
+                const type = e.target.getAttribute('data-type');
+
+
+                const response = await fetch(`/api/search?query=${encodeURIComponent(query)}&type=${type}`);
+                if (!response.ok) {
+                    console.log('Error!');
+                } else {
+                    const results = await response.json();
+                    console.log(results);
+                    displayResult(results);
+                }
+            });
+        });
+
+        // function displayResult(results) {
+        function displayResult(results, type) {
+            const resultsContainer = document.getElementById('results');
+            // resultsContainer.innerHTML = JSON.stringify(results);
+            resultsContainer.innerHTML = '';
+
+            if (type === 'web') {
+                results.documents.forEach(item => {
+                    const resultDiv = document.createElement('div')
+                    resultDiv.innerHTML = `
+                    <h3>${item.title}</h3>
+                    <p>${item.contents}</p>
+                    <a href="${item.url}" target="_blank">${item.url}</a>
+                    `;
+                    resultsContainer.appendChild(resultDiv);
+                })
+            } else if (type === 'image') {
+                results.documents.forEach(item => {
+                    const resultDiv = document.createElement('div')
+                    resultDiv.innerHTML = `
+                    <img src='${item.thumbnail_url}' alt='Thumbnail'>
+                    `;
+                    resultsContainer.appendChild(resultDiv);
+                })
+            } else if (type === 'vclip') {
+                results.documents.forEach(item => {
+                    const resultDiv = document.createElement('div')
+                    resultDiv.innerHTML = `
+                    <img src='${item.thumbnail_url}' alt='Thumbnail'>
+                    `;
+                    resultsContainer.appendChild(resultDiv);
+                })
+            }
+
+
+        }
+    </script>
+    <!-- <script src="./search.js"></script> -->
+</body>
+
+</html>

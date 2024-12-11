@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="https://static.toss.im/icons/png/4x/icon-toss-logo.png" />
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>토스페이먼츠 샘플 프로젝트</title>
+</head>
+
+<body>
+    <div class="box_section" style="width: 600px">
+        <img width="100px" src="https://static.toss.im/illusts/check-blue-spot-ending-frame.png" />
+        <h2>결제를 완료했어요</h2>
+
+        <div class="p-grid typography--p" style="margin-top: 50px">
+            <div class="p-grid-col text--left"><b>결제금액</b></div>
+            <div class="p-grid-col text--right" id="amount"></div>
+        </div>
+        <div class="p-grid typography--p" style="margin-top: 10px">
+            <div class="p-grid-col text--left"><b>주문번호</b></div>
+            <div class="p-grid-col text--right" id="orderId"></div>
+        </div>
+        <div class="p-grid typography--p" style="margin-top: 10px">
+            <div class="p-grid-col text--left"><b>paymentKey</b></div>
+            <div class="p-grid-col text--right" id="paymentKey" style="white-space: initial; width: 250px"></div>
+        </div>
+    </div>
+
+    <div class="box_section" style="width: 600px; text-align: left">
+        <b>Response Data :</b>
+        <div id="response" style="white-space: initial"></div>
+    </div>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+
+        document.getElementById('orderId').textContent = urlParams.get('orderId');
+        document.getElementById('amount').textContent = `${urlParams.get('amount')}원`;
+        document.getElementById('paymentKey').textContent = urlParams.get('paymentKey');
+
+        // 서버에 다시 결제 confirm을 해줘야 함...
+        async function confirmPayment() {
+            try {
+                const response = await fetch('/confirm/payment', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        paymentKey: urlParams.get('paymentKey'),
+                        orderId: urlParams.get('orderId'),
+                        amount: urlParams.get('amount'),
+                    }),
+                });
+
+                const data = await response.json();
+                if (!response.ok) {
+                    throw new Error(data.message || '결제 confirm 실패');
+                }
+                // 성공
+                document.getElementById('response').textContent = JSON.stringify(data);
+            } catch (error) {
+                console.error('결제 검증 실패:', error);
+                // window.location.href = `/fail.html?messages=${error.message}`;
+            }
+        }
+
+        // 결제 검증 실행
+        confirmPayment();
+    </script>
+</body>
+
+</html>
