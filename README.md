@@ -12,8 +12,9 @@
   
 3️⃣ Front-end  
 - [x] Bootstrap: Component Design, Processing Asynchronous Request (JS)  
-- [x] React: Front-end Development  
-- [x] ${\textsf{\color{0000BB}API / Web Game(Snake)}}$  
+- [x] React: Front-end Development
+- [x] Web Game: Snake  
+- [x] API: YouTube, Search Engine, SNS Login, Payment, Map  
   
 4️⃣ Infrastructure
 - [ ] Cloud(AWS), Linux ${\textsf{\color{orange}← learning next week}}$  
@@ -21,9 +22,9 @@
   
 5️⃣ Team Project (5-weeks)  
 - [ ] Planning  ${\textsf{\color{orange}← doing this simultaneously}}$
-- [ ] Documentation  ${\textsf{\color{orange}← doing this simultaneously}}$
+- [ ] Documentation: SRS, UI/UX Design, WBS, Gantt Chart, Tech Stack, TLA Diagram, API spec  ${\textsf{\color{orange}← doing this simultaneously}}$
 - [ ] Development
-- [ ] Testing
+- [ ] Test & Debugging
 - [ ] Distribution
 - [ ] Operation & Monitoring  
 - My R&R: P/M & Back-end Developer
