@@ -6,71 +6,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        /*         form[action='/verify'] {
+        /* 초기에는 인증코드 확인창 숨기기 */
+        form[action='/verify'] {
             display: none;
-        } */
+        }
     </style>
 </head>
 
 <body>
-    <h1>회원 가입</h1>
-    <form id="signup">
-        <label for="email">email: </label>
-        <input type="email" id="email" name="email" require />
-        <button onClick="sendSignupRequest()">인증 코드 발송</button>
+    <h1>회원가입</h1>
+    <form id="signupForm">
+        <label for="email">이메일:</label>
+        <input type="email" id="email" name="email" required />
+        <button type="button" onclick="sendSignupRequest()">인증 코드 발송</button>
     </form>
     <p id="signupResult"></p>
 
-    <form action="/verify" method="POST" id="verify">
-        <label for="code">인증 코드: </label>
+    <form action="/verify" method="post" id="verifyForm">
+        <label for="code">인증코드:</label>
         <input type="text" id="code" name="code" required />
         <input type="hidden" id="emailVerify" name="email" value="" />
-        <button onClick="sendVerifyCode()">인증코드 확인</button>
+        <button type="button" onclick="sendVerifyCode()">인증 코드 확인</button>
     </form>
-
     <p id="verificationResult"></p>
 
     <script>
         function sendSignupRequest() {
-            const email = document.getElementById('email').value;
-            document.getElementById('emailVerify').value = email;
+            if (!document.getElementById('email').value) {
+                document.getElementById('email').focus();
+            } else {
+                const email = document.getElementById('email').value;
+                document.getElementById('emailVerify').value = email;
 
-            fetch('/signup', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ emil: email })
-            })
-                .then((response) => {
-                    if (!response.ok) {
-                        throw new Error('서버 응답 오류');
-                    }
-                    return response.json();
+                fetch('/signup', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email: email })
                 })
-                .then((data) => {
-                    console.log('Success', data);
-                    document.getElementById('signupForm').style.display = 'none';
-                    document.getElementById('verifyForm').style.display = 'block';
-                    document.getElementById('signupResult').innerText = 'data.message';
-                })
-                .catch((error) => {
-                    console.log('오류:', error);
-                    document.getElementById('signupResult').innerText = error.message;
-                })
+                    .then((response) => {
+                        if (!response.ok) {
+                            throw new Error('서버 응답 오류');
+                        }
+                        return response.json();
+                    })
+                    .then((data) => {
+                        console.log('Success', data);
+                        document.getElementById('signupForm').style.display = 'none';
+                        document.getElementById('verifyForm').style.display = 'block';
+                        document.getElementById('signupResult').innerText = data.message;
+                    })
+                    .catch((error) => {
+                        console.error('오류:', error);
+                        document.getElementById('signupResult').innerText = error.message;
+                    })
+            }
         }
 
         function sendVerifyCode() {
-            const email = document.getElementById('email').value;
+            const email = document.getElementById('emailVerify').value;
             const code = document.getElementById('code').value;
-            document.getElementById('emailVerify').value = email;
 
             fetch('/verify', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ emil: email, code: code }),
+                body: JSON.stringify({ email: email, code: code }),
             })
                 .then((response) => {
                     if (!response.ok) {
@@ -79,11 +82,11 @@
                     return response.json();
                 })
                 .then((data) => {
-                    console.log('Success: 최종 완료', data);
-                    document.getElementById('verificationResultForm').innerText = data.message;
+                    console.log('Response.json() 통해서 데이터 정상 수신', data);
+                    document.getElementById('verificationResult').innerText = data.message;
                 })
                 .catch((error) => {
-                    console.error('Error:', error);
+                    console.error('Error: ', error);
                     document.getElementById('verificationResult').innerText = error.message;
                 })
         }
