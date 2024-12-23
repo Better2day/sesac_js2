@@ -17,8 +17,8 @@
 - [x] API: YouTube, Search Engine, SNS Login, Payment, Map  
   
 4️⃣ Infrastructure
-- [ ] Cloud(AWS), Linux ${\textsf{\color{orange}← learning this week}}$  
-- [ ] Container (Docker & Packaging)
+- [x] Cloud(AWS), Linux  
+- [ ] Container (Docker & Packaging) ${\textsf{\color{orange}← will learn a few weeks later}}$  
   
 5️⃣ Team Project (5-weeks)  
 - [ ] Planning  ${\textsf{\color{orange}← doing this simultaneously}}$
