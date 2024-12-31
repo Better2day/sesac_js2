@@ -1,4 +1,6 @@
-2024.12.25  
+2024.12.25 작성  
+2024.12.31 수정  
+  
 F(x).com 맞춤형 환율 조회 프로젝트 Convention Guide  
 (Javascript 쪽에서 제일 유명한 Airbnb Javascript Style Guide 기반)  
   
@@ -37,22 +39,33 @@ F(x).com 맞춤형 환율 조회 프로젝트 Convention Guide
 3. Template Literals (back tick(`)) 사용  
    (문자열이 여러 줄로 이뤄졌거나, 변수를 포함할 때. 한 줄 짜리 단순 문자열은 외따옴표)  
   
-   문자열을 **+**로 연결하기보다는 템플릿 리터럴(`)을 사용합니다.  
+   문자열을 **+** 연산자로 연결하기보다는 템플릿 리터럴(`)을 사용합니다.  
    가독성을 높이고, 코드가 간결해집니다.  
-
+  
 ```
-   const apiUrl = `https://api.exchangerate-api.com/v4/latest/${selectedCurrency}`;  
-   string = 'F(X)'  
-```  
-
-4. 객체 리터럴 사용 권장
+   const apiUrl = `https://api.exchangerate-api.com/v4/latest/${selectedCurrency}`;
+   const query = `
+     SELECT *
+     FROM user_currency
+     WHERE user_id = ?
+   `;
+   const projectName = 'F(x).com';
+```
+  
+4. 객체 리터럴 사용 권장  
    클래스는 큰 규모의 애플리케이션에서 주로 사용하고, 간단하게 사용할 때는 객체 리터럴을 주로 사용합니다.
    (객체 리터럴로 데이터 구조를 정의하는 것이 간편합니다.)  
    객체 리터럴 축약 구문을 사용하여, 코드의 길이를 줄이고 가독성을 높입니다.  
 ```
-   const a = [];
-   const b = {};
-```
+   const userCurrency = {
+     from: src,
+     to: dst,
+   }
+   const tmpArr = [];
+```  
+   **※ 객체의 마지막 속성이 있는 줄 끝에도 comma(,)를 넣습니다.**  
+   추후 (아랫에) 새 속성을 추가할 일이 생기면 해당 줄 끝에도 comma를 추가할 수밖에 없는데,  
+   이렇게 되면 commit 변경사항에 해당 줄까지 변경된 것으로 나와서 헷갈릴 수 있기 때문입니다.  
   
 5. 에러 처리  
    **try/catch**로 에러 처리를 제대로 해주는 것이 좋습니다.  
