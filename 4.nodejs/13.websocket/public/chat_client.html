@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* CSS styles for the chat message container */
+    #messageContainer {
+      height: 400px;
+      overflow-y: scroll;
+      border: 1px solid #ccc;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* CSS styles for the input box */
+    #inputMessage {
+      width: 300px;
+      padding: 5px;
+    }
+
+    /* CSS styles for the message bubbles */
+    .messageBubble {
+      max-width: 100%;
+      margin-bottom: 10px;
+      padding: 8px;
+    }
+
+    /* CSS styles for sent messages */
+    .sentMessage {
+      text-align: right;
+      background-color: lightgreen;
+      color: black;
+      align-self: flex-end;
+      border-radius: 10px 10px 0px 10px;
+    }
+
+    /* CSS styles for received messages */
+    .receivedMessage {
+      text-align: left;
+      background-color: lightblue;
+      color: black;
+      align-self: flex-start;
+      border-radius: 10px 10px 10px 0px;
+    }
+
+    /* CSS styles for broadcast messages */
+    .broadcastMessage {
+      text-align: center;
+      font-style: italic;
+      color: #888;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>웹소켓 테스트</h1>
+  <input type="text" id="inputMessage" />
+  <button id="sendButton">전송</button>
+  <div id="meesageContainer"></div>
+  <script>
+    const socket = new WebSocket('ws://localhost:3000/chat');
+    let username;
+
+    socket.addEventListener('open', (event) => {
+      // 처음 접속시 사용자 이름을 받아서 전달
+      username = prompt('이름을 입력하세요:');
+      socket.send(JSON.stringify({ type: 'session', username: username }));
+      console.log('서버에 연결됨');
+    });
+
+    socket.addEventListener('message', (event) => {
+      const message = JSON.parse(event.data);
+      console.log('뭔가 왔음', message);
+      if (message)
+        displayMessage(message);
+
+    });
+
+    document.getElementById('sendButton').addEventListener('click', () => {
+      const inputMessage = document.getElementById('inputMessage');
+      const message = inputMessage.value;
+      sendMessage(message);
+    });
+
+    function sendMessage(message) {
+      const messageObj = { type: 'chat', username: username, content: message };
+      socket.send(JSON.stringify(messageObj));
+    }
+
+    function displayMessage(message) {
+      const messageContainer = document.getElementById('meesageContainer');
+      const messageElement = document.createElement('div');
+
+      messageElement.classList.add('messageBubble');
+      if (message.sender === username) {
+        messageElement.classList.add('sentMessage');
+      } else {
+        messageElement.classList.add('receivedMessage');
+      }
+      messageElement.textContent = `${message.sender}: ${message.content}`;
+      messageContainer.appendChild(messageElement);
+
+      messageContainer.scrollTop = messageContainer.scrollHeight;
+    }
+  </script>
+</body>
+
+</html>
