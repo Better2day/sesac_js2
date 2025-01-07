@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h1>SSE (Server Send Event)</h1>
+  <div id="output"></div>
+  <script>
+    // SSE 연결 생성
+    const eventSource = new EventSource('http://127.0.0.1:3000/events');
+
+    // 메시지가 수신되었을 때 표시
+    eventSource.onmessage = (event) => {
+      const outputDiv = document.getElementById('output');
+      const newMessage = document.createElement('p');
+      newMessage.textContent = `서버 메시지: ${event.data}`;
+      outputDiv.appendChild(newMessage);
+    }
+
+    eventSource.onerror = (error) => {
+      console.error('서버 연결 실패: ', error);
+      eventSource.close(); // 실패하면 재접속 중지
+    }
+  </script>
+</body>
+
+</html>

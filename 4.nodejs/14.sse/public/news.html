@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #news-container {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #ddd;
+    }
+
+    .news-item {
+      padding: 5px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .highlight {
+      background-color: yellow;
+      opacity: 1;
+      transition: opacity 1s ease-in-out;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Live 새싹 뉴스!</h1>
+  <div id="news-container"></div>
+  <script>
+    const eventSource = new EventSource('/news'); // 내가 브라우져에 접속한 주소 뒤에 /news
+    const newsContainer = document.getElementById('news-container');
+    let newsList = []; // 뉴스를 담을 리스트 배열
+
+    eventSource.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      // 새로운 메시지가 올 때마다, 리스트의 앞에 삽입
+      newsList.unshift(data.news);
+      if (newsList.length > 5) {
+        newsList.pop(); // 리스트 맨 뒤 요소 삭제
+      };
+
+      // newsContainer.innerHTML += data.news + '<hr>';
+      // TODO1. 가장 최근 5개만 표시하는데, 최신 뉴스를 위에 표시한다
+      // newsContainer.innerHTML = newsList.map(news => `<div class="news-item">${news}</div>`).join('');
+      // TODO2. 가장 최근 1개가 업데이트될 때마다, 노란색 배경으로 하이라이트 하는 등 표시
+      newsContainer.innerHTML = newsList.map((news, index) => {
+        return `<div class="news-item ${index === 0 ? 'highlight' : ''}">${news}</div>`
+      }).join('');
+
+      setTimeout(() => {
+        const highlightedItem = document.querySelector('.highlight');
+        if (highlightedItem) {
+          highlightedItem.classList.remove('highlight');
+        }
+      }, 500);
+    }
+
+  </script>
+</body>
+
+</html>
