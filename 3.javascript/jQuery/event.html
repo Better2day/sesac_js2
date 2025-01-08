@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+  <div id="myDiv">
+    <span id="displayText">Hover me</span>
+  </div>
+  <button id="myBtn">색상 바꾸기</button>
+  <script>
+    $(document).ready(() => {
+      const myDiv = $("#myDiv");
+      const displayText = $("#displayText");
+
+      $('#myBtn').click(() => {
+        const color = getRandomColor();
+        $('#myDiv').css('background-color', color);
+
+        // TODO. 아래 비교
+        console.log(Math.floor(Math.random() * 0xFFFFFF)); // 16진수?
+        console.log(Math.floor(Math.random() * 0xFFFFFF).toString(10));
+        console.log(Math.floor(Math.random() * 0xFFFFFF).toString(16));
+      });
+
+
+      function getRandomColor() {
+        // 6글자의 Hex 값 RGB 생성
+        return '#' + Math.floor(Math.random() * 0xFFFFFF).toString(16).padStart(6, '0');
+      }
+
+      myDiv.hover(
+        () => { // 함수의 첫 번째 인자: hover를 했을 때
+          const color = myDiv.css('background-color');
+          displayText.text('현재 색상: ' + color);
+          displayText.css('color', 'white');
+        },
+        () => { //함수의 두 번째 인자:  hover가 나갔을 때
+          displayText.text('Hover me');
+          displayText.css('color', 'black');
+        }
+      )
+    });
+  </script>
+</body>
+
+</html>
