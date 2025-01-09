@@ -19,11 +19,16 @@
 4️⃣ Infrastructure
 - [x] Cloud(AWS), Linux  
 - [ ] Container (Docker & Packaging) ${\textsf{\color{orange}← will learn a few weeks later}}$  
+
+5️⃣ Misc (Network, Web, Data)  
+- [x] WebSocket  
+- [x] SSE (Server-Sent Events)  
+- [x] Web Scraping  
   
-5️⃣ Team Project (5-weeks)  
+6️⃣ Team Project (5-weeks)  
 - [x] Planning
 - [ ] Design/Documentation: SRS, UI/UX Design, WBS, Gantt Chart, Tech Stack, API spec, ERD, TLA Diagram  ${\textsf{\color{orange}← doing this simultaneously}}$
-- [ ] Development
+- [ ] Development  ${\textsf{\color{orange}← doing this simultaneously}}$
 - [ ] Test & Debugging
 - [ ] Distribution
 - [ ] Operation & Monitoring  
