@@ -46,7 +46,7 @@ const puppeteer = require('puppeteer');
   console.log('검색 결과:');
   console.log(results);
 
-  await page.screenshot({ path: 'screenshot.png' });
+  await page.screenshot({ path: 'screenshot.png' }); // 잘못 입력? 이거 안 됐음
   await browser.close();
 
 
