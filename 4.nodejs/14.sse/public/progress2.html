@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h1>SSE (Server Send Event) Progress Bar</h1>
+  <button id="startButton" onClick="startProgress()">시작</button>
+  <button id="stopButton">중지</button>
+  <div>
+    <progress id="progressBar" value="0" max="100"></progress>
+    <p id="status">시작 버튼을 클릭하시오</p>
+  </div>
+
+  <script>
+    function startProgress() {
+      const eventSource = new EventSource('http://localhost:3000/progress');
+
+      const progressBar = document.getElementById('progressBar');
+      const status = document.getElementById('status');
+      const startButton = document.getElementById('startButton');
+      const stopButton = document.getElementById('stopButton');
+
+      startButton.disabled = true;
+
+      eventSource.onmessage = (event) => {
+        const data = JSON.parse(event.data);
+        progressBar.value = data.progress;
+        status.textContent = `Progress: ${data.progress}%`;
+
+        if (data.progress >= 100) {
+          eventSource.close();
+          status.textContent = '프로그레스 완료!';
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>

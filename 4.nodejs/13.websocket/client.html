@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h1>웹소켓 테스트</h1>
+  <input type="text" id="inputMessage" />
+  <button id="sendButton">전송</button>
+  <div id="messageContainer"></div>
+  <script>
+    const socket = new WebSocket('ws://localhost:8000');
+
+    // socket.addEventListener('open', (event) => {
+    socket.onopen = (event) => {
+      console.log('서버에 연결됨');
+    };
+
+    // socket.addEventListener('message', (event) => {
+    socket.onmessage = (event) => {
+      // console.log('뭔가 왔음', event);
+      const message = JSON.parse(event.data);
+      displayMessage(message);
+    };
+
+    socket.onerror = (error) => {
+      console.error('Web Socket Error:', error);
+    }
+
+    socket.onclose = () => {
+      console.log('Web Socket connection closed');
+    };
+
+    document.getElementById('sendButton').addEventListener('click', () => {
+      const inputMessage = document.getElementById('inputMessage');
+      const message = inputMessage.value;
+      sendMessage(message);
+    })
+
+    function sendMessage(message) {
+      const messageObj = { type: 'chat', content: message };
+      socket.send(JSON.stringify(messageObj));
+    }
+
+    // function decodeMessageData(message) {
+    //     const uint8Array = new Uint8Array(message);
+    //     const decoder = new TextDecoder('utf-8');
+    //     const decodedMessage = decoder.decode(uint8Array);
+    //     return decodedMessage;
+    // }
+
+    function displayMessage(message) {
+      const messageContainer = document.getElementById('messageContainer');
+      const messageElement = document.createElement('p');
+      messageElement.textContent = `${message.type}: ${message.content}`
+      messageContainer.appendChild(messageElement);
+
+      // const decodeMessage = decodeMessageData(message.content.data);
+      // messageElement.textContent = decodeMessage;
+      // messageContainer.appendChild(messageElement);
+    }
+
+  </script>
+</body>
+
+</html>
