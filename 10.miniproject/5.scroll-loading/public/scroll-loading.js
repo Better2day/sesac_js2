@@ -3,7 +3,7 @@ const itemsPerLoad = 20;
 const maxItemsOnScreen = itemsPerLoad * 5;
 let start = 0;
 let end = start + itemsPerLoad;
-let loading;
+let loading = false;
 
 // TODO 1. 아래 scroll에서 하드코딩된 20, 40을 변수로 대체
 // TODO 2. 중복되는 두 개의 fetch를 하나의 함수로 만들기
@@ -37,17 +37,16 @@ function loadItems() {
 
   // 로딩 후 1초 안에는 다시 못 불러오도록, 잠시 기다리게 설정
   // setTimeout(() => {
-  //   loading = false;
+  loading = false;
   // }, 1000);
 }
-
 
 function loadPrevItems() {
   const firstItem = container.firstElementChild;
   console.log(firstItem);
 
-  const pend = firstItem ? parseInt(firstItem.textContent.replace('Item ', '')) - 1 : 0; // 현재 있는 데이터
-  const pstart = pend > itemsPerLoad ? (pend - itemsPerLoad) : 0;
+  const pend = firstItem ? parseInt(firstItem.textContent.replace('Item ', '')) - 1 : 0;
+  const pstart = pend >= itemsPerLoad ? (pend - itemsPerLoad) : 0;
 
   console.log(`이전 데이터 로딩... ${pstart}~${pend}`);
 
@@ -85,6 +84,12 @@ function loadPrevItems() {
   // console.log(Array.slice(container.firstElementChild.textContent, 3));
 };
 
+// TODO 3. 서버의 데이터를 200개가 아닌 2000 ~ 20000으로 늘려보기 (스크롤이 계속 되면 느려질텐데 해결법도..)
+// 데이터 개수가 너무 많아지면 윗부분 자식 삭제
+// 이번에 로드하는 개수(이 소스에서는 20개로 고정)만큼, 반복해서 scroll-container 바로 아래 자식 div부터 삭제
+// TODO 4. 중복 데이터 없는지 확인 (스크롤 아래로 다다닥 내리면서 살펴보기)
+// TODO 5. 너무 많은 데이터가 화면에 렌더링되서 느려지면 어떻게 해결할 것인가?
+// TODO 6. 아래로 스크롤할 때 위에서 데이터가 삭제되었는데, 스크롤을 다시 위로 올리면 다시 불러오기
 function deleteItems() {
   for (i = 0; i < itemsPerLoad; i++) {
     container.removeChild(document.querySelector('#scroll-container > div'));
@@ -97,7 +102,7 @@ window.addEventListener('scroll', () => {
   console.log(`window.scrollY = ${window.scrollY}`);
   // console.log(`container.firstElementChild = ${Array.prototype.slice(container.firstElementChild?.textContent, 5)}`);
   // console.log(`스크롤 위치는 ${window.innerHeight}, ${window.scrollY}, ${document.body.offsetHeight}`);
-  if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+  if (!loading && window.innerHeight + window.scrollY >= document.body.offsetHeight) {
     // start += itemPerLoad;
     // end = start + itemPerLoad;
     console.log('화면 끝');
@@ -114,13 +119,5 @@ window.addEventListener('scroll', () => {
     loadPrevItems();
     // start += end - itemsPerLoad;
     // end = start + itemsPerLoad;
-
-
   };
-
-  // TODO 3. 서버의 데이터를 200개가 아닌 2000 ~ 20000으로 늘려보기 (스크롤이 계속 되면 느려질텐데 해결법도..)
-  // 데이터 개수가 너무 많아지면 윗부분 자식 삭제
-  // 이번에 로드하는 개수(이 소스에서는 20개로 고정)만큼, 반복해서 scroll-container 바로 아래 자식 div부터 삭제
-
-
 });

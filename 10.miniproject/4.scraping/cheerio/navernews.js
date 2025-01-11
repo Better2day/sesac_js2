@@ -30,13 +30,13 @@ axios.get(url)
     console.log(headlines.slice(0, 5));
 
     /* 
-          $('li.sa_item._SECTION_HEADLINE').each((_, element) => { // _ : 사용하지 않을 매개변수
-          $(element).find('div.sa_text a').each((_, subElement) => {
-            const title = $(subElement).text().trim();
-            console.log(title);
-          });
+        $('li.sa_item._SECTION_HEADLINE').each((_, element) => { // _ : 사용하지 않을 매개변수
+        $(element).find('div.sa_text a').each((_, subElement) => {
+          const title = $(subElement).text().trim();
+          console.log(title);
         });
-     */
+      });
+    */
 
     // console.log(paragraphs);
     // paragraphs.each((index, element) => {

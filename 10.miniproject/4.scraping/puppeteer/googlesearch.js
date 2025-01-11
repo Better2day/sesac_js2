@@ -49,9 +49,6 @@ const puppeteer = require('puppeteer');
   await page.screenshot({ path: 'screenshot.png' }); // 잘못 입력? 이거 안 됐음
   await browser.close();
 
-
-
   // await new Promise(resolve => setTimeout(resolve, 3000));
   // await browser.close();
-
 })();
