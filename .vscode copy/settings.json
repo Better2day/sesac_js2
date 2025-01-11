@@ -1,0 +1,9 @@
+{
+  "eslint.autoFixOnSave": true,
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
+  "prettier.requireConfig": true,
+  "eslint.alwaysShowStatus": true
+}
