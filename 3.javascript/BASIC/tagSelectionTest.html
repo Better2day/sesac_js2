@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <ol>
+    <li class="testLi"><b>test 1</b></li>
+    <li class="testLi"><b>test 2</b></li>
+    <li class="testLi"><b>test 3</b></li>
+  </ol>
+  <div id="test"></div>
+</body>
+
+<script>
+  // const lis = document.querySelectorAll('li');
+  const lis = document.getElementsByClassName('testLi');
+  console.log(lis);
+  const testDiv = document.getElementById('test');
+  lis.forEach((li) => {
+    testDiv.innerHTML += li.innerHTML + '<br>';
+  })
+
+
+</script>
+
+</html>

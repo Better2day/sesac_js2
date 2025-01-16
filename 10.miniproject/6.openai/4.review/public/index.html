@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <h2>구매 상품 리뷰</h2>
+  <div class="product-image">
+    <img src="http://picsum.photos/600/400" alt="Product Image">
+  </div>
+
+  <section class="review-form">
+    <h3>후기 작성</h3>
+    <div>
+      <p>별점:</p>
+      <label><input type="radio" name="rating" value="1">1</label>
+      <label><input type="radio" name="rating" value="2">2</label>
+      <label><input type="radio" name="rating" value="3">3</label>
+      <label><input type="radio" name="rating" value="4">4</label>
+      <label><input type="radio" name="rating" value="5">5</label>
+    </div>
+    <textarea id="comment" placeholder="후기를 작성해주세요" cols="40"></textarea>
+    <button onClick="submitReview()">등록</button>
+  </section>
+  <!-- 후기 표시할 곳 -->
+  <section>
+    <h3>사용자 후기</h3>
+    <div id="reviews-container">
+      <div class="ai-summary" id="ai-summary"></div>
+      <!-- 사용자 후기 -->
+    </div>
+  </section>
+  <script src="scripts.js"></script>
+</body>
+
+</html>

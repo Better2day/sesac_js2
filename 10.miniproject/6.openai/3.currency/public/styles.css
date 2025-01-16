@@ -1,0 +1,37 @@
+h2 {
+  text-align: center;
+}
+
+.chat-container {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+#chatContainer {
+  height: 300px;
+  border: 1px solid #ccc;
+  overflow-y: auto;
+}
+
+.message {
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 5px;
+  max-width: 70%;
+}
+
+.user-message {
+  background: #c9e3ff;
+  text-align: right;
+  margin-left: auto;
+}
+
+.bot-message {
+  background: #ffd2d2;
+  text-align: left;
+  margin-right: auto;
+}
+
+body {
+  font-family: 'BM HANNA', sans-serif;
+}
